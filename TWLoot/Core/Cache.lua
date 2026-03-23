@@ -49,25 +49,38 @@ end
 -- @param attempts number Optional attempts count for repeated tries (default 1)
 -- @return void
 ---
-function AtlasTW.LootCache.ForceCacheItem(itemID, maxAttempts)
+function AtlasTW.LootCache.ForceCacheItem(itemID, maxAttempts, callback)
     if not itemID or itemID == 0 then
+        if callback then callback(false) end
         return false
     end
+
+    if GetItemInfo(itemID) then
+        if callback then callback(true) end
+        return true
+    end
+
     maxAttempts = maxAttempts or 3
     local attempts = 0
+
     local function tryCache()
         if GetItemInfo(itemID) then
-            return true
+            if callback then callback(true) end
+            return
         end
-        GameTooltip:SetHyperlink("item:" .. itemID .. ":0:0:0")
+
+        -- Use a hidden tooltip to request item data from server
+        AtlasTWLootTooltip:SetHyperlink("item:" .. itemID .. ":0:0:0")
         attempts = attempts + 1
+
         if attempts < maxAttempts then
-            -- Start next attempt
-            tryCache()
+            -- Wait for client to receive data before retrying (0.15s is safer for server latency)
+            AtlasTW.Timer.Start(0.15, tryCache)
         else
-            return false
+            if callback then callback(false) end
         end
     end
+
     tryCache()
 end
 
@@ -98,7 +111,7 @@ function AtlasTW.LootCache.CacheAllItems(dataSource, callback)
             if type(item) == "table" then
                 if item.id then
                     itemID = item.id
-                    -- Map spells/enchants to item ids when needed
+                    -- Map spells/enchants to item ids when needed (item database format)
                     if item.skill and item.type ~= "item" then
                         if AtlasTW and AtlasTW.SpellDB and AtlasTW.SpellDB.enchants and AtlasTW.SpellDB.enchants[itemID] then
                             itemID = AtlasTW.SpellDB.enchants[itemID].item
@@ -108,6 +121,17 @@ function AtlasTW.LootCache.CacheAllItems(dataSource, callback)
                     end
                 elseif item[1] then
                     itemID = item[1]
+                    -- Map spells/enchants to item ids when needed (search result format)
+                    local itemType = item[4]
+                    if itemType == "spell" or itemType == "enchant" then
+                        if AtlasTW and AtlasTW.SpellDB then
+                            if itemType == "enchant" and AtlasTW.SpellDB.enchants and AtlasTW.SpellDB.enchants[itemID] then
+                                itemID = AtlasTW.SpellDB.enchants[itemID].item
+                            elseif itemType == "spell" and AtlasTW.SpellDB.craftspells and AtlasTW.SpellDB.craftspells[itemID] then
+                                itemID = AtlasTW.SpellDB.craftspells[itemID].item
+                            end
+                        end
+                    end
                 end
             elseif type(item) == "number" then
                 itemID = item
@@ -210,7 +234,7 @@ function AtlasTW.LootCache.CacheAllItems(dataSource, callback)
                 end)
             else
                 local delay = (iteration == 1) and 0.07 or 0.09
-                StartTimer(delay, function()
+                AtlasTW.Timer.Start(delay, function()
                     local remaining = {}
                     for i = 1, total do
                         local id = uncachedItems[i]

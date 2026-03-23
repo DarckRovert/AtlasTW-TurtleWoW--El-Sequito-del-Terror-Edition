@@ -32,91 +32,92 @@ AtlasTW = AtlasTW or {}
 
 --Default map to auto-select to when no SubZone data is available
 AtlasTW.AssocDefaults = {
-    ["Dire Maul"] =					"DireMaulNorth",
-    ["Blackrock Spire"] =			"BlackrockSpireLower",
-    ["Scarlet Monastery"] =			"ScarletMonasteryEnt"
+    ["Dire Maul"] = "DireMaulNorth",
+    ["Blackrock Spire"] = "BlackrockSpireLower",
+    ["Scarlet Monastery"] = "ScarletMonasteryEnt"
 }
 --Links maps together that are part of the same instance
 AtlasTW.SubZoneAssoc = {
-    ["DireMaulNorth"] =				"Dire Maul",
-    ["DireMaulEast"] =				"Dire Maul",
-    ["DireMaulWest"] =				"Dire Maul",
-    ["DireMaulEnt"] =				"Dire Maul",
-    ["BlackrockSpireLower"] =		"Blackrock Spire",
-    ["BlackrockSpireUpper"] =		"Blackrock Spire",
-    ["BlackrockMountainEnt"] =		"Blackrock Spire",
-    ["ScarletMonasteryGraveyard"] =			        "Scarlet Monastery",
-    ["ScarletMonasteryLibrary"] =					"Scarlet Monastery",
-    ["ScarletMonasteryArmory"] =					"Scarlet Monastery",
-    ["ScarletMonasteryCathedral"] =				    "Scarlet Monastery",
-    ["ScarletMonasteryEnt"] =						"Scarlet Monastery"
+    ["DireMaulNorth"] = "Dire Maul",
+    ["DireMaulEast"] = "Dire Maul",
+    ["DireMaulWest"] = "Dire Maul",
+    ["DireMaulEnt"] = "Dire Maul",
+    ["BlackrockSpireLower"] = "Blackrock Spire",
+    ["BlackrockSpireUpper"] = "Blackrock Spire",
+    ["BlackrockMountainEnt"] = "Blackrock Spire",
+    ["ScarletMonasteryGraveyard"] = "Scarlet Monastery",
+    ["ScarletMonasteryLibrary"] = "Scarlet Monastery",
+    ["ScarletMonasteryArmory"] = "Scarlet Monastery",
+    ["ScarletMonasteryCathedral"] = "Scarlet Monastery",
+    ["ScarletMonasteryEnt"] = "Scarlet Monastery"
 }
 --Links SubZone values with specific instance maps
 AtlasTW.SubZoneData = {
-    ["Halls of Destruction"] =		"DireMaulNorth",
-    ["Gordok's Seat"] =				"DireMaulNorth",
-    ["Warpwood Quarter"] =			"DireMaulEast",
-    ["The Hidden Reach"] =			"DireMaulEast",
-    ["The Conservatory"] =			"DireMaulEast",
-    ["The Shrine of Eldretharr"] =	"DireMaulEast",
-    ["Capital Gardens"] =			"DireMaulWest",
-    ["Court of the Highborne"] =	"DireMaulWest",
-    ["Prison of Immol'thar"] =		"DireMaulWest",
-    ["The Athenaeum"] =				"DireMaulWest",
-    ["Mok'Doom"] =					"BlackrockSpireLower",
-    ["Tazz'Alaor"] =				"BlackrockSpireLower",
-    ["Skitterweb Tunnels"] =		"BlackrockSpireLower",
-    ["The Storehouse"] =			"BlackrockSpireLower",
-    ["Chamber of Battle"] =			"BlackrockSpireLower",
-    ["Dragonspire Hall"] =			"BlackrockSpireUpper",
-    ["Hall of Binding"] =			"BlackrockSpireUpper",
-    ["The Rookery"] =				"BlackrockSpireUpper",
-    ["Hall of Blackhand"] =			"BlackrockSpireUpper",
-    ["Blackrock Stadium"] =			"BlackrockSpireUpper",
-    ["The Furnace"] =				"BlackrockSpireUpper",
-    ["Hordemar City"] =				"BlackrockSpireUpper",
-    ["Spire Throne"] =				"BlackrockSpireUpper",
-    ["Chamber of Atonement"] =		"ScarletMonasteryGraveyard",
-    ["Forlorn Cloister"] =			"ScarletMonasteryGraveyard",
-    ["Honor's Tomb"] =				"ScarletMonasteryGraveyard",
-    ["Huntsman's Cloister"] =		"ScarletMonasteryLibrary",
-    ["Gallery of Treasures"] =		"ScarletMonasteryLibrary",
-    ["Athenaeum"] =					"ScarletMonasteryLibrary",
-    ["Training Grounds"] =			"ScarletMonasteryArmory",
-    ["Footman's Armory"] =			"ScarletMonasteryArmory",
-    ["Crusader's Armory"] =			"ScarletMonasteryArmory",
-    ["Hall of Champions"] =			"ScarletMonasteryArmory",
-    ["Chapel Gardens"] =			"ScarletMonasteryCathedral",
-    ["Crusader's Chapel"] =			"ScarletMonasteryCathedral",
-    ["The Grand Vestibule"] =		"ScarletMonasteryEnt"
+    ["Halls of Destruction"] = "DireMaulNorth",
+    ["Gordok's Seat"] = "DireMaulNorth",
+    ["Warpwood Quarter"] = "DireMaulEast",
+    ["The Hidden Reach"] = "DireMaulEast",
+    ["The Conservatory"] = "DireMaulEast",
+    ["The Shrine of Eldretharr"] = "DireMaulEast",
+    ["Capital Gardens"] = "DireMaulWest",
+    ["Court of the Highborne"] = "DireMaulWest",
+    ["Prison of Immol'thar"] = "DireMaulWest",
+    ["The Athenaeum"] = "DireMaulWest",
+    ["Mok'Doom"] = "BlackrockSpireLower",
+    ["Tazz'Alaor"] = "BlackrockSpireLower",
+    ["Skitterweb Tunnels"] = "BlackrockSpireLower",
+    ["The Storehouse"] = "BlackrockSpireLower",
+    ["Chamber of Battle"] = "BlackrockSpireLower",
+    ["Dragonspire Hall"] = "BlackrockSpireUpper",
+    ["Hall of Binding"] = "BlackrockSpireUpper",
+    ["The Rookery"] = "BlackrockSpireUpper",
+    ["Hall of Blackhand"] = "BlackrockSpireUpper",
+    ["Blackrock Stadium"] = "BlackrockSpireUpper",
+    ["The Furnace"] = "BlackrockSpireUpper",
+    ["Hordemar City"] = "BlackrockSpireUpper",
+    ["Spire Throne"] = "BlackrockSpireUpper",
+    ["Chamber of Atonement"] = "ScarletMonasteryGraveyard",
+    ["Forlorn Cloister"] = "ScarletMonasteryGraveyard",
+    ["Honor's Tomb"] = "ScarletMonasteryGraveyard",
+    ["Huntsman's Cloister"] = "ScarletMonasteryLibrary",
+    ["Gallery of Treasures"] = "ScarletMonasteryLibrary",
+    ["Athenaeum"] = "ScarletMonasteryLibrary",
+    ["Training Grounds"] = "ScarletMonasteryArmory",
+    ["Footman's Armory"] = "ScarletMonasteryArmory",
+    ["Crusader's Armory"] = "ScarletMonasteryArmory",
+    ["Hall of Champions"] = "ScarletMonasteryArmory",
+    ["Chapel Gardens"] = "ScarletMonasteryCathedral",
+    ["Crusader's Chapel"] = "ScarletMonasteryCathedral",
+    ["The Grand Vestibule"] = "ScarletMonasteryEnt"
 }
 --Maps to auto-select to from outdoor zones.
 AtlasTW.OutdoorZoneToAtlas = {
-    ["Ashenvale"] =					"BlackfathomDeepsEnt",
-    ["Badlands"] =					"UldamanEnt",
-    ["Blackrock Mountain"] =		"BlackrockMountainEnt",
-    ["Burning Steppes"] = 			"HateforgeQuarry", -- TurtleWOW
-    ["Deadwind Pass"] = 			"KarazhanCrypt",    -- TurtleWOW
-    ["Desolace"] =					"MaraudonEnt",
-    ["Dun Morogh"] =				"GnomereganEnt",
-    ["Feralas"] =					"DireMaulEnt",
-    ["Searing Gorge"] =				"BlackrockMountainEnt",
-    ["Swamp of Sorrows"] =			"TheSunkenTempleEnt",
-    ["Tanaris"] =					"ZulFarrak",
-    ["The Barrens"] =				"WailingCavernsEnt",
-    ["Gilneas"] =					"GilneasCity", -- TurtleWOW
-    ["Tirisfal Glades"]	=			"ScarletMonasteryEnt",
-    ["Westfall"] =					"TheDeadminesEnt",
-    ["Orgrimmar"] =					"RagefireChasm",
-    ["Dustwallow Marsh"] =			"OnyxiasLair",
-    ["Silithus"] =					"TheTempleofAhnQiraj",
-    ["Western Plaguelands"] =		"Scholomance",
-    ["Silverpine Forest"] =			"ShadowfangKeep",
-    ["Eastern Plaguelands"] =		"Stratholme",
-    ["Stormwind City"] =			"TheStockade",
-    ["Stranglethorn Vale"] =		"ZulGurub",
-    ["Balor"] =                     "StormwroughtRuins", -- TurtleWOW
-    ["Wetlands"] =                  "DragonmawRetreat" -- TurtleWOW
+    ["Ashenvale"] = "BlackfathomDeepsEnt",
+    ["Badlands"] = "UldamanEnt",
+    ["Blackrock Mountain"] = "BlackrockMountainEnt",
+    ["Burning Steppes"] = "HateforgeQuarry", -- TurtleWOW
+    ["Deadwind Pass"] = "KarazhanCrypt",     -- TurtleWOW
+    ["Desolace"] = "MaraudonEnt",
+    ["Dun Morogh"] = "GnomereganEnt",
+    ["Feralas"] = "DireMaulEnt",
+    ["Searing Gorge"] = "BlackrockMountainEnt",
+    ["Swamp of Sorrows"] = "TheSunkenTempleEnt",
+    ["Tanaris"] = "ZulFarrak",
+    ["The Barrens"] = "WailingCavernsEnt",
+    ["Gilneas"] = "GilneasCity", -- TurtleWOW
+    ["Tirisfal Glades"] = "ScarletMonasteryEnt",
+    ["Westfall"] = "TheDeadminesEnt",
+    ["Orgrimmar"] = "RagefireChasm",
+    ["Dustwallow Marsh"] = "OnyxiasLair",
+    ["Silithus"] = "TheTempleofAhnQiraj",
+    ["Western Plaguelands"] = "Scholomance",
+    ["Silverpine Forest"] = "ShadowfangKeep",
+    ["Eastern Plaguelands"] = "Stratholme",
+    ["Stormwind City"] = "TheStockade",
+    ["Stranglethorn Vale"] = "ZulGurub",
+    ["Balor"] = "StormwroughtRuins",   -- TurtleWOW
+    ["Wetlands"] = "DragonmawRetreat", -- TurtleWOW
+    --["Dun Morogh"] = "Frostmane Hollow", -- TurtleWOW
 }
 ---
 --- Register Core UI translations
@@ -125,6 +126,7 @@ AtlasTW.Localization:RegisterNamespace("UI", "enUS", {
     --************************************************
     -- Common UI Strings
     --************************************************
+    ["Rank Pattern"] = " %a+ %d+$",
     ["Options"] = true,
     ["Search"] = true,
     ["Clear"] = true,
@@ -145,6 +147,15 @@ AtlasTW.Localization:RegisterNamespace("UI", "enUS", {
     ["Loot"] = true,
     ["Previous"] = true,
     ["Next"] = true,
+    ["Group by Source"] = true,
+    ["Default"] = true,
+    ["Check Completed Quests"] = true,
+    ["Enable Profession Info"] = true,
+    ["Lockpicking"] = true,
+    ["Doors"] = true,
+    ["Night"] = true,
+    ["Day"] = true,
+    ["Winter"] = true,
 
     --************************************************
     -- Colors
@@ -240,7 +251,6 @@ AtlasTW.Localization:RegisterNamespace("UI", "enUS", {
     ["Color Quests by Level"] = true,
     ["Color Quests from the Questlog"] = true,
     ["Auto-Query Unknown Items"] = true,
-    ["Suppress Server Query Spam"] = true,
     ["Show Loot Panel with AtlasTW"] = true,
     ["Sort Instance by:"] = true,
     ["Show Button on Minimap"] = true,
@@ -250,6 +260,10 @@ AtlasTW.Localization:RegisterNamespace("UI", "enUS", {
     ["Show Acronyms"] = true,
     ["Clamp window to screen"] = true,
     ["Show Cursor Coordinates on Map"] = true,
+    ["Enable pfUI Styling"] = true,
+    ["Show Map Markers"] = true,
+    ["pfUI styling enabled. Type /reload to apply changes."] = true,
+    ["pfUI styling disabled. Type /reload to apply changes."] = true,
     ["Scale"] = true,
     ["Welcome to Atlas-TW Edition. Please take a moment to set your preferences."] = true,
 
@@ -334,16 +348,11 @@ AtlasTW.Localization:RegisterNamespace("UI", "enUS", {
     ["has been reset!"] = true,
     ["Reset Settings"] = true,
     ["Default settings applied!"] = true,
-    ["Safe Chat Links |cff1eff00(recommended)|r"] = true,
-    ["Enable all Chat Links"] = true,
-    ["Default Tooltips"] = true,
-    ["Lootlink Tooltips"] = true,
-    ["ItemSync Tooltips"] = true,
     ["Use EquipCompare"] = true,
     ["Make Loot Table Opaque"] = true,
-    ["Show IDs at all times"] = true,
-    ["Suppress Text Spam"] = true,
     ["Show Source on Tooltips"] = true,
+    ["Show IDs in Tooltips"] = true,
+    ["Show Icon in Tooltips"] = true,
 
     --************************************************
     -- Version & Updates
@@ -354,8 +363,8 @@ AtlasTW.Localization:RegisterNamespace("UI", "enUS", {
     ["NewVersionAvailableFmt"] = "|cffff0000New version available!|r |cff00ff00Download here:|r %s",
     [" |cffA52A2Aloaded."] = true,
     ["NoticeText"] = "If you find anything missing, please report it at:|r",
-    ["NoticeLink"] = "https://github.com/DarckRovert/Atlas-TW-TurtleWoW-Elnazzareno-Edition/issues/|r",
-    ["Link"] = "https://github.com/DarckRovert/Atlas-TW-TurtleWoW-Elnazzareno-Edition.git|r",
+    ["NoticeLink"] = "https://github.com/byCFM2/Atlas-TW/issues/|r",
+    ["Link"] = "https://github.com/byCFM2/Atlas-TW/|r",
 
     --************************************************
     -- Categories & Menus
@@ -616,6 +625,7 @@ AtlasTW.Localization:RegisterNamespace("UI", "enUS", {
     ["Helm"] = true,
     ["Shoulders"] = true,
     ["Bracers"] = true,
+    ["Bracer"] = true,
     ["Belt"] = true,
     ["Pants"] = true,
     ["Bags"] = true,
@@ -631,6 +641,9 @@ AtlasTW.Localization:RegisterNamespace("UI", "enUS", {
     ["Amulets"] = true,
     ["Scales"] = true,
     ["Special"] = true,
+    ["Enchant weapon"] = true,
+    ["mana oil"] = true,
+    ["wizard oil"] = true,
 
     --************************************************
     -- Set Categories
@@ -645,4 +658,9 @@ AtlasTW.Localization:RegisterNamespace("UI", "enUS", {
     ["Tier 3 Sets"] = true,
     ["Item Level"] = true,
     ["Disenchanting"] = true,
+    ["Reagent Tooltip Options"] = true,
+    ["Reagent Rows"] = true,
+    ["Other"] = true,
+    ["... %d more"] = true,
+    ["Recipe #%d"] = true,
 })

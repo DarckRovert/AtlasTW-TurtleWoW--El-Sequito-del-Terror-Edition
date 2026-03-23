@@ -23,7 +23,6 @@
 local TIP_NAME = "AtlasTWLootTip"
 local GREY = AtlasTW.Colors.GREY
 local L = AtlasTW.Localization.UI
-local MAX_ITEM_SEARCH_RANGE = 99999
 local FASHION_COIN_ID = 51217
 
 -- ============================================================================
@@ -32,7 +31,6 @@ local FASHION_COIN_ID = 51217
 
 local strfind = string.find
 local tonumber = tonumber
-local tostring = tostring
 local pairs = pairs
 local ipairs = ipairs
 local getglobal = getglobal
@@ -83,18 +81,9 @@ local ModuleState = {
 -- CACHING SYSTEMS
 -- ============================================================================
 
--- Global index for fast lookups (O(1) instead of O(N))
-local GlobalIndex = {
-    itemID = {},      -- itemID -> sourceString
-    spellID = {},     -- spellID -> sourceString
-    nameToID = {},    -- itemName -> itemID
-    isIndexed = false
-}
+-- Relies on centralized AtlasTW.DataIndex module (Core/DataIndex.lua)
+-- No local indexing logic is needed here.
 
--- Cache for items not found in Atlas-TW database
-local NegativeCache = {}
-local NegativeCacheSize = 0
-local NEGATIVE_CACHE_LIMIT = 1000
 
 -- ============================================================================
 -- MONEY TOOLTIP HOOK
@@ -136,372 +125,43 @@ end
 -- ITEM SEARCH FUNCTIONS
 -- ============================================================================
 
-
----
---- Recursively checks if an item ID exists in a loot page
---- @param data table - The loot page data (list of items/tables)
---- @param searchID number - The item ID to search for
---- @return boolean - True if found
----
-local function IsItemInPage(data, searchID)
-    if type(data) ~= "table" then return false end
-    -- table.getn is used for compatibility with WoW 1.12
-    for i = 1, table.getn(data) do
-        local item = data[i]
-        if type(item) == "table" then
-            if item.id == searchID or item[1] == searchID then return true end
-            if item.container and IsItemInPage(item.container, searchID) then
-                return true
-            end
-        elseif item == searchID then
-            return true
-        end
-    end
-    return false
-end
-
----
---- Searches for a page identifier in the MenuData tables to find a localized name
---- @param pageKey string The loot table key
---- @return string|nil Localized source name or nil
----
-local function FindItemSourceInMenuData(pageKey)
-    if not AtlasTW.MenuData then return nil end
-
-    -- Helper to match pageKey with lootpage strings
-    -- Handles both direct match and "AtlasTWLoot[PageKey]Menu" pattern
-    local function isMatch(lootpage)
-        if not lootpage or not pageKey then return false end
-        if lootpage == pageKey then return true end
-        local _, _, shortName = strfind(lootpage, "AtlasTWLoot(.+)Menu")
-        if shortName == pageKey then return true end
-        return false
-    end
-
-    local menuTablesToCheck = {
-        AtlasTW.MenuData.WorldEvents,
-        AtlasTW.MenuData.Factions,
-        AtlasTW.MenuData.PVP,
-        AtlasTW.MenuData.PVPSets,
-        AtlasTW.MenuData.Sets,
-        AtlasTW.MenuData.Alchemy,
-        AtlasTW.MenuData.Smithing,
-        AtlasTW.MenuData.Enchanting,
-        AtlasTW.MenuData.Engineering,
-        AtlasTW.MenuData.Herbalism,
-        AtlasTW.MenuData.Leatherworking,
-        AtlasTW.MenuData.Mining,
-        AtlasTW.MenuData.Tailoring,
-        AtlasTW.MenuData.Jewelcrafting,
-        AtlasTW.MenuData.Cooking,
-        AtlasTW.MenuData.FirstAid,
-        AtlasTW.MenuData.Survival,
-        AtlasTW.MenuData.Skinning,
-        AtlasTW.MenuData.Fishing,
-        AtlasTW.MenuData.Poisons,
-    }
-
-    for _, menuTable in pairs(menuTablesToCheck) do
-        if type(menuTable) == "table" then
-            for _, entry in pairs(menuTable) do
-                if type(entry) == "table" and isMatch(entry.lootpage) and entry.name then
-                    return entry.name
-                end
-            end
-        end
-    end
-
-    return nil
-end
-
-local function BuildGlobalIndex()
-    if GlobalIndex.isIndexed then return end
-
-    -- 1. Index Quests (High Priority)
-    if AtlasTW.Quest and AtlasTW.Quest.DataBase then
-        for _, instanceData in pairs(AtlasTW.Quest.DataBase) do
-            local instanceName = instanceData.Caption
-            if type(instanceName) == "table" then instanceName = instanceName[1] end
-
-            local function indexQuests(questList)
-                if not questList then return end
-                for _, quest in pairs(questList) do
-                    if quest.Rewards then
-                        for _, reward in pairs(quest.Rewards) do
-                            local rID = type(reward) == "table" and reward.id or reward
-                            if rID then
-                                local questTitle = quest.Title or "?"
-                                local source = (instanceName ~= "" and instanceName .. " " or "") .. L["Quest"] .. ": " .. questTitle
-                                if not GlobalIndex.itemID[rID] then
-                                    GlobalIndex.itemID[rID] = source
-                                end
-                            end
-                        end
-                    end
-                end
-            end
-            indexQuests(instanceData.Alliance)
-            indexQuests(instanceData.Horde)
-        end
-    end
-
-    -- 2. Index Sets (Medium Priority - used for combining later)
-    local itemToSetMap = {}
-    if AtlasTW.MenuData and AtlasTW.MenuData.Sets then
-        for _, setCat in ipairs(AtlasTW.MenuData.Sets) do
-            if setCat.lootpage then
-                local _, _, shortName = strfind(setCat.lootpage, "AtlasTWLoot(.+)Menu")
-                local menuTable = AtlasTW.MenuData[shortName or setCat.lootpage]
-                if not menuTable and shortName then
-                     local _, _, baseName = strfind(shortName, "^(.+)Set$")
-                     if baseName then menuTable = AtlasTW.MenuData[baseName] end
-                end
-
-                if menuTable then
-                    for _, entry in pairs(menuTable) do
-                        if entry.lootpage and AtlasTWLoot_Data[entry.lootpage] then
-                            local lootData = AtlasTWLoot_Data[entry.lootpage]
-                            -- Helper to populate itemToSetMap
-                            local function mapItems(data)
-                                if type(data) ~= "table" then return end
-                                for i = 1, table.getn(data) do
-                                    local item = data[i]
-                                    if type(item) == "table" then
-                                        local id = item.id or item[1]
-                                        if id and not itemToSetMap[id] then
-                                            itemToSetMap[id] = setCat.name
-                                        end
-                                        if item.container then mapItems(item.container) end
-                                    elseif type(item) == "number" then
-                                        if not itemToSetMap[item] then
-                                            itemToSetMap[item] = setCat.name
-                                        end
-                                    end
-                                end
-                            end
-                            mapItems(lootData)
-                        end
-                    end
-                end
-            end
-        end
-    end
-
-    -- 3. Index Professions
-    if AtlasTW.SpellDB and AtlasTW.MenuData then
-        local profPages = {}
-        local menuKeys = {"Alchemy", "Smithing", "Enchanting", "Engineering", "Leatherworking", "Mining", "Tailoring", "Jewelcrafting", "Cooking", "FirstAid", "Survival", "Crafting", "CraftedSet"}
-        for _, key in ipairs(menuKeys) do
-            local menu = AtlasTW.MenuData[key]
-            if menu then
-                for _, entry in ipairs(menu) do
-                    if entry.lootpage and entry.name then
-                        table.insert(profPages, { pageKey = entry.lootpage, name = entry.name })
-                    end
-                end
-            end
-        end
-
-        local function indexProfItems(spellList)
-            if not spellList then return end
-            for spellID, data in pairs(spellList) do
-                for _, profEntry in ipairs(profPages) do
-                    local pageKey = profEntry.pageKey
-                    local profName = profEntry.name
-                    if AtlasTWLoot_Data[pageKey] and IsItemInPage(AtlasTWLoot_Data[pageKey], spellID) then
-                        GlobalIndex.spellID[spellID] = profName
-                        break
-                    end
-                end
-                if data.item then GlobalIndex.itemID[data.item] = GlobalIndex.spellID[spellID] end
-            end
-        end
-        indexProfItems(AtlasTW.SpellDB.enchants)
-        indexProfItems(AtlasTW.SpellDB.craftspells)
-    end
-
-    -- 4. Index Loot Tables (Instances/Bosses)
-    -- Modified to use safer iteration logic via centralized Utils
-    if AtlasTW.LootUtils and AtlasTW.LootUtils.IterateAllLootItems then
-
-        AtlasTW.LootUtils.IterateAllLootItems(function(idOrItem, pageKey, itemData)
-            -- While iterating, update nameToID
-            local itemID = idOrItem
-            if type(itemData) == "table" and itemData.id then itemID = itemData.id end
-
-            if GetItemInfo then
-                local name = GetItemInfo(itemID)
-                if name then GlobalIndex.nameToID[name] = itemID end
-            end
-
-            -- Filtering logic from Search.lua (adapted)
-            -- If it looks like a spell/skill but not an explicit item, skip it for GlobalIndex
-            -- checking if it's a spell-like entry
-            local isExplicitItem = (type(itemData) == "table" and itemData.type and itemData.type == "item")
-            local isSpellLike = false
-            if type(itemData) == "table" and itemData.skill and not isExplicitItem then
-                local sid = itemData.id
-                if sid and AtlasTW and AtlasTW.SpellDB and ((AtlasTW.SpellDB.enchants and AtlasTW.SpellDB.enchants[sid]) or (AtlasTW.SpellDB.craftspells and AtlasTW.SpellDB.craftspells[sid])) then
-                    isSpellLike = true
-                end
-            end
-
-            if isSpellLike then return end
-
-            -- Continue with Source naming logic
-            local isCraft = false
-            local craftPrefixes = {"Alchemy", "Smithing", "Smith", "Enchanting", "Engineering", "Leatherworking", "Tailoring", "Smelting", "Jewelcraft", "Cooking", "FirstAid", "Survival"}
-            for _, prefix in ipairs(craftPrefixes) do
-                if strfind(pageKey, "^" .. prefix) then isCraft = true break end
-            end
-
-            if not isCraft then
-                local isBoss = false
-                local source = AtlasTW.LootUtils.GetLootTableSource(pageKey)
-                if source then
-                    isBoss = true
-                else
-                    source = FindItemSourceInMenuData(pageKey)
-                end
-                source = source or pageKey
-
-                -- Combine with Set information if available
-                local setInfo = itemToSetMap[itemID]
-                if setInfo then
-                    if isBoss then
-                        -- "Molten Core - Lucifron (T1 Set)"
-                        source = source .. " (" .. setInfo .. ")"
-                    else
-                        -- If it's a world drop or generic category, prefer Set Name
-                        if strfind(pageKey, "World") or source == pageKey then
-                            source = setInfo
-                        else
-                            source = source .. " (" .. setInfo .. ")"
-                        end
-                    end
-                end
-
-                -- Final assignment (only if not already set by higher priority like Quest)
-                if not GlobalIndex.itemID[itemID] then
-                    GlobalIndex.itemID[itemID] = source
-                end
-            end
-        end)
-
-        GlobalIndex.isIndexed = true
-    end
-end
-
----
---- Checks if an item belongs to a Set Category in MenuData
---- @param itemID number
---- @return string|nil Localized Set Categpry Name (e.g. "Ruins of Ahn'Qiraj Sets")
----
-local function GetItemSetCategory(itemID)
-    if not AtlasTW.MenuData or not AtlasTW.MenuData.Sets then return nil end
-
-    -- Helper to check a Menu Table (list of sub-pages)
-    local function checkMenuTable(menuTable)
-        if type(menuTable) ~= "table" then return false end
-        for _, entry in pairs(menuTable) do
-            if entry.lootpage and AtlasTWLoot_Data[entry.lootpage] then
-                if IsItemInPage(AtlasTWLoot_Data[entry.lootpage], itemID) then
-                    return true
-                end
-            end
-        end
-        return false
-    end
-
-    for _, setCat in ipairs(AtlasTW.MenuData.Sets) do
-        if setCat.lootpage then
-            -- Try to Map string "AtlasTWLootXMenu" to AtlasTW.MenuData.X
-            local key = setCat.lootpage
-            local menuTable = nil
-
-            -- Regex extraction (WoW 1.12 compatible)
-            local _, _, shortName = strfind(key, "AtlasTWLoot(.+)Menu")
-            if shortName then
-                menuTable = AtlasTW.MenuData[shortName] -- e.g. "AQ20Set"
-                if not menuTable then
-                    -- Try removing "Set" suffix (e.g. "PriestSet" -> "Priest")
-                    local _, _, baseName = strfind(shortName, "^(.+)Set$")
-                    if baseName then
-                        menuTable = AtlasTW.MenuData[baseName]
-                    end
-                end
-            end
-
-            if menuTable and checkMenuTable(menuTable) then
-                return setCat.name -- Localized name
-            end
-        end
-    end
-    return nil
-end
+-- IsItemInPage and FindItemSourceInMenuData have been moved to AtlasTW.LootUtils
+-- as IsItemInLootPage and GetLootPageDisplayName respectively.
 
 local function FindItemSource(itemID)
-    if not itemID then return nil end
+    if not AtlasTW.DataIndex or not AtlasTW.DataIndex.SourceCache then return nil end
 
-    -- Check global index first
-    BuildGlobalIndex()
-    if GlobalIndex.itemID[itemID] then
-        return GlobalIndex.itemID[itemID]
+    -- Use centralized index
+    local source = AtlasTW.DataIndex.SourceCache[itemID]
+
+    -- Trigger indexing if not ready
+    if not AtlasTW.DataIndex.isIndexed and not AtlasTW.DataIndex.isIndexing then
+        AtlasTW.DataIndex.BuildIndex(true)
     end
 
-    -- Support for Transmogrification (Custom IDs)
-    -- If the ID isn't in our database, try looking up the item by name
-    -- to see if it matches an existing item in our Atlas-TW index.
+    -- Handle false (cached as missing)
+    if source == false then return nil end
+    if source then return source end
+
+    -- Fallback for Transmogrification (Custom IDs)
     local name = GetItemInfo(itemID)
-    if name then
-        local originalID = GlobalIndex.nameToID[name]
+    if name and AtlasTW.DataIndex.NameToID then
+        local originalID = AtlasTW.DataIndex.NameToID[name]
         if originalID and originalID ~= itemID then
-            local source = GlobalIndex.itemID[originalID]
-            if source then
-                -- Cache the result for this specific custom ID to speed up future hovers
-                GlobalIndex.itemID[itemID] = source
-                return source
+            local originalSource = AtlasTW.DataIndex.SourceCache[originalID]
+            if originalSource then
+                AtlasTW.DataIndex.SourceCache[itemID] = originalSource
+                return originalSource
             end
         end
     end
 
-    -- Check negative cache to avoid repeated failed lookups
-    if NegativeCache[itemID] then return nil end
-
-    -- For items not in Atlas database, they might be in sets
-    local setCategory = GetItemSetCategory(itemID)
-    if setCategory then
-        GlobalIndex.itemID[itemID] = setCategory
-        return setCategory
-    end
-
-    -- If still not found, cache as missing
-    NegativeCache[itemID] = true
-    NegativeCacheSize = NegativeCacheSize + 1
-    if NegativeCacheSize > NEGATIVE_CACHE_LIMIT then
-        NegativeCache = {}
-        NegativeCacheSize = 0
-    end
     return nil
 end
 
----
---- Gets item ID by name with caching support
---- @param name string - The item name to search for
---- @return number|nil - The item ID or nil if not found
---- @usage local itemID = GetItemIDByName("Thunderfury")
----
 local function GetItemIDByName(name)
-    if not name then return nil end
-    BuildGlobalIndex()
-
-    local foundID = GlobalIndex.nameToID[name]
-    if foundID then return foundID end
-
-    -- If not in our index, we still avoid the 100k loop because it's too expensive.
-    -- We can try to use GetItemInfo dynamically if we encounter this name often,
-    -- but for now, we just return nil to protect performance.
-    return nil
+    if not AtlasTW.DataIndex then return nil end
+    return AtlasTW.DataIndex.NameToID and AtlasTW.DataIndex.NameToID[name]
 end
 
 -- ============================================================================
@@ -539,10 +199,104 @@ local function ExtendTooltip(tooltip)
         end
     end
 
+    -- Add recipe usage information
+    local itemID = tonumber(tooltip.itemID)
+    if itemID and AtlasTW.ReagentData and AtlasTW.ReagentData.GetRecipes and AtlasTWOptions and (AtlasTWOptions.ReagentRows or 0) > 0 then
+        local recipes = AtlasTW.ReagentData.GetRecipes(itemID)
+        if recipes and next(recipes) then
+            -- Filter recipes based on professions option
+            local filteredRecipes = {}
+            for _, recipe in ipairs(recipes) do
+                local key = recipe.professionKey or "Other"
+                local isEnabled = true
+                if AtlasTWOptions.ReagentProfessions and AtlasTWOptions.ReagentProfessions[key] == false then
+                    isEnabled = false
+                end
+
+                if isEnabled then
+                    table.insert(filteredRecipes, recipe)
+                end
+            end
+
+            if table.getn(filteredRecipes) > 0 then
+                local maxRows = AtlasTWOptions.ReagentRows or 20
+                local count = 0
+                local lastProfession = nil
+
+                for _, recipe in ipairs(filteredRecipes) do
+                    -- Check profession filter
+                    -- We need to check if the profession is enabled.
+                    -- Since we only have the localized name, we might have issues if languages differ.
+                    -- Ideally ReagentData should provide the key.
+                    -- Let's assume for now we skip filtering if key is missing, or rely on English match if playing in English.
+
+                    -- Check row limit
+                    if count >= maxRows then
+                        tooltip:AddLine(string.format(L["... %d more"], (table.getn(filteredRecipes) - count)), 0.5, 0.5,
+                            0.5)
+                        break
+                    end
+
+                    -- Grouping by profession
+                    local currentProfession = recipe.profession or L["Other"]
+                    if currentProfession ~= lastProfession then
+                        tooltip:AddLine(currentProfession, 0, 1, 0) -- Green Header
+                        lastProfession = currentProfession
+                    end
+
+                    local name = recipe.name
+                    if not name and recipe.itemID then
+                        name = GetItemInfo(recipe.itemID)
+                        if name then
+                            recipe.name = name -- Cache for future use
+                        elseif AtlasTW.LootCache and AtlasTW.LootCache.ForceCacheItem then
+                            AtlasTW.LootCache.ForceCacheItem(recipe.itemID)
+                        end
+                    end
+                    name = name or string.format(L["Recipe #%d"], recipe.spellID)
+
+                    -- Determine colors
+                    local r, g, b = 1, 0.2, 0.2 -- Default Red (Cannot learn/No profession)
+
+                    local professionSkill = AtlasTW.ReagentData.GetPlayerProfessionSkill(recipe.profession)
+
+                    -- Gray out if skill is significantly higher (likely known/trivial)
+                    -- 40 is a common threshold for recipes turning gray
+                    if professionSkill > 0 and recipe.skill then
+                        if professionSkill >= (recipe.skill + 40) then
+                            r, g, b = 0.5, 0.5, 0.5 -- Gray
+                        elseif professionSkill >= recipe.skill then
+                            r, g, b = 0, 1, 0       -- Green
+                        end
+                    end
+
+                    local rightText = ""
+                    if recipe.skill and recipe.skill > 0 then
+                        rightText = "(" .. recipe.skill .. ")"
+                    end
+
+                    tooltip:AddDoubleLine("-" .. name, rightText, r, g, b, r, g, b)
+                    count = count + 1
+                end
+                tooltip:Show()
+            end
+        end
+    end
+
     -- Add money information if present
     if ModuleState.tooltipMoney > 0 then
         original_SetTooltipMoney(tooltip, ModuleState.tooltipMoney)
         tooltip:Show()
+    end
+
+    -- Universal enhancements (Icon and ItemID)
+    if AtlasTW.TooltipExtras then
+        local itemID = tonumber(tooltip.itemID)
+        if itemID then
+            -- ONLY show icon for ItemRefTooltip (chat) as requested
+            local isItemRef = (tooltip:GetName() == "ItemRefTooltip")
+            AtlasTW.TooltipExtras.Extend(tooltip, itemID, isItemRef)
+        end
     end
 end
 
@@ -560,6 +314,7 @@ end
 ---
 local function CreateTooltipWrapper(tooltip, methodName, linkExtractor)
     local originalMethod = tooltip[methodName]
+    if not originalMethod then return end
 
     tooltip[methodName] = function(self, arg1, arg2, arg3, arg4, arg5)
         ModuleState.insideHook = true
@@ -581,30 +336,69 @@ local function CreateTooltipWrapper(tooltip, methodName, linkExtractor)
     end
 end
 
+---
+--- Creates a wrapper for tooltip methods that clear or reset content
+--- @param tooltip table - The tooltip frame to wrap
+--- @param methodName string - The method name to wrap
+--- @return nil
+---
+local function CreateTooltipClearWrapper(tooltip, methodName)
+    local originalMethod = tooltip[methodName]
+    if not originalMethod then return end
+
+    tooltip[methodName] = function(self, arg1, arg2, arg3, arg4, arg5)
+        -- Clear item state
+        self.itemID = nil
+        ModuleState.tooltipMoney = 0
+
+        -- Hide icon ONLY if this is the tooltip that was cleared
+        -- and only if AtlasTW.TooltipExtras is present
+        if AtlasTW.TooltipExtras and AtlasTW.TooltipExtras.HideIcon then
+            if AtlasTWTooltipIcon:GetParent() == self then
+                AtlasTW.TooltipExtras.HideIcon()
+            end
+        end
+
+        return originalMethod(self, arg1, arg2, arg3, arg4, arg5)
+    end
+end
+
 -- Tooltip hook configuration table
 local TooltipHooks = {
-    {"SetLootRollItem", function(rollID) return ExtractItemID(GetLootRollItemLink(rollID)) end},
-    {"SetLootItem", function(slot) return ExtractItemID(GetLootSlotLink(slot)) end},
-    {"SetMerchantItem", function(merchantIndex) return ExtractItemID(GetMerchantItemLink(merchantIndex)) end},
-    {"SetQuestLogItem", function(itemType, index) return ExtractItemID(GetQuestLogItemLink(itemType, index)) end},
-    {"SetQuestItem", function(itemType, index) return ExtractItemID(GetQuestItemLink(itemType, index)) end},
-    {"SetHyperlink", function(link) return ExtractItemID(link) end},
-    {"SetBagItem", function(container, slot) return ExtractItemID(GetContainerItemLink(container, slot)) end},
-    {"SetInboxItem", function(mailID, attachmentIndex) return GetItemIDByName(GetInboxItem(mailID)) end},
-    {"SetInventoryItem", function(unit, slot) return ExtractItemID(GetInventoryItemLink(unit, slot)) end},
-    {"SetCraftItem", function(skill, slot) return ExtractItemID(GetCraftReagentItemLink(skill, slot)) end},
-    {"SetCraftSpell", function(slot) return ExtractItemID(GetCraftItemLink(slot)) end},
-    {"SetTradeSkillItem", function(skillIndex, reagentIndex)
+    { "SetLootRollItem",  function(rollID) return ExtractItemID(GetLootRollItemLink(rollID)) end },
+    { "SetLootItem",      function(slot) return ExtractItemID(GetLootSlotLink(slot)) end },
+    { "SetMerchantItem",  function(merchantIndex) return ExtractItemID(GetMerchantItemLink(merchantIndex)) end },
+    { "SetQuestLogItem",  function(itemType, index) return ExtractItemID(GetQuestLogItemLink(itemType, index)) end },
+    { "SetQuestItem",     function(itemType, index) return ExtractItemID(GetQuestItemLink(itemType, index)) end },
+    { "SetHyperlink",     function(link) return ExtractItemID(link) end },
+    { "SetBagItem",       function(container, slot) return ExtractItemID(GetContainerItemLink(container, slot)) end },
+    { "SetInboxItem",     function(mailID, attachmentIndex) return GetItemIDByName(GetInboxItem(mailID)) end },
+    { "SetInventoryItem", function(unit, slot) return ExtractItemID(GetInventoryItemLink(unit, slot)) end },
+    { "SetCraftItem",     function(skill, slot) return ExtractItemID(GetCraftReagentItemLink(skill, slot)) end },
+    { "SetCraftSpell",    function(slot) return ExtractItemID(GetCraftItemLink(slot)) end },
+    { "SetTradeSkillItem", function(skillIndex, reagentIndex)
         if reagentIndex then
             return ExtractItemID(GetTradeSkillReagentItemLink(skillIndex, reagentIndex))
         else
             return ExtractItemID(GetTradeSkillItemLink(skillIndex))
         end
-    end},
-    {"SetAuctionItem", function(atype, index) return ExtractItemID(GetAuctionItemLink(atype, index)) end},
-    {"SetAuctionSellItem", function() return GetItemIDByName(GetAuctionSellItemInfo()) end},
-    {"SetTradePlayerItem", function(index) return ExtractItemID(GetTradePlayerItemLink(index)) end},
-    {"SetTradeTargetItem", function(index) return ExtractItemID(GetTradeTargetItemLink(index)) end}
+    end },
+    { "SetAuctionItem",     function(atype, index) return ExtractItemID(GetAuctionItemLink(atype, index)) end },
+    { "SetAuctionSellItem", function() return GetItemIDByName(GetAuctionSellItemInfo()) end },
+    { "SetTradePlayerItem", function(index) return ExtractItemID(GetTradePlayerItemLink(index)) end },
+    { "SetTradeTargetItem", function(index) return ExtractItemID(GetTradeTargetItemLink(index)) end }
+}
+
+-- Methods that clear or reset tooltip content (non-item methods)
+local ClearHooks = {
+    "ClearLines",
+    "SetUnit",
+    "SetUnitCharacter",
+    "SetAction",
+    "SetSpell",
+    "SetPetAction",
+    "SetText",
+    "SetOwner"
 }
 
 ---
@@ -622,12 +416,22 @@ local function HookTooltip(tooltip)
         if originalOnHide then originalOnHide() end
         this.itemID = nil
         ModuleState.tooltipMoney = 0
+        if AtlasTW.TooltipExtras and AtlasTW.TooltipExtras.HideIcon then
+            if AtlasTWTooltipIcon:GetParent() == this then
+                AtlasTW.TooltipExtras.HideIcon()
+            end
+        end
     end)
 
-    -- Hook all methods from configuration table
+    -- Hook all item methods from configuration table
     for _, hookData in ipairs(TooltipHooks) do
         local methodName, linkExtractor = hookData[1], hookData[2]
         CreateTooltipWrapper(tooltip, methodName, linkExtractor)
+    end
+
+    -- Hook all clear methods
+    for _, methodName in ipairs(ClearHooks) do
+        CreateTooltipClearWrapper(tooltip, methodName)
     end
 end
 
@@ -646,6 +450,13 @@ end
 local original_SetItemRef = SetItemRef
 function SetItemRef(link, text, button)
     local startIndex, _, id = strfind(link or "", "item:(%d+)")
+
+    -- Clear state first
+    ItemRefTooltip.itemID = nil
+    if AtlasTW.TooltipExtras and AtlasTW.TooltipExtras.HideIcon then
+        AtlasTW.TooltipExtras.HideIcon()
+    end
+
     ItemRefTooltip.itemID = tonumber(id)
     original_SetItemRef(link, text, button)
 
@@ -659,6 +470,9 @@ local original_ItemRefOnHide = ItemRefTooltip:GetScript("OnHide")
 ItemRefTooltip:SetScript("OnHide", function()
     if original_ItemRefOnHide then original_ItemRefOnHide() end
     ItemRefTooltip.itemID = nil
+    if AtlasTW.TooltipExtras and AtlasTW.TooltipExtras.HideIcon then
+        AtlasTW.TooltipExtras.HideIcon()
+    end
 end)
 
 -- ============================================================================
@@ -694,7 +508,20 @@ end
 -- Hook main tooltips
 HookTooltip(GameTooltip)
 
--- Build global index on startup to avoid hover delays
+-- Build global index when Atlas window is first shown to avoid loading lag
 AtlasTWLootTip.HookAddonOrVariable("AtlasTW", function()
-    BuildGlobalIndex()
+    if AtlasTW and AtlasTW.OnShow then
+        local original_OnShow = AtlasTW.OnShow
+        AtlasTW.OnShow = function()
+            if original_OnShow then original_OnShow() end
+            if AtlasTW.DataIndex and AtlasTW.DataIndex.CheckAndBuildIndex then
+                AtlasTW.DataIndex.CheckAndBuildIndex()
+            end
+        end
+    else
+        -- Fallback if AtlasTW not fully initialized yet
+        if AtlasTW.DataIndex and AtlasTW.DataIndex.CheckAndBuildIndex then
+            AtlasTW.DataIndex.CheckAndBuildIndex()
+        end
+    end
 end)

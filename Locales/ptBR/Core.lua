@@ -34,91 +34,91 @@ AtlasTW = AtlasTW or {}
 
 --Default map to auto-select to when no SubZone data is available
 AtlasTW.AssocDefaults = {
-    ["Gládio Cruel"] =					"DireMaulNorth",
-    ["Pico da Rocha Negra"] =			"BlackrockSpireLower",
-    ["Monastério Escarlate"] =			"ScarletMonasteryEnt"
+    ["Gládio Cruel"] = "DireMaulNorth",
+    ["Pico da Rocha Negra"] = "BlackrockSpireLower",
+    ["Monastério Escarlate"] = "ScarletMonasteryEnt"
 }
 --Links maps together that are part of the same instance
 AtlasTW.SubZoneAssoc = {
-    ["DireMaulNorth"] =				"Gládio Cruel",
-    ["DireMaulEast"] =				"Gládio Cruel",
-    ["DireMaulWest"] =				"Gládio Cruel",
-    ["DireMaulEnt"] =				"Gládio Cruel",
-    ["BlackrockSpireLower"] =		"Pico da Rocha Negra",
-    ["BlackrockSpireUpper"] =		"Pico da Rocha Negra",
-    ["BlackrockMountainEnt"] =		"Pico da Rocha Negra",
-    ["ScarletMonasteryGraveyard"] =	"Monastério Escarlate",
-    ["ScarletMonasteryLibrary"] =	"Monastério Escarlate",
-    ["ScarletMonasteryArmory"] =	"Monastério Escarlate",
-    ["ScarletMonasteryCathedral"] =	"Monastério Escarlate",
-    ["ScarletMonasteryEnt"] =		"Monastério Escarlate"
+    ["DireMaulNorth"] = "Gládio Cruel",
+    ["DireMaulEast"] = "Gládio Cruel",
+    ["DireMaulWest"] = "Gládio Cruel",
+    ["DireMaulEnt"] = "Gládio Cruel",
+    ["BlackrockSpireLower"] = "Pico da Rocha Negra",
+    ["BlackrockSpireUpper"] = "Pico da Rocha Negra",
+    ["BlackrockMountainEnt"] = "Pico da Rocha Negra",
+    ["ScarletMonasteryGraveyard"] = "Monastério Escarlate",
+    ["ScarletMonasteryLibrary"] = "Monastério Escarlate",
+    ["ScarletMonasteryArmory"] = "Monastério Escarlate",
+    ["ScarletMonasteryCathedral"] = "Monastério Escarlate",
+    ["ScarletMonasteryEnt"] = "Monastério Escarlate"
 }
 --Links SubZone values with specific instance maps
 AtlasTW.SubZoneData = {
-    ["Salões da Destruição"] =		"DireMaulNorth",
-    ["Assento de Gordok"] =				"DireMaulNorth",
-    ["Distrito Lenhatorta"] =			"DireMaulEast",
-    ["A Passagem Oculta"] =			"DireMaulEast",
-    ["O Conservatório"] =			"DireMaulEast",
-    ["O Santuário de Eldretharr"] =	"DireMaulEast",
-    ["Jardins Capitais"] =			"DireMaulWest",
-    ["Corte dos Altaneiros"] =	"DireMaulWest",
-    ["Prisão de Immol'thar"] =		"DireMaulWest",
-    ["O Ateneu"] =				"DireMaulWest",
-    ["Mok'Doom"] =					"BlackrockSpireLower",
-    ["Tazz'Alaor"] =				"BlackrockSpireLower",
-    ["Túneis Skitterweb"] =		"BlackrockSpireLower",
-    ["O Armazém"] =			"BlackrockSpireLower",
-    ["Câmara de Batalha"] =			"BlackrockSpireLower",
-    ["Salão do Pináculo Dracônico"] =			"BlackrockSpireUpper",
-    ["Salão da Vinculação"] =			"BlackrockSpireUpper",
-    ["O Viveiro"] =				"BlackrockSpireUpper",
-    ["Salão da Mão Negra"] =			"BlackrockSpireUpper",
-    ["Estádio Rocha Negra"] =			"BlackrockSpireUpper",
-    ["A Fornalha"] =				"BlackrockSpireUpper",
-    ["Cidade Hordemar"] =				"BlackrockSpireUpper",
-    ["Trono do Pináculo"] =				"BlackrockSpireUpper",
-    ["Câmara da Redenção"] =		"ScarletMonasteryGraveyard",
-    ["Claustro Abandonado"] =			"ScarletMonasteryGraveyard",
-    ["Tumba de Honra"] =				"ScarletMonasteryGraveyard",
-    ["Claustro do Caçador"] =		"ScarletMonasteryLibrary",
-    ["Galeria dos Tesouros"] =		"ScarletMonasteryLibrary",
-    ["Ateneu"] =					"ScarletMonasteryLibrary",
-    ["Campos de Treinamento"] =			"ScarletMonasteryArmory",
-    ["Arsenal do Lacaio"] =			"ScarletMonasteryArmory",
-    ["Arsenal do Cruzado"] =			"ScarletMonasteryArmory",
-    ["Salão dos Campeões"] =			"ScarletMonasteryArmory",
-    ["Jardins da Capela"] =			"ScarletMonasteryCathedral",
-    ["Capela do Cruzado"] =			"ScarletMonasteryCathedral",
-    ["O Grande Vestíbulo"] =		"ScarletMonasteryEnt"
+    ["Salões da Destruição"] = "DireMaulNorth",
+    ["Assento de Gordok"] = "DireMaulNorth",
+    ["Distrito Lenhatorta"] = "DireMaulEast",
+    ["A Passagem Oculta"] = "DireMaulEast",
+    ["O Conservatório"] = "DireMaulEast",
+    ["O Santuário de Eldretharr"] = "DireMaulEast",
+    ["Jardins Capitais"] = "DireMaulWest",
+    ["Corte dos Altaneiros"] = "DireMaulWest",
+    ["Prisão de Immol'thar"] = "DireMaulWest",
+    ["O Ateneu"] = "DireMaulWest",
+    ["Mok'Doom"] = "BlackrockSpireLower",
+    ["Tazz'Alaor"] = "BlackrockSpireLower",
+    ["Túneis Skitterweb"] = "BlackrockSpireLower",
+    ["O Armazém"] = "BlackrockSpireLower",
+    ["Câmara de Batalha"] = "BlackrockSpireLower",
+    ["Salão do Pináculo Dracônico"] = "BlackrockSpireUpper",
+    ["Salão da Vinculação"] = "BlackrockSpireUpper",
+    ["O Viveiro"] = "BlackrockSpireUpper",
+    ["Salão da Mão Negra"] = "BlackrockSpireUpper",
+    ["Estádio Rocha Negra"] = "BlackrockSpireUpper",
+    ["A Fornalha"] = "BlackrockSpireUpper",
+    ["Cidade Hordemar"] = "BlackrockSpireUpper",
+    ["Trono do Pináculo"] = "BlackrockSpireUpper",
+    ["Câmara da Redenção"] = "ScarletMonasteryGraveyard",
+    ["Claustro Abandonado"] = "ScarletMonasteryGraveyard",
+    ["Tumba de Honra"] = "ScarletMonasteryGraveyard",
+    ["Claustro do Caçador"] = "ScarletMonasteryLibrary",
+    ["Galeria dos Tesouros"] = "ScarletMonasteryLibrary",
+    ["Ateneu"] = "ScarletMonasteryLibrary",
+    ["Campos de Treinamento"] = "ScarletMonasteryArmory",
+    ["Arsenal do Lacaio"] = "ScarletMonasteryArmory",
+    ["Arsenal do Cruzado"] = "ScarletMonasteryArmory",
+    ["Salão dos Campeões"] = "ScarletMonasteryArmory",
+    ["Jardins da Capela"] = "ScarletMonasteryCathedral",
+    ["Capela do Cruzado"] = "ScarletMonasteryCathedral",
+    ["O Grande Vestíbulo"] = "ScarletMonasteryEnt"
 }
 --Maps to auto-select to from outdoor zones.
 AtlasTW.OutdoorZoneToAtlas = {
-    ["Vale Gris"] =					"BlackfathomDeepsEnt",
-    ["Ermos"] =					"UldamanEnt",
-    ["Montanha Rocha Negra"] =		"BlackrockMountainEnt",
-    ["Estepes Ardentes"] = 			"HateforgeQuarry", -- TurtleWOW
-    ["Trilha do Vento Morto"] = 			"KarazhanCrypt",    -- TurtleWOW
-    ["Desolação"] =					"MaraudonEnt",
-    ["Dun Morogh"] =				"GnomereganEnt",
-    ["Feralas"] =					"DireMaulEnt",
-    ["Garganta Abrasadora"] =				"BlackrockMountainEnt",
-    ["Pântano das Mágoas"] =			"TheSunkenTempleEnt",
-    ["Tanaris"] =					"ZulFarrak",
-    ["Sertões"] =				"WailingCavernsEnt",
-    ["Gilneas"] =					"GilneasCity", -- TurtleWOW
-    ["Clareiras de Tirisfal"]	=			"ScarletMonasteryEnt",
-    ["Cerro Oeste"] =					"TheDeadminesEnt",
-    ["Orgrimmar"] =					"RagefireChasm",
-    ["Pântano Vadeoso"] =			"OnyxiasLair",
-    ["Silithus"] =					"TheTempleofAhnQiraj",
-    ["Terras Pestilentas Ocidentais"] =		"Scholomance",
-    ["Floresta de Pinhaprata"] =			"ShadowfangKeep",
-    ["Terras Pestilentas Orientais"] =		"Stratholme",
-    ["Ventobravo"] =			"TheStockade",
-    ["Selva do Espinhaço"] =		"ZulGurub",
-    ["Balor"] =                     "StormwroughtRuins", -- TurtleWOW
-    ["Pantanal"] =                  "DragonmawRetreat" -- TurtleWOW
+    ["Vale Gris"] = "BlackfathomDeepsEnt",
+    ["Ermos"] = "UldamanEnt",
+    ["Montanha Rocha Negra"] = "BlackrockMountainEnt",
+    ["Estepes Ardentes"] = "HateforgeQuarry",       -- TurtleWOW
+    ["Trilha do Vento Morto"] = "KarazhanCrypt",    -- TurtleWOW
+    ["Desolação"] = "MaraudonEnt",
+    ["Dun Morogh"] = "GnomereganEnt",
+    ["Feralas"] = "DireMaulEnt",
+    ["Garganta Abrasadora"] = "BlackrockMountainEnt",
+    ["Pântano das Mágoas"] = "TheSunkenTempleEnt",
+    ["Tanaris"] = "ZulFarrak",
+    ["Sertões"] = "WailingCavernsEnt",
+    ["Gilneas"] = "GilneasCity",     -- TurtleWOW
+    ["Clareiras de Tirisfal"] = "ScarletMonasteryEnt",
+    ["Cerro Oeste"] = "TheDeadminesEnt",
+    ["Orgrimmar"] = "RagefireChasm",
+    ["Pântano Vadeoso"] = "OnyxiasLair",
+    ["Silithus"] = "TheTempleofAhnQiraj",
+    ["Terras Pestilentas Ocidentais"] = "Scholomance",
+    ["Floresta de Pinhaprata"] = "ShadowfangKeep",
+    ["Terras Pestilentas Orientais"] = "Stratholme",
+    ["Ventobravo"] = "TheStockade",
+    ["Selva do Espinhaço"] = "ZulGurub",
+    ["Balor"] = "StormwroughtRuins",                     -- TurtleWOW
+    ["Pantanal"] = "DragonmawRetreat"                    -- TurtleWOW
 }
 
 ---
@@ -128,6 +128,7 @@ AtlasTW.Localization:RegisterNamespace("UI", "ptBR", {
     --************************************************
     -- Common UI Strings
     --************************************************
+    ["Rank Pattern"] = " %a+ %d+$",
     ["Options"] = "Opções",
     ["Search"] = "Buscar",
     ["Clear"] = "Limpar",
@@ -147,6 +148,16 @@ AtlasTW.Localization:RegisterNamespace("UI", "ptBR", {
     ["Loot"] = "Saque",
     ["Previous"] = "Anterior",
     ["Next"] = "Próximo",
+    ["Group by Source"] = "Agrupar por fonte",
+    ["Default"] = "Padrão",
+    ["Check Completed Quests"] = "Verificar missões concluídas",
+    ["Enable Profession Info"] = "Ativar informações da profissão",
+    ["Lockpicking"] = "Arrombamento",
+    ["Doors"] = "Portas",
+    ["Night"] = "Noite",
+    ["Day"] = "Dia",
+    ["Winter"] = "Inverno",
+
 
     --************************************************
     -- Colors
@@ -242,7 +253,6 @@ AtlasTW.Localization:RegisterNamespace("UI", "ptBR", {
     ["Color Quests by Level"] = "Colorir Missões por Nível",
     ["Color Quests from the Questlog"] = "Colorir Missões do Registro",
     ["Auto-Query Unknown Items"] = "Consultar Itens Desconhecidos auto",
-    ["Suppress Server Query Spam"] = "Suprimir Spam de Consultas ao Servidor",
     ["Show Loot Panel with AtlasTW"] = "Mostrar Painel de Saques com AtlasTW",
     ["Sort Instance by:"] = "Ordenar instância por:",
     ["Show Button on Minimap"] = "Mostrar botão no minimapa",
@@ -252,6 +262,12 @@ AtlasTW.Localization:RegisterNamespace("UI", "ptBR", {
     ["Show Acronyms"] = "Mostrar acrônimos",
     ["Clamp window to screen"] = "Fixar janela à tela",
     ["Show Cursor Coordinates on Map"] = "Mostrar coordenadas do cursor no mapa",
+    ["Show Map Markers"] = "Mostrar marcadores no mapa",
+    ["Enable pfUI Styling"] = "Ativar o estilo pfUI",
+    ["pfUI styling enabled. Type /reload to apply changes."] =
+    "Estilo pfUI ativado. Digite /reload para aplicar as alterações.",
+    ["pfUI styling disabled. Type /reload to apply changes."] =
+    "Estilo pfUI desativado. Digite /reload para aplicar as alterações.",
     ["Scale"] = "Escala",
 
     --************************************************
@@ -338,15 +354,10 @@ AtlasTW.Localization:RegisterNamespace("UI", "ptBR", {
     ["has been reset!"] = "foi redefinido!",
     ["Reset Settings"] = "Resetar Configurações",
     ["Default settings applied!"] = "Configurações padrão aplicadas!",
-    ["Safe Chat Links |cff1eff00(recommended)|r"] = "Links de Chat Seguros |cff1eff00(recomendado)|r",
-    ["Enable all Chat Links"] = "Ativar todos os Links de Chat",
-    ["Default Tooltips"] = "Dicas padrão",
-    ["Lootlink Tooltips"] = "Dicas do Lootlink",
-    ["ItemSync Tooltips"] = "Dicas do ItemSync",
     ["Use EquipCompare"] = "Usar EquipCompare",
     ["Make Loot Table Opaque"] = "Tornar a Tabela de Saque opaca",
-    ["Show IDs at all times"] = "Mostrar IDs em todos os momentos",
-    ["Suppress Text Spam"] = "Suprimir spam de texto",
+    ["Show IDs in Tooltips"] = "Mostrar IDs nas dicas",
+    ["Show Icon in Tooltips"] = "Mostrar ícone nas dicas",
     ["Show Source on Tooltips"] = "Mostrar origem nas dicas",
     ["Welcome to Atlas-TW Edition. Please take a moment to set your preferences."] =
     "Bem-vindo ao Atlas-TW Edition. Por favor, tome um momento para configurar suas preferências.",
@@ -579,7 +590,7 @@ AtlasTW.Localization:RegisterNamespace("UI", "ptBR", {
     ["Ammo Pouch"] = "Bornal de Munição",
     ["Bag"] = "Bolsa",
     ["Potion"] = "Poção",
-    ["Reagent"] = "Reagente",--TODO check
+    ["Reagent"] = "Reagente", --TODO check
     ["Darkmoon Faire Card"] = "Carta da Feira de Negraluna",
     ["Fishing Pole"] = "Vara de Pesca",
     ["Gemstones"] = "Gemas",
@@ -623,6 +634,7 @@ AtlasTW.Localization:RegisterNamespace("UI", "ptBR", {
     ["Helm"] = "Elmo",
     ["Shoulders"] = "Ombreiras",
     ["Bracers"] = "Braçadeiras",
+    ["Bracer"] = "Braçadeira",
     ["Belt"] = "Cinto",
     ["Pants"] = "Calças",
     ["Bags"] = "Sacos",
@@ -638,6 +650,9 @@ AtlasTW.Localization:RegisterNamespace("UI", "ptBR", {
     ["Amulets"] = "Amuletos",
     ["Scales"] = "Escamas",
     ["Special"] = "Especial",
+    ["Enchant weapon"] = "Encantamento de Arma",
+    ["mana oil"] = " de Mana",
+    ["wizard oil"] = " de Teurgo",
 
     --************************************************
     -- Set Categories
@@ -652,4 +667,9 @@ AtlasTW.Localization:RegisterNamespace("UI", "ptBR", {
     ["Tier 3 Sets"] = "Conjuntos Tier 3",
     ["Item Level"] = "Nível de Item",
     ["Disenchanting"] = "Desencantar",
+    ["Reagent Tooltip Options"] = "Opções de Dica de Reagentes",
+    ["Reagent Rows"] = "Linhas de Reagentes",
+    ["Other"] = "Outro",
+    ["... %d more"] = "... %d mais",
+    ["Recipe #%d"] = "Receita #%d",
 })

@@ -265,6 +265,7 @@ local Factions = {
 		{ id = 16768 },
 		{ id = 16769 },
 		{ id = 19445 },
+		{ id = 42379 },
 		{ name = LF["Revered"], icon="INV_Misc_Horn_01" },
 		{ id = 19218, container={19050} },
 		{ id = 19327, container={19049} },
@@ -1401,6 +1402,56 @@ local Factions = {
         {},
 		{ id = 80635 },
 		{ id = 80643 }, --*15L
+	},
+	EarthenRing = {
+		{ name = LF["Honored"], icon = "Spell_Nature_EarthBind"},
+		{ id = 33123 },
+		{ id = 33124 },
+        {},
+		{ name = LF["Revered"], icon = "Spell_Nature_EarthBind"},
+		{ id = 33125 },
+		{ id = 33126 },
+		{ id = 33127 },
+		{ id = 33128 },
+		{ id = 33129 },
+        {},
+        {},
+        {},
+        {},
+        {},
+		{ name = LF["Exalted"], icon = "Spell_Nature_EarthBind"},
+		{ id = 33133 }, -- Earthen Ring Tabard
+		{ id = 33130 }, -- Crackling Earthfury Claw
+		{ id = 33131 }, -- Ragefury Stompers
+		{ id = 33132 }, -- Totem of Calm Cascades
+		{ id = 33134, container = { 33135 } }, -- Plans: Bulwark of Unshaken Earth
+	},
+	DraeneiExiles = {
+		{ name = LF["Friendly"], icon = "INV_Offhand_Draenei_A_02"},
+		{ id = 33136 }, -- 
+		{ id = 33137 }, -- 
+		{ id = 33177 }, -- 
+		{ id = 33178 }, -- 
+		{},
+		{ name = LF["Honored"], icon = "INV_Offhand_Draenei_A_02"},
+		{ id = 33138 }, -- 
+		{ id = 33139 }, -- 
+		{ id = 33140 }, -- 
+		{ id = 33141 }, -- 
+		{ id = 33142 }, -- 
+		{ id = 33143 }, -- 
+		{},
+		{},
+		{ name = LF["Revered"], icon = "INV_Offhand_Draenei_A_02"},
+		{ id = 33144 }, -- Formula: Rift Tear
+		{ id = 33145, container = { 33146 } }, -- Schematic: Facetted Crystal Scope
+		{ id = 37071 }, -- Toothy
+		{ id = 37072 }, -- Palatinate Pebble
+		{},
+		{ name = LF["Exalted"], icon = "INV_Offhand_Draenei_A_02"},
+		{ id = 33147 }, -- Mar'kali, the Midnight Star
+		{ id = 33148 }, -- Alar'tar, Born from Hope
+		{ id = 30005 }, -- Swamp Riding Crocolisk
 	},
 }
 

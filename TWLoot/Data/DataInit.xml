@@ -40,6 +40,7 @@
     <Include file="Instances\DragonmawRetreat.lua"/>
     <Include file="Instances\WindhornCanyon.lua"/>
     <Include file="Instances\TimbermawHold.lua"/>
+    <Include file="Instances\FrostmaneHollow.lua"/>
     <!-- World content data -->
     <Include file="World\Azuregos.lua"/>
     <Include file="World\FourDragons.lua"/>
@@ -73,8 +74,6 @@
     <Include file="Tables\Events.lua"/>
     <Include file="Tables\Sets.lua"/>
     <Include file="Tables\Crafting.lua"/>
-    <Include file="Tables\Disenchanting.lua"/>
-    <Include file="Tables\Cloth.lua"/>
     <Include file="Tables\ProfessionTrainers.lua"/>
     <Include file="Tables\WeaponSkills.lua"/>
 

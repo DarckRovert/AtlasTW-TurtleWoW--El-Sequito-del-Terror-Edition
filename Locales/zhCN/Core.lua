@@ -124,6 +124,7 @@ AtlasTW.OutdoorZoneToAtlas = {
 
 AtlasTW.Localization:RegisterNamespace("UI", "zhCN", {
     -- Common UI Strings
+    ["Rank Pattern"] = "等级 %d+$",
     ["Options"] = "选项",
     ["Search"] = "搜索",
     ["Clear"] = "清除",
@@ -143,6 +144,15 @@ AtlasTW.Localization:RegisterNamespace("UI", "zhCN", {
     ["Loot"] = "掉落",
     ["Previous"] = "上一页",
     ["Next"] = "下一页",
+    ["Group by Source"] = "按来源分组",
+    ["Default"] = "默认",
+    ["Check Completed Quests"] = "检查已完成的任务",
+    ["Enable Profession Info"] = "启用职业信息",
+    ["Lockpicking"] = "开锁",
+    ["Doors"] = "门",
+    ["Night"] = "夜晚",
+    ["Day"] = "白天",
+    ["Winter"] = "冬天",
 
     -- Colors
     ["Purple"] = "紫色",
@@ -220,7 +230,6 @@ AtlasTW.Localization:RegisterNamespace("UI", "zhCN", {
     ["Color Quests by Level"] = "按等级为任务着色",
     ["Color Quests from the Questlog"] = "按任务日志为任务着色",
     ["Auto-Query Unknown Items"] = "自动查询未知物品",
-    ["Suppress Server Query Spam"] = "抑制服务器查询消息",
     ["Show Loot Panel with AtlasTW"] = "在 AtlasTW 显示掉落面板",
     ["Sort Instance by:"] = "副本排序依据：",
     ["Show Button on Minimap"] = "在小地图显示按钮",
@@ -230,6 +239,10 @@ AtlasTW.Localization:RegisterNamespace("UI", "zhCN", {
     ["Show Acronyms"] = "显示缩写",
     ["Clamp window to screen"] = "窗口限制在屏幕内",
     ["Show Cursor Coordinates on Map"] = "在地图上显示光标坐标",
+    ["Show Map Markers"] = "显示地图标记",
+    ["Enable pfUI Styling"] = "启用 pfUI 样式",
+    ["pfUI styling enabled. Type /reload to apply changes."] = "pfUI 样式已启用。输入 /reload 以应用更改。",
+    ["pfUI styling disabled. Type /reload to apply changes."] = "pfUI 样式已禁用。输入 /reload 以应用更改。",
     ["Scale"] = "缩放",
 
     -- Quest Related
@@ -303,15 +316,10 @@ AtlasTW.Localization:RegisterNamespace("UI", "zhCN", {
     ["has been reset!"] = "已重置！",
     ["Reset Settings"] = "重置设置",
     ["Default settings applied!"] = "已应用默认设置！",
-    ["Safe Chat Links |cff1eff00(recommended)|r"] = "安全聊天链接 |cff1eff00（推荐）|r",
-    ["Enable all Chat Links"] = "启用所有聊天链接",
-    ["Default Tooltips"] = "默认提示",
-    ["Lootlink Tooltips"] = "Lootlink 提示",
-    ["ItemSync Tooltips"] = "ItemSync 提示",
     ["Use EquipCompare"] = "使用 EquipCompare",
     ["Make Loot Table Opaque"] = "使掉落表不透明",
-    ["Show IDs at all times"] = "始终显示ID",
-    ["Suppress Text Spam"] = "抑制文本刷屏",
+    ["Show IDs in Tooltips"] = "在提示中显示 ID",
+    ["Show Icon in Tooltips"] = "在提示中显示图标",
     ["Show Source on Tooltips"] = "在提示中显示来源",
     ["Welcome to Atlas-TW Edition. Please take a moment to set your preferences."] = "欢迎使用 Atlas-TW 版本。请花点时间设置您的偏好。",
 
@@ -562,6 +570,7 @@ AtlasTW.Localization:RegisterNamespace("UI", "zhCN", {
     ["Helm"] = "头盔",
     ["Shoulders"] = "护肩",
     ["Bracers"] = "护腕",
+    ["Bracer"] = "护腕",
     ["Belt"] = "腰带",
     ["Pants"] = "护腿",
     ["Bags"] = "背包",
@@ -578,6 +587,9 @@ AtlasTW.Localization:RegisterNamespace("UI", "zhCN", {
     ["Demons"] = "恶魔",
     ["Scales"] = "鳞片",
     ["Special"] = "特殊",
+    ["Enchant weapon"] = "武器附魔",
+    ["mana oil"] = "法力之油",
+    ["wizard oil"] = "巫师之油",
 
     -- Set Categories
     ["Tier 0/0.5 Sets"] = "T0/T0.5 套装",
@@ -590,6 +602,11 @@ AtlasTW.Localization:RegisterNamespace("UI", "zhCN", {
     ["Tier 3 Sets"] = "T3 套装",
     ["Item Level"] = "物品等级",
     ["Disenchanting"] = "分解",
+    ["Reagent Tooltip Options"] = "材料提示选项",
+    ["Reagent Rows"] = "材料行数",
+    ["Other"] = "其他",
+    ["... %d more"] = "... 还有 %d 个",
+    ["Recipe #%d"] = "配方 #%d",
 })
 
 BINDING_HEADER_ATLASTW_TITLE = "Atlas-TW 快捷键"

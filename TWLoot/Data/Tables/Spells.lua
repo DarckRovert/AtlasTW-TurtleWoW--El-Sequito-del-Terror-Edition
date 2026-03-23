@@ -19,6 +19,7 @@ local _G = getfenv()
 AtlasTW = _G.AtlasTW or {}
 
 local L = AtlasTW.Localization.UI
+local LF = AtlasTW.Localization.Factions
 local LS = AtlasTW.Localization.Spells
 local LMD = AtlasTW.Localization.MapData
 
@@ -26,513 +27,1451 @@ local Colors = AtlasTW.Colors
 
 AtlasTW.SpellDB = {
 	enchants = {
-		[44] = { name = LS["Enchant Bracer - Agility"] }, --1.18
-		[48] = { name = LS["Enchant Boots - Lesser Intellect"] }, --1.18
-		[7420] = { name = LS["Enchant Chest - Minor Health"] },
-		[7421] = { item = 6218 },
+		[44] = {
+			name = LS["Enchant Bracer - Agility"],
+			tools = { 11130 },
+			reagents = {
+				{ 11134 },
+				{ 7067 },
+			},
+		},
+		[48] = {
+			name = LS["Enchant Boots - Lesser Intellect"],
+			tools = { 11130 },
+			reagents = {
+				{ 11083, 3 },
+				{ 11137 },
+			},
+		},
+		[5668] = {
+			icon = "Ability_Rogue_Disguise",
+			name = LS["Peasant Disguise"],
+			extra = LF["Horde"],
+			reagents = {
+				{ 2589 },
+			},
+		},
+		[5669] = {
+			icon = "Ability_Rogue_Disguise",
+			name = LS["Peon Disguise"],
+			extra = LF["Alliance"],
+			reagents = {
+				{ 2589 },
+			},
+		},
+		[7418] = {
+			name = LS["Enchant Bracer - Minor Health"],
+			tools = { 6218 },
+			reagents = {
+				{ 10940 },
+			},
+		},
+		[7420] = {
+			name = LS["Enchant Chest - Minor Health"],
+			tools = { 6218 },
+			reagents = {
+				{ 10940 },
+			},
+		},
+		[7421] = {
+			item = 6218,
+			reagents = {
+				{ 6217 },
+				{ 10940 },
+				{ 10938 },
+			},
+		},
 		[7426] = {
 			name = LS["Enchant Chest - Minor Absorption"],
+			tools = { 6218 },
+			reagents = {
+				{ 10940, 2 },
+				{ 10938 },
+			},
 		},
 		[7428] = {
-			name = LS["Enchant Bracer - Minor Deflection"],
+			name = LS["Enchant Bracer - Minor Deflect"],
+			tools = { 6218 },
+			reagents = {
+				{ 10938 },
+				{ 10940 },
+			},
 		},
 		[7443] = {
 			name = LS["Enchant Chest - Minor Mana"],
+			tools = { 6218 },
+			reagents = {
+				{ 10938 },
+			},
 		},
 		[7454] = {
 			name = LS["Enchant Cloak - Minor Resistance"],
+			tools = { 6218 },
+			reagents = {
+				{ 10940 },
+				{ 10938, 2 },
+			},
 		},
 		[7457] = {
 			name = LS["Enchant Bracer - Minor Stamina"],
+			tools = { 6218 },
+			reagents = {
+				{ 10940, 3 },
+			},
 		},
 		[7745] = {
 			name = LS["Enchant 2H Weapon - Minor Impact"],
+			tools = { 6218 },
+			reagents = {
+				{ 10940, 4 },
+				{ 10978 },
+			},
 		},
 		[7748] = {
 			name = LS["Enchant Chest - Lesser Health"],
+			tools = { 6218 },
+			reagents = {
+				{ 10940, 2 },
+				{ 10938, 2 },
+			},
 		},
 		[7766] = {
 			name = LS["Enchant Bracer - Minor Spirit"],
+			tools = { 6218 },
+			reagents = {
+				{ 10938, 2 },
+			},
 		},
 		[7771] = {
 			name = LS["Enchant Cloak - Minor Protection"],
+			tools = { 6218 },
+			reagents = {
+				{ 10940, 3 },
+				{ 10939 },
+			},
 		},
 		[7776] = {
 			name = LS["Enchant Chest - Lesser Mana"],
+			tools = { 6218 },
+			reagents = {
+				{ 10939 },
+				{ 10938 },
+			},
 		},
 		[7779] = {
 			name = LS["Enchant Bracer - Minor Agility"],
+			tools = { 6218 },
+			reagents = {
+				{ 10940, 2 },
+				{ 10939 },
+			},
 		},
 		[7782] = {
 			name = LS["Enchant Bracer - Minor Strength"],
+			tools = { 6218 },
+			reagents = {
+				{ 10940, 5 },
+			},
 		},
 		[7786] = {
 			name = LS["Enchant Weapon - Minor Beastslayer"],
+			tools = { 6218 },
+			reagents = {
+				{ 10940, 4 },
+				{ 10939, 2 },
+			},
 		},
 		[7788] = {
 			name = LS["Enchant Weapon - Minor Striking"],
+			tools = { 6218 },
+			reagents = {
+				{ 10940, 2 },
+				{ 10939 },
+				{ 10978 },
+			},
 		},
 		[7793] = {
 			name = LS["Enchant 2H Weapon - Lesser Intellect"],
+			tools = { 6218 },
+			reagents = {
+				{ 10939, 3 },
+			},
 		},
 		[7795] = {
 			item = 6339,
+			reagents = {
+				{ 6338 },
+				{ 10940, 6 },
+				{ 10939, 3 },
+				{ 1210 },
+			},
 		},
 		[7857] = {
 			name = LS["Enchant Chest - Health"],
+			tools = { 6339 },
+			reagents = {
+				{ 10940, 4 },
+				{ 10998 },
+			},
 		},
 		[7859] = {
 			name = LS["Enchant Bracer - Lesser Spirit"],
+			tools = { 6339 },
+			reagents = {
+				{ 10998, 2 },
+			},
 		},
 		[7861] = {
 			name = LS["Enchant Cloak - Lesser Fire Resistance"],
+			tools = { 6339 },
+			reagents = {
+				{ 6371 },
+				{ 10998 },
+			},
 		},
 		[7863] = {
 			name = LS["Enchant Boots - Minor Stamina"],
+			tools = { 6339 },
+			reagents = {
+				{ 10940, 8 },
+			},
 		},
 		[7867] = {
 			name = LS["Enchant Boots - Minor Agility"],
+			tools = { 6339 },
+			reagents = {
+				{ 10940, 6 },
+				{ 10998, 2 },
+			},
 		},
 		[13378] = {
 			name = LS["Enchant Shield - Minor Stamina"],
+			tools = { 6218 },
+			reagents = {
+				{ 10998 },
+				{ 10940, 2 },
+			},
 		},
 		[13380] = {
 			name = LS["Enchant 2H Weapon - Lesser Spirit"],
+			tools = { 6218 },
+			reagents = {
+				{ 10998 },
+				{ 10940, 6 },
+			},
 		},
 		[13419] = {
 			name = LS["Enchant Cloak - Minor Agility"],
+			tools = { 6339 },
+			reagents = {
+				{ 10998 },
+			},
 		},
 		[13421] = {
 			name = LS["Enchant Cloak - Lesser Protection"],
+			tools = { 6218 },
+			reagents = {
+				{ 10940, 6 },
+				{ 10978 },
+			},
 		},
 		[13464] = {
 			name = LS["Enchant Shield - Lesser Protection"],
+			tools = { 6339 },
+			reagents = {
+				{ 10998 },
+				{ 10940 },
+				{ 10978 },
+			},
 		},
 		[13485] = {
 			name = LS["Enchant Shield - Lesser Spirit"],
+			tools = { 6339 },
+			reagents = {
+				{ 10998, 2 },
+				{ 10940, 4 },
+			},
 		},
 		[13501] = {
 			name = LS["Enchant Bracer - Lesser Stamina"],
+			tools = { 6339 },
+			reagents = {
+				{ 11083, 2 },
+			},
 		},
 		[13503] = {
 			name = LS["Enchant Weapon - Lesser Striking"],
+			tools = { 6339 },
+			reagents = {
+				{ 11083, 2 },
+				{ 11084 },
+			},
 		},
 		[13522] = {
 			name = LS["Enchant Cloak - Lesser Shadow Resistance"],
+			tools = { 6339 },
+			reagents = {
+				{ 11082 },
+				{ 6048 },
+			},
 		},
 		[13529] = {
 			name = LS["Enchant 2H Weapon - Lesser Impact"],
+			tools = { 6339 },
+			reagents = {
+				{ 11083, 3 },
+				{ 11084 },
+			},
 		},
 		[13536] = {
 			name = LS["Enchant Bracer - Lesser Strength"],
+			tools = { 6339 },
+			reagents = {
+				{ 11083, 2 },
+			},
 		},
 		[13538] = {
 			name = LS["Enchant Chest - Lesser Absorption"],
+			tools = { 6339 },
+			reagents = {
+				{ 10940, 2 },
+				{ 11082 },
+				{ 11084 },
+			},
 		},
 		[13607] = {
 			name = LS["Enchant Chest - Mana"],
+			tools = { 6339 },
+			reagents = {
+				{ 11082 },
+				{ 10998, 2 },
+			},
 		},
 		[13612] = {
 			name = LS["Enchant Gloves - Mining"],
+			tools = { 6339 },
+			reagents = {
+				{ 11083 },
+				{ 2772, 3 },
+			},
 		},
 		[13617] = {
 			name = LS["Enchant Gloves - Herbalism"],
+			tools = { 6339 },
+			reagents = {
+				{ 11083 },
+				{ 3356, 3 },
+			},
 		},
 		[13620] = {
 			name = LS["Enchant Gloves - Fishing"],
+			tools = { 6339 },
+			reagents = {
+				{ 11083 },
+				{ 6370, 3 },
+			},
 		},
 		[13622] = {
 			name = LS["Enchant Bracer - Lesser Intellect"],
+			tools = { 6339 },
+			reagents = {
+				{ 11082, 2 },
+			},
 		},
 		[13626] = {
 			name = LS["Enchant Chest - Minor Stats"],
+			tools = { 6339 },
+			reagents = {
+				{ 11082 },
+				{ 11083 },
+				{ 11084 },
+			},
 		},
 		[13628] = {
 			item = 11130,
+			reagents = {
+				{ 11128 },
+				{ 5500 },
+				{ 11082, 2 },
+				{ 11083, 2 },
+			},
 		},
 		[13631] = {
 			name = LS["Enchant Shield - Lesser Stamina"],
+			tools = { 11130 },
+			reagents = {
+				{ 11134 },
+				{ 11083 },
+			},
 		},
 		[13635] = {
 			name = LS["Enchant Cloak - Defense"],
+			tools = { 11130 },
+			reagents = {
+				{ 11138 },
+				{ 11083, 3 },
+			},
 		},
 		[13637] = {
 			name = LS["Enchant Boots - Lesser Agility"],
+			tools = { 11130 },
+			reagents = {
+				{ 11083 },
+				{ 11134 },
+			},
 		},
 		[13640] = {
 			name = LS["Enchant Chest - Greater Health"],
+			tools = { 11130 },
+			reagents = {
+				{ 11083, 3 },
+			},
 		},
 		[13642] = {
 			name = LS["Enchant Bracer - Spirit"],
+			tools = { 11130 },
+			reagents = {
+				{ 11134 },
+			},
 		},
 		[13644] = {
 			name = LS["Enchant Boots - Lesser Stamina"],
+			tools = { 11130 },
+			reagents = {
+				{ 11083, 4 },
+			},
 		},
 		[13646] = {
 			name = LS["Enchant Bracer - Lesser Deflection"],
+			tools = { 11130 },
+			reagents = {
+				{ 11134 },
+				{ 11083, 2 },
+			},
 		},
 		[13648] = {
 			name = LS["Enchant Bracer - Stamina"],
+			tools = { 11130 },
+			reagents = {
+				{ 11083, 6 },
+			},
 		},
 		[13653] = {
 			name = LS["Enchant Weapon - Lesser Beastslayer"],
+			tools = { 11130 },
+			reagents = {
+				{ 11134 },
+				{ 5637, 2 },
+				{ 11138 },
+			},
 		},
 		[13655] = {
 			name = LS["Enchant Weapon - Lesser Elemental Slayer"],
+			tools = { 11130 },
+			reagents = {
+				{ 11134 },
+				{ 7067 },
+				{ 11138 },
+			},
 		},
 		[13657] = {
 			name = LS["Enchant Cloak - Fire Resistance"],
+			tools = { 11130 },
+			reagents = {
+				{ 11134 },
+				{ 7068 },
+			},
 		},
 		[13659] = {
 			name = LS["Enchant Shield - Spirit"],
+			tools = { 11130 },
+			reagents = {
+				{ 11135 },
+				{ 11137 },
+			},
 		},
 		[13661] = {
 			name = LS["Enchant Bracer - Strength"],
+			tools = { 11130 },
+			reagents = {
+				{ 11137 },
+			},
 		},
 		[13663] = {
 			name = LS["Enchant Chest - Greater Mana"],
+			tools = { 11130 },
+			reagents = {
+				{ 11135 },
+			},
 		},
 		[13687] = {
 			name = LS["Enchant Boots - Lesser Spirit"],
+			tools = { 11130 },
+			reagents = {
+				{ 11135 },
+				{ 11134, 2 },
+			},
 		},
 		[13689] = {
 			name = LS["Enchant Shield - Lesser Block"],
+			tools = { 11130 },
+			reagents = {
+				{ 11135, 2 },
+				{ 11137, 2 },
+				{ 11139 },
+			},
 		},
 		[13693] = {
 			name = LS["Enchant Weapon - Striking"],
+			tools = { 11130 },
+			reagents = {
+				{ 11135, 2 },
+				{ 11139 },
+			},
 		},
 		[13695] = {
 			name = LS["Enchant 2H Weapon - Impact"],
+			tools = { 11130 },
+			reagents = {
+				{ 11137, 4 },
+				{ 11139 },
+			},
 		},
 		[13698] = {
 			name = LS["Enchant Gloves - Skinning"],
+			tools = { 11130 },
+			reagents = {
+				{ 11137 },
+				{ 7392, 3 },
+			},
 		},
 		[13700] = {
 			name = LS["Enchant Chest - Lesser Stats"],
+			tools = { 11130 },
+			reagents = {
+				{ 11135, 2 },
+				{ 11137, 2 },
+				{ 11139 },
+			},
 		},
 		[13702] = {
 			item = 11145,
+			reagents = {
+				{ 11144 },
+				{ 7971 },
+				{ 11135, 2 },
+				{ 11137, 2 },
+			},
 		},
 		[13746] = {
 			name = LS["Enchant Cloak - Greater Defense"],
+			tools = { 11145 },
+			reagents = {
+				{ 11137, 3 },
+			},
 		},
 		[13794] = {
 			name = LS["Enchant Cloak - Resistance"],
+			tools = { 11145 },
+			reagents = {
+				{ 11174 },
+			},
 		},
 		[13815] = {
 			name = LS["Enchant Gloves - Agility"],
+			tools = { 11145 },
+			reagents = {
+				{ 11174 },
+				{ 11137 },
+			},
 		},
 		[13817] = {
 			name = LS["Enchant Shield - Stamina"],
+			tools = { 11145 },
+			reagents = {
+				{ 11137, 5 },
+			},
 		},
 		[13822] = {
 			name = LS["Enchant Bracer - Intellect"],
+			tools = { 11145 },
+			reagents = {
+				{ 11174, 2 },
+			},
 		},
 		[13836] = {
 			name = LS["Enchant Boots - Stamina"],
+			tools = { 11145 },
+			reagents = {
+				{ 11137, 5 },
+			},
 		},
 		[13841] = {
 			name = LS["Enchant Gloves - Advanced Mining"],
+			tools = { 11145 },
+			reagents = {
+				{ 11137, 3 },
+				{ 6037,  3 },
+			},
 		},
 		[13846] = {
 			name = LS["Enchant Bracer - Greater Spirit"],
+			tools = { 11145 },
+			reagents = {
+				{ 11174, 3 },
+				{ 11137 },
+			},
 		},
 		[13858] = {
 			name = LS["Enchant Chest - Superior Health"],
+			tools = { 11145 },
+			reagents = {
+				{ 11137, 6 },
+			},
 		},
 		[13868] = {
 			name = LS["Enchant Gloves - Advanced Herbalism"],
+			tools = { 11145 },
+			reagents = {
+				{ 11137, 3 },
+				{ 8838,  3 },
+			},
 		},
 		[13882] = {
 			name = LS["Enchant Cloak - Lesser Agility"],
+			tools = { 11145 },
+			reagents = {
+				{ 11174, 2 },
+			},
 		},
 		[13887] = {
 			name = LS["Enchant Gloves - Strength"],
+			tools = { 11145 },
+			reagents = {
+				{ 11174, 2 },
+				{ 11137, 3 },
+			},
 		},
 		[13890] = {
 			name = LS["Enchant Boots - Minor Speed"],
+			tools = { 11145 },
+			reagents = {
+				{ 11177 },
+				{ 7909 },
+				{ 11174 },
+			},
 		},
 		[13898] = {
 			name = LS["Enchant Weapon - Fiery Weapon"],
+			tools = { 11145 },
+			reagents = {
+				{ 11177, 4 },
+				{ 7078 },
+			},
 		},
 		[13905] = {
 			name = LS["Enchant Shield - Greater Spirit"],
+			tools = { 11145 },
+			reagents = {
+				{ 11175 },
+				{ 11176, 2 },
+			},
 		},
 		[13915] = {
 			name = LS["Enchant Weapon - Demonslaying"],
+			tools = { 11145 },
+			reagents = {
+				{ 11177 },
+				{ 11176, 2 },
+				{ 9224 },
+			},
 		},
 		[13917] = {
 			name = LS["Enchant Chest - Superior Mana"],
+			tools = { 11145 },
+			reagents = {
+				{ 11175 },
+				{ 11174, 2 },
+			},
 		},
 		[13931] = {
 			name = LS["Enchant Bracer - Deflection"],
+			tools = { 11145 },
+			reagents = {
+				{ 11175 },
+				{ 11176, 2 },
+			},
 		},
 		[13933] = {
 			name = LS["Enchant Shield - Frost Resistance"],
+			tools = { 11145 },
+			reagents = {
+				{ 11178 },
+				{ 3829 },
+			},
 		},
 		[13935] = {
 			name = LS["Enchant Boots - Agility"],
+			tools = { 11145 },
+			reagents = {
+				{ 11175, 2 },
+			},
 		},
 		[13937] = {
 			name = LS["Enchant 2H Weapon - Greater Impact"],
+			tools = { 11145 },
+			reagents = {
+				{ 11178, 2 },
+				{ 11176, 2 },
+			},
 		},
 		[13939] = {
 			name = LS["Enchant Bracer - Greater Strength"],
+			tools = { 11145 },
+			reagents = {
+				{ 11176, 2 },
+				{ 11175 },
+			},
 		},
 		[13941] = {
 			name = LS["Enchant Chest - Stats"],
+			tools = { 11145 },
+			reagents = {
+				{ 11178 },
+				{ 11176, 3 },
+				{ 11175, 2 },
+			},
 		},
 		[13943] = {
 			name = LS["Enchant Weapon - Greater Striking"],
+			tools = { 11145 },
+			reagents = {
+				{ 11178, 2 },
+				{ 11175, 2 },
+			},
 		},
 		[13945] = {
 			name = LS["Enchant Bracer - Greater Stamina"],
+			tools = { 11145 },
+			reagents = {
+				{ 11176, 5 },
+			},
 		},
 		[13947] = {
 			name = LS["Enchant Gloves - Riding Skill"],
+			tools = { 11145 },
+			reagents = {
+				{ 11178, 2 },
+				{ 11176, 3 },
+			},
 		},
 		[13948] = {
 			name = LS["Enchant Gloves - Minor Haste"],
+			tools = { 11145 },
+			reagents = {
+				{ 11178, 2 },
+				{ 8153,  2 },
+			},
 		},
 		[14293] = {
+			tools = { 6218 },
 			item = 11287,
+			reagents = {
+				{ 4470 },
+				{ 10938 },
+			},
 		},
 		[14807] = {
+			tools = { 6218 },
 			item = 11288,
+			reagents = {
+				{ 4470 },
+				{ 10939 },
+			},
 		},
 		[14809] = {
+			tools = { 11130 },
 			item = 11289,
+			reagents = {
+				{ 42007 },
+				{ 11134 },
+				{ 11083 },
+			},
 		},
 		[14810] = {
+			tools = { 11130 },
 			item = 11290,
+			reagents = {
+				{ 42007 },
+				{ 11135 },
+				{ 11137 },
+			},
 		},
 		[15596] = {
 			item = 11811,
+			reagents = {
+				{ 11382 },
+				{ 7078 },
+				{ 14343, 3 },
+			},
 		},
 		[17180] = {
+			tools = { 11145 },
 			item = 12655,
+			reagents = {
+				{ 12359 },
+				{ 16204, 3 },
+			},
 		},
 		[17181] = {
+			tools = { 11145 },
 			item = 12810,
+			reagents = {
+				{ 8170 },
+				{ 16202 },
+			},
 		},
 		[20008] = {
 			name = LS["Enchant Bracer - Greater Intellect"],
+			tools = { 11145 },
+			reagents = {
+				{ 16202, 3 },
+			},
 		},
 		[20009] = {
 			name = LS["Enchant Bracer - Superior Spirit"],
+			tools = { 11145 },
+			reagents = {
+				{ 16202, 3 },
+				{ 11176, 10 },
+			},
 		},
 		[20010] = {
 			name = LS["Enchant Bracer - Superior Strength"],
+			tools = { 11145 },
+			reagents = {
+				{ 16204, 6 },
+				{ 16203, 6 },
+			},
 		},
 		[20011] = {
 			name = LS["Enchant Bracer - Superior Stamina"],
+			tools = { 11145 },
+			reagents = {
+				{ 16204, 15 },
+			},
 		},
 		[20012] = {
 			name = LS["Enchant Gloves - Greater Agility"],
+			tools = { 11145 },
+			reagents = {
+				{ 16202, 3 },
+				{ 16204, 3 },
+			},
 		},
 		[20013] = {
 			name = LS["Enchant Gloves - Greater Strength"],
+			tools = { 11145 },
+			reagents = {
+				{ 16203, 4 },
+				{ 16204, 4 },
+			},
 		},
 		[20014] = {
 			name = LS["Enchant Cloak - Greater Resistance"],
+			tools = { 11145 },
+			reagents = {
+				{ 16202, 2 },
+				{ 7077 },
+				{ 7075 },
+				{ 7079 },
+				{ 7081 },
+				{ 7972 },
+			},
 		},
 		[20015] = {
 			name = LS["Enchant Cloak - Superior Defense"],
+			tools = { 11145 },
+			reagents = {
+				{ 16204, 8 },
+			},
 		},
 		[20016] = {
 			name = LS["Enchant Shield - Superior Spirit"],
+			tools = { 11145 },
+			reagents = {
+				{ 16203, 2 },
+				{ 16204, 4 },
+			},
 		},
 		[20017] = {
 			name = LS["Enchant Shield - Greater Stamina"],
+			tools = { 11145 },
+			reagents = {
+				{ 11176, 10 },
+			},
 		},
 		[20020] = {
 			name = LS["Enchant Boots - Greater Stamina"],
+			tools = { 11145 },
+			reagents = {
+				{ 11176, 10 },
+			},
 		},
 		[20023] = {
 			name = LS["Enchant Boots - Greater Agility"],
+			tools = { 11145 },
+			reagents = {
+				{ 16203, 8 },
+			},
 		},
 		[20024] = {
 			name = LS["Enchant Boots - Spirit"],
+			tools = { 11145 },
+			reagents = {
+				{ 16203, 2 },
+				{ 16202 },
+			},
 		},
 		[20025] = {
 			name = LS["Enchant Chest - Greater Stats"],
+			tools = { 16207 },
+			reagents = {
+				{ 14344, 4 },
+				{ 16204, 15 },
+				{ 16203, 10 },
+			},
 		},
 		[20026] = {
 			name = LS["Enchant Chest - Major Health"],
+			tools = { 11145 },
+			reagents = {
+				{ 16204, 6 },
+				{ 14343 },
+			},
 		},
 		[20028] = {
 			name = LS["Enchant Chest - Major Mana"],
+			tools = { 11145 },
+			reagents = {
+				{ 16203, 3 },
+				{ 14343 },
+			},
 		},
 		[20029] = {
 			name = LS["Enchant Weapon - Icy Chill"],
+			tools = { 11145 },
+			reagents = {
+				{ 14343, 4 },
+				{ 7080 },
+				{ 7082 },
+				{ 13467 },
+			},
 		},
 		[20030] = {
 			name = LS["Enchant 2H Weapon - Superior Impact"],
+			tools = { 16207 },
+			reagents = {
+				{ 14344, 4 },
+				{ 16204, 10 },
+			},
 		},
 		[20031] = {
 			name = LS["Enchant Weapon - Superior Striking"],
+			tools = { 16207 },
+			reagents = {
+				{ 14344, 2 },
+				{ 16203, 10 },
+			},
 		},
 		[20032] = {
 			name = LS["Enchant Weapon - Lifestealing"],
+			tools = { 16207 },
+			reagents = {
+				{ 14344, 6 },
+				{ 12808, 6 },
+				{ 12803, 6 },
+			},
 		},
 		[20033] = {
 			name = LS["Enchant Weapon - Unholy Weapon"],
+			tools = { 16207 },
+			reagents = {
+				{ 14344, 4 },
+				{ 12808, 4 },
+			},
 		},
 		[20034] = {
 			name = LS["Enchant Weapon - Crusader"],
+			tools = { 16207 },
+			reagents = {
+				{ 14344, 4 },
+				{ 12811, 2 },
+			},
 		},
 		[20035] = {
 			name = LS["Enchant 2H Weapon - Major Spirit"],
+			tools = { 16207 },
+			reagents = {
+				{ 16203, 12 },
+				{ 14344, 2 },
+			},
 		},
 		[20036] = {
 			name = LS["Enchant 2H Weapon - Major Intellect"],
+			tools = { 16207 },
+			reagents = {
+				{ 16203, 12 },
+				{ 14344, 2 },
+			},
 		},
 		[20051] = {
 			item = 16207,
+			reagents = {
+				{ 16206 },
+				{ 13926 },
+				{ 16204, 10 },
+				{ 16203, 4 },
+				{ 14343, 4 },
+				{ 14344, 2 },
+			},
 		},
 		[21931] = {
 			name = LS["Enchant Weapon - Winter's Might"],
+			tools = { 11130 },
+			reagents = {
+				{ 11135, 3 },
+				{ 11137, 3 },
+				{ 11139 },
+				{ 3819,  2 },
+			},
 		},
 		[22749] = {
 			name = LS["Enchant Weapon - Spell Power"],
+			tools = { 16207 },
+			reagents = {
+				{ 14344, 4 },
+				{ 16203, 12 },
+				{ 7078,  4 },
+				{ 7080,  4 },
+				{ 7082,  4 },
+				{ 13926, 2 },
+			},
 		},
 		[22750] = {
 			name = LS["Enchant Weapon - Healing Power"],
+			tools = { 16207 },
+			reagents = {
+				{ 14344, 4 },
+				{ 16203, 8 },
+				{ 12803, 6 },
+				{ 7080,  6 },
+				{ 12811 },
+			},
 		},
 		[23799] = {
 			name = LS["Enchant Weapon - Strength"],
+			tools = { 16207 },
+			reagents = {
+				{ 14344, 6 },
+				{ 16203, 6 },
+				{ 16204, 4 },
+				{ 7076,  2 },
+			},
 		},
 		[23800] = {
 			name = LS["Enchant Weapon - Agility"],
+			tools = { 16207 },
+			reagents = {
+				{ 14344, 6 },
+				{ 16203, 6 },
+				{ 16204, 4 },
+				{ 7082,  2 },
+			},
 		},
 		[23801] = {
 			name = LS["Enchant Bracer - Mana Regeneration"],
+			tools = { 16207 },
+			reagents = {
+				{ 16204, 16 },
+				{ 16203, 4 },
+				{ 7080,  2 },
+			},
 		},
 		[23802] = {
 			name = LS["Enchant Bracer - Healing Power"],
+			tools = { 16207 },
+			reagents = {
+				{ 14344, 2 },
+				{ 16204, 20 },
+				{ 16203, 4 },
+				{ 12803, 6 },
+			},
 		},
 		[23803] = {
 			name = LS["Enchant Weapon - Mighty Spirit"],
+			tools = { 16207 },
+			reagents = {
+				{ 14344, 10 },
+				{ 16203, 8 },
+				{ 16204, 15 },
+			},
 		},
 		[23804] = {
 			name = LS["Enchant Weapon - Mighty Intellect"],
+			tools = { 16207 },
+			reagents = {
+				{ 14344, 15 },
+				{ 16203, 12 },
+				{ 16204, 20 },
+			},
 		},
 		[25072] = {
 			name = LS["Enchant Gloves - Threat"],
+			tools = { 16207 },
+			reagents = {
+				{ 20725, 4 },
+				{ 14344, 6 },
+				{ 18512, 8 },
+			},
 		},
 		[25073] = {
 			name = LS["Enchant Gloves - Shadow Power"],
+			tools = { 16207 },
+			reagents = {
+				{ 20725, 3 },
+				{ 14344, 10 },
+				{ 12808, 6 },
+			},
 		},
 		[25074] = {
 			name = LS["Enchant Gloves - Frost Power"],
+			tools = { 16207 },
+			reagents = {
+				{ 20725, 3 },
+				{ 14344, 10 },
+				{ 7080,  4 },
+			},
 		},
 		[25078] = {
 			name = LS["Enchant Gloves - Fire Power"],
+			tools = { 16207 },
+			reagents = {
+				{ 20725, 2 },
+				{ 14344, 10 },
+				{ 7078,  4 },
+			},
 		},
 		[25079] = {
 			name = LS["Enchant Gloves - Healing Power"],
+			tools = { 16207 },
+			reagents = {
+				{ 20725, 3 },
+				{ 14344, 8 },
+				{ 12811 },
+			},
 		},
 		[25080] = {
 			name = LS["Enchant Gloves - Superior Agility"],
+			tools = { 16207 },
+			reagents = {
+				{ 20725, 3 },
+				{ 14344, 8 },
+				{ 7082,  4 },
+			},
 		},
 		[25081] = {
 			name = LS["Enchant Cloak - Greater Fire Resistance"],
+			tools = { 16207 },
+			reagents = {
+				{ 20725, 3 },
+				{ 14344, 8 },
+				{ 7078,  4 },
+			},
 		},
 		[25082] = {
 			name = LS["Enchant Cloak - Greater Nature Resistance"],
+			tools = { 16207 },
+			reagents = {
+				{ 20725, 2 },
+				{ 14344, 8 },
+				{ 12803, 4 },
+			},
 		},
 		[25083] = {
 			name = LS["Enchant Cloak - Stealth"],
+			tools = { 16207 },
+			reagents = {
+				{ 20725, 3 },
+				{ 14344, 8 },
+				{ 13468, 2 },
+			},
 		},
 		[25084] = {
 			name = LS["Enchant Cloak - Subtlety"],
+			tools = { 16207 },
+			reagents = {
+				{ 20725, 4 },
+				{ 14344, 6 },
+				{ 11754, 2 },
+			},
 		},
 		[25086] = {
 			name = LS["Enchant Cloak - Dodge"],
+			tools = { 16207 },
+			reagents = {
+				{ 20725, 3 },
+				{ 14344, 8 },
+				{ 12809, 8 },
+			},
 		},
 		[25124] = {
-			item = 20744,
 			extra = Colors.WHITE .. "5 " .. L["Charges"],
+			tools = { 6218 },
+			item = 20744,
+			reagents = {
+				{ 10940, 2 },
+				{ 17034 },
+				{ 3371 },
+			},
 		},
 		[25125] = {
-			item = 20745,
 			extra = Colors.WHITE .. "5 " .. L["Charges"],
+			tools = { 6339 },
+			item = 20745,
+			reagents = {
+				{ 11083, 3 },
+				{ 17034, 2 },
+				{ 3372 },
+			},
 		},
 		[25126] = {
-			item = 20746,
 			extra = Colors.WHITE .. "5 " .. L["Charges"],
+			tools = { 11130 },
+			item = 20746,
+			reagents = {
+				{ 11137, 3 },
+				{ 17035, 2 },
+				{ 3372 },
+			},
 		},
 		[25127] = {
-			item = 20747,
 			extra = Colors.WHITE .. "5 " .. L["Charges"],
+			tools = { 11145 },
+			item = 20747,
+			reagents = {
+				{ 11176, 3 },
+				{ 8831,  2 },
+				{ 8925 },
+			},
 		},
 		[25128] = {
-			item = 20750,
 			extra = Colors.WHITE .. "5 " .. L["Charges"],
+			tools = { 11145 },
+			item = 20750,
+			reagents = {
+				{ 16204, 3 },
+				{ 4625,  2 },
+				{ 8925 },
+			},
 		},
 		[25129] = {
-			item = 20749,
 			extra = Colors.WHITE .. "5 " .. L["Charges"],
+			tools = { 16207 },
+			item = 20749,
+			reagents = {
+				{ 14344, 2 },
+				{ 4625,  3 },
+				{ 18256 },
+			},
 		},
 		[25130] = {
-			item = 20748,
 			extra = Colors.WHITE .. "5 " .. L["Charges"],
+			tools = { 16207 },
+			item = 20748,
+			reagents = {
+				{ 14344, 2 },
+				{ 8831,  3 },
+				{ 18256 },
+			},
 		},
 		[27837] = {
 			name = LS["Enchant 2H Weapon - Agility"],
+			tools = { 16207 },
+			reagents = {
+				{ 14344, 10 },
+				{ 16203, 6 },
+				{ 16204, 14 },
+				{ 7082,  4 },
+			},
+		},
+		[36942] = { -- 1.18.1
+			name = LS["Enchant Weapon - Rift Tear"],
+			tools = { 16207 },
+			reagents = {
+				{ 16204, 30 },
+				{ 42001, 4 },
+				{ 14343, 8 },
+				{ 20725 },
+			},
 		},
 		[41758] = {
+			tools = { 11145 },
 			item = 55248,
+			reagents = {
+				{ 55247 },
+				{ 16203 },
+				{ 11175 },
+			},
 		},
 		[45071] = {
 			name = LS["Enchant 2H Weapon - Minor Intellect"],
+			tools = { 6218 },
+			reagents = {
+				{ 10940, 4 },
+				{ 10939, 2 },
+			},
 		},
 		[46086] = {
 			name = LS["Enchant Gloves - Major Strength"],
+			tools = { 16207 },
+			reagents = {
+				{ 20725, 2 },
+				{ 14344, 4 },
+				{ 7076,  4 },
+				{ 7077,  4 },
+			},
 		},
 		[46601] = {
 			name = LS["Enchant Gloves - Arcane Power"],
+			tools = { 16207 },
+			reagents = {
+				{ 20725, 2 },
+				{ 14344, 10 },
+				{ 16203, 4 },
+			},
 		},
 		[46602] = {
 			name = LS["Enchant Gloves - Nature Power"],
+			tools = { 16207 },
+			reagents = {
+				{ 20725, 2 },
+				{ 14344, 10 },
+				{ 7082,  2 },
+				{ 7076,  2 },
+			},
 		},
 		[46603] = {
 			name = LS["Enchant Gloves - Holy Power"],
+			tools = { 16207 },
+			reagents = {
+				{ 20725, 2 },
+				{ 14344, 10 },
+				{ 12811, 4 },
+			},
 		},
 		[56543] = {
 			name = LS["Enchant Boots - Major Intellect"],
+			tools = { 11145 },
+			reagents = {
+				{ 16204, 15 },
+				{ 16203, 4 },
+				{ 14344, 2 },
+				{ 20725 },
+			},
 		},
 		[57028] = {
 			name = LS["Enchant Bracer - Spell Power"],
+			tools = { 16207 },
+			reagents = {
+				{ 14344, 2 },
+				{ 16204, 10 },
+				{ 7076,  3 },
+				{ 7082,  3 },
+			},
 		},
 		[57030] = {
 			name = LS["Enchant Bracer - Greater Agility"],
+			tools = { 11145 },
+			reagents = {
+				{ 14344, 3 },
+				{ 16203 },
+				{ 7082,  2 },
+				{ 7076,  2 },
+			},
 		},
 		[57117] = {
 			name = LS["Enchant Cloak - Greater Arcane Resistance"],
+			tools = { 16207 },
+			reagents = {
+				{ 20725, 2 },
+				{ 14344, 6 },
+				{ 16204, 20 },
+			},
 		},
 		[57119] = {
 			name = LS["Enchant Chest - Mighty Mana"],
+			tools = { 16207 },
+			reagents = {
+				{ 14344, 6 },
+				{ 16204, 40 },
+			},
 		},
 		[57127] = {
 			name = LS["Enchant Boots - Superior Stamina"],
+			tools = { 16207 },
+			reagents = {
+				{ 16203, 6 },
+				{ 8846,  2 },
+			},
 		},
 		[57142] = {
 			name = LS["Enchant Boots - Greater Spirit"],
+			tools = { 16207 },
+			reagents = {
+				{ 16203, 5 },
+			},
 		},
 		[57144] = {
 			name = LS["Enchant Bracer - Greater Deflection"],
+			tools = { 16207 },
+			reagents = {
+				{ 14344 },
+				{ 61673, 2 },
+				{ 7076,  2 },
+				{ 16203, 4 },
+			},
 		},
 		[57146] = {
 			name = LS["Enchant Bracer - Vampirism"],
+			tools = { 11130 },
+			reagents = {
+				{ 11135 },
+				{ 5637, 2 },
+			},
 		},
 		[57148] = {
 			name = LS["Enchant Boots - Vampirism"],
+			tools = { 16207 },
+			reagents = {
+				{ 19933, 8 },
+				{ 12808, 4 },
+				{ 14344, 4 },
+				{ 16204, 10 },
+			},
 		},
 		[57518] = {
 			item = 61732,
+			reagents = {
+				{ 61197, 5 },
+				{ 61673, 25 },
+				{ 61199, 25 },
+				{ 20725, 10 },
+				{ 13468, 5 },
+				{ 12803, 80 },
+			},
 		},
-	},
+},
 	craftspells = {
 		[37] = { --1.18 Leatherworking: Harness of the High Thane
 			item = 55043,
@@ -554,20 +1493,20 @@ AtlasTW.SpellDB = {
 				{ 2321, 2 },
 			},
 		},
-		[57] = { --1.18
-			item = 131,
+		[57] = { --Steel Belt Buckle
 			requires = L["Anvil"],
 			tools = { 5956 },
+			item = 131,
 			reagents = {
 				{ 3859, 8 },
 				{ 7071 },
 				{ 7966 },
 			},
 		},
-		[69] = { --1.18
-			item = 66,
+		[69] = { --Gold Belt Buckle
 			requires = L["Anvil"],
 			tools = { 5956 },
+			item = 66,
 			reagents = {
 				{ 3577, 8 },
 				{ 7071 },
@@ -582,13 +1521,13 @@ AtlasTW.SpellDB = {
 				{ 4236,  2 },
 				{ 5637,  2 },
 				{ 4402,  2 },
-				{ 55289, 2 },
+				{ 55249, 2 },
 			},
 		},
-		[74] = { --1.18
-			item = 67,
+		[74] = { --Dragonscale Belt Buckle
 			requires = L["Anvil"],
 			tools = { 5956 },
+			item = 67,
 			reagents = {
 				{ 12359, 4 },
 				{ 7071 },
@@ -596,7 +1535,7 @@ AtlasTW.SpellDB = {
 				{ 7966 },
 			},
 		},
-		[83] = { --1.18
+		[83] = { --Stormreaver Gloves
 			item = 58134,
 			reagents = {
 				{ 4305, 8 },
@@ -607,10 +1546,10 @@ AtlasTW.SpellDB = {
 				{ 4291, 2 },
 			},
 		},
-		[85] = { --1.18
-			item = 82,
+		[85] = { --Dark Iron Belt Buckle
 			requires = L["Anvil"],
 			tools = { 5956 },
+			item = 82,
 			reagents = {
 				{ 11371, 2 },
 				{ 7071 },
@@ -618,20 +1557,20 @@ AtlasTW.SpellDB = {
 				{ 12644, 2 },
 			},
 		},
-		[90] = { --1.18
-			item = 151,
+		[90] = { --Truesilver Belt Buckle
 			requires = L["Anvil"],
 			tools = { 5956 },
+			item = 151,
 			reagents = {
 				{ 6037, 8 },
 				{ 7071 },
 				{ 7966, 2 },
 			},
 		},
-		[93] = { --1.18
-			item = 156,
+		[93] = { --Refined Dwarven Necklace
 			requires = L["Anvil"],
-			tools = { 5956 },
+			tools = { 55155, 41326 },
+			item = 156,
 			reagents = {
 				{ 3860,  12 },
 				{ 55249, 3 },
@@ -640,10 +1579,10 @@ AtlasTW.SpellDB = {
 				{ 55152, 2 },
 			},
 		},
-		[95] = { --1.18
-			item = 87,
+		[95] = { --Enchanted Thorium Belt Buckle
 			requires = L["Anvil"],
 			tools = { 5956 },
+			item = 87,
 			reagents = {
 				{ 12655, 2 },
 				{ 7071 },
@@ -651,10 +1590,10 @@ AtlasTW.SpellDB = {
 				{ 12644 },
 			},
 		},
-		[102] = { --1.18
-			item = 103,
+		[102] = { --Obsidian Belt Buckle
 			requires = L["Anvil"],
 			tools = { 5956 },
+			item = 103,
 			reagents = {
 				{ 22203, 2 },
 				{ 7071 },
@@ -664,16 +1603,16 @@ AtlasTW.SpellDB = {
 			},
 		},
 		[104] = { --1.18 Jewelcrafting: Ancient Dwarven Gemstone
-			item = 56112,
 			requires = L["Anvil"],
-			tools = { 5956 },
+			tools = { 55155, 41326 },
+			item = 56112,
 			reagents = {
 				{ 3860 },
 				{ 55249 },
 				{ 55247 },
 			},
 		},
-		[115] = { --1.18
+		[115] = { --Elixir of Rapid Growth
 			item = 56113,
 			reagents = {
 				{ 4625 },
@@ -683,9 +1622,9 @@ AtlasTW.SpellDB = {
 		},
 		[818] = {
 			name = LS["Basic Campfire"],
-			tools = { 4471 },
 			icon = "Spell_Fire_Fire",
-			text= LS["Builds a campfire that increases the spirits of those nearby by 4 and allows cooking."],
+			text = LS["Builds a campfire that increases the spirits of those nearby by 4 and allows cooking."],
+			tools = { 4471 },
 			reagents = {
 				{ 4470 },
 			},
@@ -721,7 +1660,7 @@ AtlasTW.SpellDB = {
 			item = 2308,
 			reagents = {
 				{ 2318, 10 },
-				{ 2320, 2 },
+				{ 2321, 2 },
 			},
 		},
 		[2160] = {
@@ -953,7 +1892,7 @@ AtlasTW.SpellDB = {
 			reagents = {
 				{ 2997, 4 },
 				{ 2321, 2 },
-				{ 2318 },
+				{ 2318, 2 },
 			},
 		},
 		[2402] = {
@@ -1061,14 +2000,14 @@ AtlasTW.SpellDB = {
 			requires = L["Cooking Fire"],
 			item = 2685,
 			reagents = {
-				{ 2677 },
+				{ 2677, 2 },
 				{ 2692 },
 			},
 		},
 		[2549] = {
 			requires = L["Cooking Fire"],
-			item = 1017,
 			quantity = 3,
+			item = 1017,
 			reagents = {
 				{ 1015, 2 },
 				{ 2665 },
@@ -1093,8 +2032,8 @@ AtlasTW.SpellDB = {
 		[2659] = {
 			name = LS["Smelting: Smelt Bronze"],
 			requires = L["Forge"],
-			item = 2841,
 			quantity = 2,
+			item = 2841,
 			reagents = {
 				{ 2840 },
 				{ 3576 },
@@ -1593,9 +2532,9 @@ AtlasTW.SpellDB = {
 		},
 		[3325] = {
 			requires = L["Anvil"],
+			extra = Colors.GREEN .. L["<Random enchantment>"],
 			tools = { 5956 },
 			item = 3474,
-			extra = Colors.GREEN .. L["<Random enchantment>"],
 			reagents = {
 				{ 2840, 8 },
 				{ 818 },
@@ -1686,8 +2625,8 @@ AtlasTW.SpellDB = {
 		},
 		[3371] = {
 			requires = L["Cooking Fire"],
-			item = 3220,
 			quantity = 2,
+			item = 3220,
 			reagents = {
 				{ 3173 },
 				{ 3172 },
@@ -2163,7 +3102,7 @@ AtlasTW.SpellDB = {
 		[3766] = {
 			item = 4249,
 			reagents = {
-				{ 2312 },
+				{ 4246 },
 				{ 4233 },
 				{ 2321, 2 },
 				{ 4340 },
@@ -2226,7 +3165,7 @@ AtlasTW.SpellDB = {
 				{ 4236, 2 },
 				{ 4234, 12 },
 				{ 3824 },
-				{ 2321 },
+				{ 2321, 2 },
 			},
 		},
 		[3774] = {
@@ -2376,10 +3315,10 @@ AtlasTW.SpellDB = {
 		[3847] = {
 			item = 4313,
 			reagents = {
-				{ 2997, 3 },
+				{ 2997, 4 },
 				{ 2318, 2 },
 				{ 2321 },
-				{ 2604 },
+				{ 2604, 2 },
 			},
 		},
 		[3848] = {
@@ -2596,16 +3535,16 @@ AtlasTW.SpellDB = {
 			},
 		},
 		[3919] = {
-			item = 4358,
 			quantity = 2,
+			item = 4358,
 			reagents = {
 				{ 4357, 2 },
 				{ 2589 },
 			},
 		},
 		[3920] = {
-			item = 8067,
 			quantity = 200,
+			item = 8067,
 			reagents = {
 				{ 4357 },
 				{ 2840 },
@@ -2621,9 +3560,9 @@ AtlasTW.SpellDB = {
 		},
 		[3923] = {
 			requires = L["Anvil"],
+			quantity = 2,
 			tools = { 5956 },
 			item = 4360,
-			quantity = 2,
 			reagents = {
 				{ 2840 },
 				{ 4359 },
@@ -2678,16 +3617,16 @@ AtlasTW.SpellDB = {
 			},
 		},
 		[3930] = {
-			item = 8068,
 			quantity = 200,
+			item = 8068,
 			reagents = {
 				{ 4364 },
 				{ 2840 },
 			},
 		},
 		[3931] = {
-			item = 4365,
 			quantity = { 1, 3 },
+			item = 4365,
 			reagents = {
 				{ 4364, 3 },
 				{ 2589 },
@@ -2734,9 +3673,9 @@ AtlasTW.SpellDB = {
 		},
 		[3937] = {
 			requires = L["Anvil"],
+			quantity = { 2, 4 },
 			tools = { 5956 },
 			item = 4370,
-			quantity = { 2, 4 },
 			reagents = {
 				{ 2840, 3 },
 				{ 4364, 4 },
@@ -2772,9 +3711,9 @@ AtlasTW.SpellDB = {
 		},
 		[3941] = {
 			requires = L["Anvil"],
+			quantity = { 1, 3 },
 			tools = { 5956 },
 			item = 4374,
-			quantity = { 1, 3 },
 			reagents = {
 				{ 4364, 4 },
 				{ 2841, 2 },
@@ -2793,9 +3732,9 @@ AtlasTW.SpellDB = {
 		},
 		[3944] = {
 			requires = L["Anvil"],
+			extra = Colors.WHITE .. "5 " .. L["Charges"],
 			tools = { 5956, 6219 },
 			item = 4376,
-			extra = Colors.WHITE .. "5 " .. L["Charges"],
 			reagents = {
 				{ 4375 },
 				{ 4402 },
@@ -2808,16 +3747,16 @@ AtlasTW.SpellDB = {
 			},
 		},
 		[3946] = {
-			item = 4378,
 			quantity = { 1, 5 },
+			item = 4378,
 			reagents = {
 				{ 4377, 2 },
 				{ 2592 },
 			},
 		},
 		[3947] = {
-			item = 8069,
 			quantity = 200,
+			item = 8069,
 			reagents = {
 				{ 4377 },
 				{ 2841 },
@@ -2835,9 +3774,9 @@ AtlasTW.SpellDB = {
 		},
 		[3950] = {
 			requires = L["Anvil"],
+			quantity = { 2, 4 },
 			tools = { 5956, 6219 },
 			item = 4380,
-			quantity = { 2, 4 },
 			reagents = {
 				{ 4377, 2 },
 				{ 2841, 3 },
@@ -2845,8 +3784,8 @@ AtlasTW.SpellDB = {
 			},
 		},
 		[3952] = {
-			item = 4381,
 			extra = Colors.WHITE .. "10 " .. L["Charges"],
+			item = 4381,
 			reagents = {
 				{ 4371 },
 				{ 4375, 2 },
@@ -2895,9 +3834,9 @@ AtlasTW.SpellDB = {
 		},
 		[3957] = {
 			requires = L["Anvil"],
+			extra = Colors.WHITE .. "5 " .. L["Charges"],
 			tools = { 5956, 6219 },
 			item = 4386,
-			extra = Colors.WHITE .. "5 " .. L["Charges"],
 			reagents = {
 				{ 4375 },
 				{ 3829 },
@@ -2913,9 +3852,9 @@ AtlasTW.SpellDB = {
 		},
 		[3959] = {
 			requires = L["Anvil"],
+			extra = Colors.WHITE .. "5 " .. L["Charges"],
 			tools = { 5956, 6219 },
 			item = 4388,
-			extra = Colors.WHITE .. "5 " .. L["Charges"],
 			reagents = {
 				{ 4375, 3 },
 				{ 4306, 2 },
@@ -2925,9 +3864,9 @@ AtlasTW.SpellDB = {
 		},
 		[3960] = {
 			requires = L["Anvil"],
+			extra = Colors.WHITE .. "8 " .. L["Charges"],
 			tools = { 5956, 6219 },
 			item = 4403,
-			extra = Colors.WHITE .. "8 " .. L["Charges"],
 			reagents = {
 				{ 4371, 4 },
 				{ 4387 },
@@ -2946,9 +3885,9 @@ AtlasTW.SpellDB = {
 		},
 		[3962] = {
 			requires = L["Anvil"],
+			quantity = { 2, 4 },
 			tools = { 5956 },
 			item = 4390,
-			quantity = { 2, 4 },
 			reagents = {
 				{ 3575 },
 				{ 4377 },
@@ -2987,9 +3926,9 @@ AtlasTW.SpellDB = {
 		},
 		[3967] = {
 			requires = L["Anvil"],
+			quantity = 2,
 			tools = { 5956, 6219 },
 			item = 4394,
-			quantity = 2,
 			reagents = {
 				{ 3575, 3 },
 				{ 4377, 3 },
@@ -3039,8 +3978,8 @@ AtlasTW.SpellDB = {
 			},
 		},
 		[3973] = {
-			item = 4404,
 			quantity = 5,
+			item = 4404,
 			reagents = {
 				{ 2842 },
 			},
@@ -3111,12 +4050,58 @@ AtlasTW.SpellDB = {
 				{ 3372 },
 			},
 		},
+		[5169] = {
+			tools = { 7997 },
+			reagents = {
+				{ 2589 },
+			},
+		},
 		[5244] = {
 			item = 5081,
 			reagents = {
 				{ 5082, 3 },
 				{ 2318, 4 },
 				{ 2320 },
+			},
+		},
+		[5264] = {
+			tools = { 5107 },
+			reagents = {
+				{ 2589 },
+			},
+		},
+		[5265] = {
+			tools = { 5109 },
+			reagents = {
+				{ 2589 },
+			},
+		},
+		[5266] = {
+			tools = { 5113 },
+			reagents = {
+				{ 2592 },
+			},
+		},
+		[5267] = {
+			tools = { 5110 },
+			reagents = {
+				{ 2589 },
+			},
+		},
+		[5268] = {
+			tools = { 5108 },
+			reagents = {
+				{ 2592 },
+			},
+		},
+		[5668] = {
+			reagents = {
+				{ 2589 },
+			},
+		},
+		[5669] = {
+			reagents = {
+				{ 2589 },
 			},
 		},
 		[5763] = {
@@ -3143,8 +4128,8 @@ AtlasTW.SpellDB = {
 		},
 		[6414] = {
 			requires = L["Cooking Fire"],
-			item = 5474,
 			quantity = 2,
+			item = 5474,
 			reagents = {
 				{ 5467 },
 				{ 2678 },
@@ -3152,8 +4137,8 @@ AtlasTW.SpellDB = {
 		},
 		[6415] = {
 			requires = L["Cooking Fire"],
-			item = 5476,
 			quantity = 2,
+			item = 5476,
 			reagents = {
 				{ 5468 },
 				{ 2678 },
@@ -3161,8 +4146,8 @@ AtlasTW.SpellDB = {
 		},
 		[6416] = {
 			requires = L["Cooking Fire"],
-			item = 5477,
 			quantity = 2,
+			item = 5477,
 			reagents = {
 				{ 5469 },
 				{ 4536 },
@@ -3170,16 +4155,16 @@ AtlasTW.SpellDB = {
 		},
 		[6417] = {
 			requires = L["Cooking Fire"],
-			item = 5478,
 			quantity = 2,
+			item = 5478,
 			reagents = {
 				{ 5051 },
 			},
 		},
 		[6418] = {
 			requires = L["Cooking Fire"],
-			item = 5479,
 			quantity = 2,
+			item = 5479,
 			reagents = {
 				{ 5470 },
 				{ 2692 },
@@ -3187,8 +4172,8 @@ AtlasTW.SpellDB = {
 		},
 		[6419] = {
 			requires = L["Cooking Fire"],
-			item = 5480,
 			quantity = 2,
+			item = 5480,
 			reagents = {
 				{ 5471 },
 				{ 2678, 4 },
@@ -3230,9 +4215,9 @@ AtlasTW.SpellDB = {
 		},
 		[6510] = {
 			name = LS["Blinding Powder"],
-			text= LS["Create the reagent for the Blind ability."],
-			item = 5530,
+			text = LS["Create the reagent for the Blind ability."],
 			quantity = 3,
+			item = 5530,
 			reagents = {
 				{ 3818 },
 			},
@@ -3758,15 +4743,15 @@ AtlasTW.SpellDB = {
 			},
 		},
 		[7934] = {
-			item = 6452,
 			quantity = 3,
+			item = 6452,
 			reagents = {
 				{ 1475 },
 			},
 		},
 		[7935] = {
-			item = 6453,
 			quantity = 3,
+			item = 6453,
 			reagents = {
 				{ 1288 },
 			},
@@ -3839,8 +4824,8 @@ AtlasTW.SpellDB = {
 			},
 		},
 		[8339] = {
-			item = 6714,
 			quantity = { 1, 3 },
+			item = 6714,
 			reagents = {
 				{ 4364, 4 },
 				{ 2592 },
@@ -3848,6 +4833,7 @@ AtlasTW.SpellDB = {
 		},
 		[8366] = { --1.18 Blacksmithing: Ironforge Chain
 			requires = L["Anvil"],
+			tools = { 5956 },
 			item = 6730,
 			reagents = {
 				{ 2840, 12 },
@@ -3866,6 +4852,7 @@ AtlasTW.SpellDB = {
 			},
 		},
 		[8368] = { --Blacksmithing: Ironforge Gauntlets 1.18
+			tools = { 5956 },
 			item = 6733,
 			reagents = {
 				{ 2841, 8 },
@@ -3959,9 +4946,9 @@ AtlasTW.SpellDB = {
 		[8760] = {
 			item = 7048,
 			reagents = {
-				{ 4305, 3 },
-				{ 3182 },
-				{ 2321, 2 },
+				{ 4305, 2 },
+				{ 6260, 2 },
+				{ 2321 },
 			},
 		},
 		[8762] = {
@@ -3991,9 +4978,9 @@ AtlasTW.SpellDB = {
 		},
 		[8768] = {
 			requires = L["Anvil"],
+			quantity = 2,
 			tools = { 5956 },
 			item = 7071,
-			quantity = 2,
 			reagents = {
 				{ 3575 },
 			},
@@ -4096,7 +5083,7 @@ AtlasTW.SpellDB = {
 			item = 7059,
 			reagents = {
 				{ 4305, 5 },
-				{ 6271, 2 },
+				{ 6371, 2 },
 				{ 2604, 2 },
 				{ 4291, 2 },
 			},
@@ -4241,7 +5228,7 @@ AtlasTW.SpellDB = {
 		[9074] = {
 			item = 7285,
 			reagents = {
-				{ 2357 },
+				{ 2457 },
 				{ 2319, 6 },
 				{ 2321 },
 			},
@@ -4328,10 +5315,10 @@ AtlasTW.SpellDB = {
 		[9198] = {
 			item = 7377,
 			reagents = {
-				{ 4236, 2 },
-				{ 4234, 12 },
-				{ 3824 },
-				{ 2321 },
+				{ 4234, 6 },
+				{ 7067, 2 },
+				{ 7070, 2 },
+				{ 2321, 2 },
 			},
 		},
 		[9201] = {
@@ -4372,7 +5359,7 @@ AtlasTW.SpellDB = {
 			item = 7391,
 			reagents = {
 				{ 4234, 10 },
-				{ 2359, 2 },
+				{ 2459, 2 },
 				{ 4337, 2 },
 				{ 4291 },
 			},
@@ -4390,8 +5377,8 @@ AtlasTW.SpellDB = {
 			},
 		},
 		[9271] = {
-			item = 6533,
 			quantity = 3,
+			item = 6533,
 			reagents = {
 				{ 2841, 2 },
 				{ 6530 },
@@ -4994,13 +5981,13 @@ AtlasTW.SpellDB = {
 			item = 8203,
 			reagents = {
 				{ 4304, 12 },
-				{ 8151, 12 },
+				{ 8154, 12 },
 				{ 4291, 4 },
 			},
 		},
 		[10529] = {
-			item = 8210,
 			extra = Colors.GREEN .. L["<Random enchantment>"],
+			item = 8210,
 			reagents = {
 				{ 4304, 10 },
 				{ 8153 },
@@ -5019,7 +6006,7 @@ AtlasTW.SpellDB = {
 			item = 8205,
 			reagents = {
 				{ 4304, 10 },
-				{ 8151, 4 },
+				{ 8154, 4 },
 				{ 4291, 2 },
 			},
 		},
@@ -5032,8 +6019,8 @@ AtlasTW.SpellDB = {
 			},
 		},
 		[10544] = {
-			item = 8211,
 			extra = Colors.GREEN .. L["<Random enchantment>"],
+			item = 8211,
 			reagents = {
 				{ 4304, 12 },
 				{ 8153, 2 },
@@ -5041,8 +6028,8 @@ AtlasTW.SpellDB = {
 			},
 		},
 		[10546] = {
-			item = 8214,
 			extra = Colors.GREEN .. L["<Random enchantment>"],
+			item = 8214,
 			reagents = {
 				{ 4304, 10 },
 				{ 8153, 2 },
@@ -5119,8 +6106,8 @@ AtlasTW.SpellDB = {
 			},
 		},
 		[10566] = {
-			item = 8213,
 			extra = Colors.GREEN .. L["<Random enchantment>"],
+			item = 8213,
 			reagents = {
 				{ 4304, 14 },
 				{ 8153, 4 },
@@ -5144,8 +6131,8 @@ AtlasTW.SpellDB = {
 			},
 		},
 		[10572] = {
-			item = 8212,
 			extra = Colors.GREEN .. L["<Random enchantment>"],
+			item = 8212,
 			reagents = {
 				{ 4304, 16 },
 				{ 8153, 6 },
@@ -5153,8 +6140,8 @@ AtlasTW.SpellDB = {
 			},
 		},
 		[10574] = {
-			item = 8215,
 			extra = Colors.GREEN .. L["<Random enchantment>"],
+			item = 8215,
 			reagents = {
 				{ 4304, 16 },
 				{ 8153, 6 },
@@ -5730,8 +6717,8 @@ AtlasTW.SpellDB = {
 			item = 10029,
 			reagents = {
 				{ 4339, 4 },
-				{ 2604 },
-				{ 8343 },
+				{ 2604, 2 },
+				{ 8343, 3 },
 			},
 		},
 		[12079] = {
@@ -5787,16 +6774,7 @@ AtlasTW.SpellDB = {
 			item = 10034,
 			reagents = {
 				{ 4339, 4 },
-				{ 2604, 2 },
 				{ 8343, 2 },
-			},
-		},
-		[12087] = { --1.18 Tailoring: Stormcloth Shoulders
-			item = 10038,
-			reagents = {
-				{ 4339, 6 },
-				{ 7079, 6 },
-				{ 8343, 3 },
 			},
 		},
 		[12086] = {
@@ -5804,7 +6782,15 @@ AtlasTW.SpellDB = {
 			reagents = {
 				{ 4339,  2 },
 				{ 10285, 8 },
-				{ 8343,  3 },
+				{ 8343,  2 },
+			},
+		},
+		[12087] = { --1.18 Tailoring: Stormcloth Shoulders
+			item = 10038,
+			reagents = {
+				{ 4339, 5 },
+				{ 7079, 6 },
+				{ 8343, 3 },
 			},
 		},
 		[12088] = {
@@ -5878,9 +6864,9 @@ AtlasTW.SpellDB = {
 		},
 		[12584] = {
 			requires = L["Anvil"],
+			quantity = 3,
 			tools = { 5956, 6219 },
 			item = 10558,
-			quantity = 3,
 			reagents = {
 				{ 3577 },
 			},
@@ -5892,8 +6878,8 @@ AtlasTW.SpellDB = {
 			},
 		},
 		[12586] = {
-			item = 10507,
 			quantity = 2,
+			item = 10507,
 			reagents = {
 				{ 10505 },
 				{ 4306 },
@@ -5957,9 +6943,9 @@ AtlasTW.SpellDB = {
 		},
 		[12596] = {
 			requires = L["Anvil"],
+			quantity = 200,
 			tools = { 5956 },
 			item = 10512,
-			quantity = 200,
 			reagents = {
 				{ 3860 },
 				{ 10505 },
@@ -5985,9 +6971,9 @@ AtlasTW.SpellDB = {
 		},
 		[12603] = {
 			requires = L["Anvil"],
+			quantity = 3,
 			tools = { 5956, 6219 },
 			item = 10514,
-			quantity = 3,
 			reagents = {
 				{ 10561 },
 				{ 10560 },
@@ -6063,9 +7049,9 @@ AtlasTW.SpellDB = {
 		},
 		[12619] = {
 			requires = L["Anvil"],
+			quantity = 4,
 			tools = { 5956, 6219 },
 			item = 10562,
-			quantity = 4,
 			reagents = {
 				{ 10561, 2 },
 				{ 10560 },
@@ -6084,18 +7070,18 @@ AtlasTW.SpellDB = {
 		},
 		[12621] = {
 			requires = L["Anvil"],
+			quantity = 200,
 			tools = { 5956 },
 			item = 10513,
-			quantity = 200,
 			reagents = {
 				{ 3860,  2 },
 				{ 10505, 2 },
 			},
 		},
 		[12622] = {
+			extra = Colors.GREEN .. L["<Random enchantment>"],
 			tools = { 6219, 10498 },
 			item = 10504,
-			extra = Colors.GREEN .. L["<Random enchantment>"],
 			reagents = {
 				{ 4304,  8 },
 				{ 1529,  3 },
@@ -6126,9 +7112,9 @@ AtlasTW.SpellDB = {
 		},
 		[12716] = {
 			requires = L["Anvil"],
+			extra = Colors.WHITE .. "6 " .. L["Charges"],
 			tools = { 5956, 6219 },
 			item = 10577,
-			extra = Colors.WHITE .. "6 " .. L["Charges"],
 			reagents = {
 				{ 10559, 2 },
 				{ 3860,  4 },
@@ -6158,6 +7144,7 @@ AtlasTW.SpellDB = {
 			},
 		},
 		[12722] = { --1.18 Engineering: Goblin Radio
+			tools = { 5956, 6219 },
 			item = 10585,
 			reagents = {
 				{ 10561 },
@@ -6168,9 +7155,9 @@ AtlasTW.SpellDB = {
 		},
 		[12754] = {
 			requires = L["Anvil"],
+			quantity = 2,
 			tools = { 5956, 6219 },
 			item = 10586,
-			quantity = 2,
 			reagents = {
 				{ 10561 },
 				{ 9061 },
@@ -6326,8 +7313,8 @@ AtlasTW.SpellDB = {
 		},
 		[13028] = {
 			requires = L["Cooking Fire"],
-			item = 10841,
 			quantity = 4,
+			item = 10841,
 			reagents = {
 				{ 3821 },
 				{ 159 },
@@ -6367,10 +7354,10 @@ AtlasTW.SpellDB = {
 		},
 		[13240] = {
 			requires = L["Anvil"],
-			tools = { 5956, 6219 },
-			text= LS["Reloads an empty Goblin mortar."],
-			item = 10577,
+			text = LS["Reloads an empty Goblin mortar."],
 			extra = Colors.WHITE .. "6 " .. L["Charges"],
+			tools = { 5956, 6219 },
+			item = 10577,
 			reagents = {
 				{ 10577 },
 				{ 3860 },
@@ -6518,7 +7505,7 @@ AtlasTW.SpellDB = {
 			item = 11826,
 			reagents = {
 				{ 7075 },
-				{ 4389, 3 },
+				{ 4389, 2 },
 				{ 7191 },
 				{ 3860, 2 },
 				{ 6037 },
@@ -6557,8 +7544,8 @@ AtlasTW.SpellDB = {
 		},
 		[15861] = {
 			requires = L["Cooking Fire"],
-			item = 12212,
 			quantity = 2,
+			item = 12212,
 			reagents = {
 				{ 12202 },
 				{ 159 },
@@ -6592,8 +7579,8 @@ AtlasTW.SpellDB = {
 		},
 		[15910] = {
 			requires = L["Cooking Fire"],
-			item = 12215,
 			quantity = 2,
+			item = 12215,
 			reagents = {
 				{ 12204, 2 },
 				{ 3713 },
@@ -6846,7 +7833,7 @@ AtlasTW.SpellDB = {
 			item = 12417,
 			reagents = {
 				{ 12359, 18 },
-				{ 7910,  4 },
+				{ 7077,  4 },
 			},
 		},
 		[16660] = {
@@ -7059,14 +8046,15 @@ AtlasTW.SpellDB = {
 			tools = { 5956 },
 			item = 12641,
 			reagents = {
-				{ 12360, 30 },
-				{ 12655, 30 },
+				{ 12360, 20 },
+				{ 12655, 20 },
 				{ 12364, 6 },
 				{ 12800, 6 },
 			},
 		},
 		[16960] = {       --1.18 Blacksmithing: Thorium Greatsword
 			requires = L["Anvil"], --TODO check
+			tools = { 5956 },
 			item = 12764,
 			reagents = {
 				{ 12359, 16 },
@@ -7089,6 +8077,7 @@ AtlasTW.SpellDB = {
 		},
 		[16967] = {       --1.18 Blacksmithing: Inlaid Thorium Hammer
 			requires = L["Anvil"], --TODO check
+			tools = { 5956 },
 			item = 12772,
 			reagents = {
 				{ 12359, 30 },
@@ -7158,6 +8147,7 @@ AtlasTW.SpellDB = {
 		},
 		[16980] = {       --1.18 Blacksmithing: Rune Edge
 			requires = L["Anvil"], --TODO check
+			tools = { 5956 },
 			item = 12779,
 			reagents = {
 				{ 12359, 30 },
@@ -7214,7 +8204,6 @@ AtlasTW.SpellDB = {
 				{ 12662, 8 },
 				{ 7910,  10 },
 				{ 12644, 2 },
-				{ 8170,  8 },
 			},
 		},
 		[16987] = {
@@ -7246,7 +8235,7 @@ AtlasTW.SpellDB = {
 			tools = { 5956 },
 			item = 12790,
 			reagents = {
-				{ 12360, 15 },
+				{ 12360, 10 },
 				{ 12800, 8 },
 				{ 12811 },
 				{ 12799, 4 },
@@ -7297,7 +8286,7 @@ AtlasTW.SpellDB = {
 			tools = { 5956 },
 			item = 12784,
 			reagents = {
-				{ 12360, 20 },
+				{ 12360, 14 },
 				{ 12810, 6 },
 				{ 12644, 2 },
 			},
@@ -7531,6 +8520,18 @@ AtlasTW.SpellDB = {
 				{ 8925 },
 			},
 		},
+		[17632] = {
+			item = 13503,
+			reagents = {
+				{ 7078,  8 },
+				{ 7076,  8 },
+				{ 7082,  8 },
+				{ 7080,  8 },
+				{ 12803, 8 },
+				{ 9262,  2 },
+				{ 13468, 4 },
+			},
+		},
 		[17634] = {
 			requires = LMD["Alchemy Lab"],
 			tools = { 9149 },
@@ -7546,7 +8547,7 @@ AtlasTW.SpellDB = {
 			requires = LMD["Alchemy Lab"],
 			item = 13510,
 			reagents = {
-				{ 13464, 30 }, --Golden Sansam 1.18
+				{ 13464, 30 },
 				{ 13423, 10 },
 				{ 13468 },
 				{ 8925 },
@@ -7556,7 +8557,7 @@ AtlasTW.SpellDB = {
 			requires = LMD["Alchemy Lab"],
 			item = 13511,
 			reagents = {
-				{ 8838,  30 }, --Sungrass 1.18
+				{ 8838,  30 },
 				{ 13467, 10 },
 				{ 13468 },
 				{ 8925 },
@@ -7580,18 +8581,6 @@ AtlasTW.SpellDB = {
 				{ 13465, 10 },
 				{ 13468 },
 				{ 8925 },
-			},
-		},
-		[17632] = {
-			item = 13503,
-			reagents = {
-				{ 7078,  8 },
-				{ 7076,  8 },
-				{ 7082,  8 },
-				{ 7080,  8 },
-				{ 12803, 8 },
-				{ 9262,  2 },
-				{ 13468, 4 },
 			},
 		},
 		[18238] = {
@@ -7906,7 +8895,7 @@ AtlasTW.SpellDB = {
 			item = 14104,
 			reagents = {
 				{ 14048, 6 },
-				{ 2577,  4 },
+				{ 3577,  4 },
 				{ 14227 },
 				{ 14341 },
 			},
@@ -8187,7 +9176,7 @@ AtlasTW.SpellDB = {
 			reagents = {
 				{ 8170,  20 },
 				{ 15412, 25 },
-				{ 14341, 2 },
+				{ 14341 },
 			},
 		},
 		[19061] = {
@@ -8353,8 +9342,8 @@ AtlasTW.SpellDB = {
 		[19081] = {
 			item = 15075,
 			reagents = {
-				{ 8170, 10 },
-				{ 12803 },
+				{ 8170,  10 },
+				{ 15423, 10 },
 				{ 14341 },
 			},
 		},
@@ -8369,9 +9358,9 @@ AtlasTW.SpellDB = {
 		[19083] = {
 			item = 15087,
 			reagents = {
-				{ 8170,  16 },
-				{ 15407, 10 },
-				{ 2325,  3 },
+				{ 8170, 16 },
+				{ 15407 },
+				{ 2325, 3 },
 				{ 14341 },
 			},
 		},
@@ -8387,7 +9376,7 @@ AtlasTW.SpellDB = {
 			item = 15050,
 			reagents = {
 				{ 8170,  40 },
-				{ 15415, 60 },
+				{ 15416, 60 },
 				{ 15407 },
 				{ 14341, 2 },
 			},
@@ -8582,9 +9571,9 @@ AtlasTW.SpellDB = {
 		},
 		[19666] = {
 			requires = L["Anvil"],
+			quantity = 2,
 			tools = { 5956 },
 			item = 15869,
-			quantity = 2,
 			reagents = {
 				{ 2842 },
 				{ 3470 },
@@ -8592,9 +9581,9 @@ AtlasTW.SpellDB = {
 		},
 		[19667] = {
 			requires = L["Anvil"],
+			quantity = 2,
 			tools = { 5956 },
 			item = 15870,
-			quantity = 2,
 			reagents = {
 				{ 3577 },
 				{ 3486 },
@@ -8602,9 +9591,9 @@ AtlasTW.SpellDB = {
 		},
 		[19668] = {
 			requires = L["Anvil"],
+			quantity = 2,
 			tools = { 5956 },
 			item = 15871,
-			quantity = 2,
 			reagents = {
 				{ 6037 },
 				{ 7966 },
@@ -8612,9 +9601,9 @@ AtlasTW.SpellDB = {
 		},
 		[19669] = {
 			requires = L["Anvil"],
+			quantity = 2,
 			tools = { 5956 },
 			item = 15872,
-			quantity = 2,
 			reagents = {
 				{ 12360 },
 				{ 12644 },
@@ -8628,9 +9617,9 @@ AtlasTW.SpellDB = {
 		},
 		[19790] = {
 			requires = L["Anvil"],
+			quantity = 3,
 			tools = { 5956 },
 			item = 15993,
-			quantity = 3,
 			reagents = {
 				{ 15994 },
 				{ 12359, 3 },
@@ -8703,9 +9692,9 @@ AtlasTW.SpellDB = {
 		},
 		[19799] = {
 			requires = L["Anvil"],
+			quantity = 3,
 			tools = { 5956 },
 			item = 16005,
-			quantity = 3,
 			reagents = {
 				{ 15994, 2 },
 				{ 11371 },
@@ -8715,9 +9704,9 @@ AtlasTW.SpellDB = {
 		},
 		[19800] = {
 			requires = L["Anvil"],
+			quantity = 200,
 			tools = { 5956 },
 			item = 15997,
-			quantity = 200,
 			reagents = {
 				{ 12359, 2 },
 				{ 15992 },
@@ -8780,9 +9769,9 @@ AtlasTW.SpellDB = {
 		},
 		[19831] = {
 			requires = L["Anvil"],
+			quantity = 3,
 			tools = { 5956 },
 			item = 16040,
-			quantity = 3,
 			reagents = {
 				{ 16006 },
 				{ 12359, 3 },
@@ -8813,8 +9802,8 @@ AtlasTW.SpellDB = {
 		},
 		[20626] = {
 			requires = L["Cooking Fire"],
-			item = 16766,
 			quantity = 2,
+			item = 16766,
 			reagents = {
 				{ 7974, 2 },
 				{ 2692 },
@@ -8902,9 +9891,9 @@ AtlasTW.SpellDB = {
 			tools = { 5956 },
 			item = 16988,
 			reagents = {
-				{ 11371, 16 },
+				{ 11371, 10 },
 				{ 17010, 4 },
-				{ 17011, 5 },
+				{ 17011, 3 },
 			},
 		},
 		[20874] = {
@@ -8932,8 +9921,8 @@ AtlasTW.SpellDB = {
 			tools = { 5956 },
 			item = 17015,
 			reagents = {
-				{ 11371, 16 },
-				{ 17010, 12 },
+				{ 11371, 10 },
+				{ 17010, 6 },
 				{ 11382, 2 },
 				{ 12810, 2 },
 			},
@@ -8943,10 +9932,10 @@ AtlasTW.SpellDB = {
 			tools = { 5956 },
 			item = 17016,
 			reagents = {
-				{ 11371, 18 },
-				{ 17011, 12 },
+				{ 11371, 10 },
+				{ 17011, 6 },
 				{ 11382, 2 },
-				{ 12644, 2 },
+				{ 12810, 2 },
 			},
 		},
 		[20916] = {
@@ -9056,14 +10045,14 @@ AtlasTW.SpellDB = {
 				{ 3713 },
 			},
 		},
-		[22704] = { -- Field Repair Bot 74A
+		[22704] = { --Field Repair Bot 74A
 			requires = L["Anvil"],
 			tools = { 5956, 6219 },
 			item = 18232,
 			reagents = {
-				{ 12359, 12 }, -- Thorium Bar
-				{ 7191,  2 }, -- Fused Wiring
-				{ 10558 }, -- Gold Power Core
+				{ 12359, 12 },
+				{ 7191,  2 },
+				{ 10558 },
 			},
 		},
 		[22711] = {
@@ -9088,8 +10077,8 @@ AtlasTW.SpellDB = {
 			item = 18253,
 			reagents = {
 				{ 10286 },
-				{ 13464, 4 },
-				{ 13463, 4 },
+				{ 13464, 3 },
+				{ 13463, 3 },
 				{ 18256 },
 			},
 		},
@@ -9312,24 +10301,24 @@ AtlasTW.SpellDB = {
 			},
 		},
 		[23066] = {
-			item = 9318,
 			quantity = 3,
+			item = 9318,
 			reagents = {
 				{ 4377 },
 				{ 4234 },
 			},
 		},
 		[23067] = {
-			item = 9312,
 			quantity = 3,
+			item = 9312,
 			reagents = {
 				{ 4377 },
 				{ 4234 },
 			},
 		},
 		[23068] = {
-			item = 9313,
 			quantity = 3,
+			item = 9313,
 			reagents = {
 				{ 4377 },
 				{ 4234 },
@@ -9343,8 +10332,8 @@ AtlasTW.SpellDB = {
 			},
 		},
 		[23070] = {
-			item = 18641,
 			quantity = 2,
+			item = 18641,
 			reagents = {
 				{ 15992, 2 },
 				{ 14047, 3 },
@@ -9384,8 +10373,8 @@ AtlasTW.SpellDB = {
 			},
 		},
 		[23079] = {
-			item = 18637,
 			extra = Colors.WHITE .. "10 " .. L["Charges"],
+			item = 18637,
 			reagents = {
 				{ 16000, 2 },
 				{ 18631 },
@@ -9493,8 +10482,8 @@ AtlasTW.SpellDB = {
 			},
 		},
 		[23507] = {
-			item = 19026,
 			quantity = 4,
+			item = 19026,
 			reagents = {
 				{ 15992, 2 },
 				{ 14047, 2 },
@@ -9902,8 +10891,8 @@ AtlasTW.SpellDB = {
 			},
 		},
 		[24266] = {
-			item = 19931,
 			quantity = 3,
+			item = 19931,
 			reagents = {
 				{ 12938 },
 				{ 19943 },
@@ -9968,9 +10957,9 @@ AtlasTW.SpellDB = {
 		},
 		[24399] = {
 			requires = L["Black Anvil"],
+			extra = Colors.GREEN .. L["<Random enchantment>"],
 			tools = { 5956 },
 			item = 20039,
-			extra = Colors.GREEN .. L["<Random enchantment>"],
 			reagents = {
 				{ 17011, 3 },
 				{ 17010, 3 },
@@ -10146,9 +11135,9 @@ AtlasTW.SpellDB = {
 		},
 		[25146] = {
 			name = LS["Transmute: Elemental Fire"],
+			quantity = 3,
 			tools = { 9149 },
 			item = 7068,
-			quantity = 3,
 			reagents = {
 				{ 7077 },
 			},
@@ -10162,8 +11151,8 @@ AtlasTW.SpellDB = {
 		},
 		[25659] = {
 			requires = L["Cooking Fire"],
-			item = 21023,
 			quantity = 5,
+			item = 21023,
 			reagents = {
 				{ 2692 },
 				{ 9061 },
@@ -10264,96 +11253,96 @@ AtlasTW.SpellDB = {
 			},
 		},
 		[26416] = {
-			item = 21558,
 			quantity = 3,
+			item = 21558,
 			reagents = {
 				{ 4364 },
 				{ 2319 },
 			},
 		},
 		[26417] = {
-			item = 21559,
 			quantity = 3,
+			item = 21559,
 			reagents = {
 				{ 4364 },
 				{ 2319 },
 			},
 		},
 		[26418] = {
-			item = 21557,
 			quantity = 3,
+			item = 21557,
 			reagents = {
 				{ 4364 },
 				{ 2319 },
 			},
 		},
 		[26420] = {
-			item = 21589,
 			quantity = 3,
+			item = 21589,
 			reagents = {
 				{ 4377 },
 				{ 4234 },
 			},
 		},
 		[26421] = {
-			item = 21590,
 			quantity = 3,
+			item = 21590,
 			reagents = {
 				{ 4377 },
 				{ 4234 },
 			},
 		},
 		[26422] = {
-			item = 21592,
 			quantity = 3,
+			item = 21592,
 			reagents = {
 				{ 4377 },
 				{ 4234 },
 			},
 		},
 		[26423] = {
-			item = 21571,
 			quantity = 3,
+			item = 21571,
 			reagents = {
 				{ 10505 },
 				{ 4304 },
 			},
 		},
 		[26424] = {
-			item = 21574,
 			quantity = 3,
+			item = 21574,
 			reagents = {
 				{ 10505 },
 				{ 4304 },
 			},
 		},
 		[26425] = {
-			item = 21576,
 			quantity = 3,
+			item = 21576,
 			reagents = {
 				{ 10505 },
 				{ 4304 },
 			},
 		},
 		[26426] = {
-			item = 21714,
 			quantity = 3,
+			item = 21714,
 			reagents = {
 				{ 15992 },
 				{ 8170 },
 			},
 		},
 		[26427] = {
-			item = 21716,
 			quantity = 3,
+			item = 21716,
 			reagents = {
 				{ 15992 },
 				{ 8170 },
 			},
 		},
 		[26428] = {
-			item = 21718,
 			quantity = 3,
+			item = 21718,
 			reagents = {
 				{ 15992 },
 				{ 8170 },
@@ -10761,24 +11750,990 @@ AtlasTW.SpellDB = {
 				{ 2840, 4 },
 			},
 		},
-		[36901] = { --1.18
+		[30004] = { --Slowing Bolas
+			item = 106,
+			reagents = {
+				{ 2838, 3 },
+				{ 50231, 2 },
+			},
+		},
+		[30006] = { --Edged Machete
+			item = 42108,
+			tools = { 42004, 5956 },
+			reagents = {
+				{ 3575, 8 },
+				{ 4234, 2 },
+				{ 50231 },
+				{ 42007 },
+			},
+		},
+		[30008] = { --Iron Spear
+			item = 42109,
+			tools = { 5956 },
+			reagents = {
+				{ 3575, 8 },
+				{ 3486, 2 },
+				{ 50231 },
+				{ 4234, 2 },
+			},
+		},
+		[30010] = { --Reinforced Fishing Rod
+			item = 42110,
+			tools = { 42004 },
+			reagents = {
+				{ 3575, 2 },
+				{ 42008, 8 },
+				{ 42006 },
+				{ 4359, 10 },
+			},
+		},
+		[30013] = { --Water Trudgers
+			item = 42111,
+			reagents = {
+				{ 4234, 12 },
+				{ 17057, 20 },
+				{ 4340, 2 },
+				{ 5500, 4 },
+			},
+		},
+		[30015] = { --Bundle of Shade Wood Sticks
+			item = 42151,
+			tools = { 42004 },
+			reagents = {
+				{ 42008, 4 },
+			},
+		},
+		[30017] = { --Sharpened Herb Sickle
+			item = 42112,
+			tools = { 42004 },
+			reagents = {
+				{ 3575, 2 },
+				{ 3577 },
+				{ 42008 },
+				{ 4234, 2 },
+				{ 4359, 4 },
+			},
+		},
+		[30021] = { --Crystal Infused Bandage
+			item = 23684,
+			reagents = {
+				{ 23567 },
+				{ 14047, 10 },
+			},
+		},
+		[30022] = { --Lined Wintercloak
+			item = 42113,
+			reagents = {
+				{ 4236, 2 },
+				{ 4234, 8 },
+				{ 4340, 2 },
+				{ 4306, 6 },
+				{ 4291, 4 },
+			},
+		},
+		[30024] = { --Sleek Pinewood Bow
+			item = 42114,
+			tools = { 42004 },
+			reagents = {
+				{ 42008, 8 },
+				{ 42006 },
+				{ 3577, 2 },
+				{ 5116, 6 },
+			},
+		},
+		[30027] = { --Superior Healing Salve
+			item = 42127,
+			reagents = {
+				{ 42005, 6 },
+				{ 3357 },
+				{ 42143, 4 },
+			},
+		},
+		[30029] = { --Savory Fishing Lure
+			item = 133,
+			reagents = {
+				{ 7974 },
+				{ 3713, 2 },
+			},
+		},
+		[30031] = { --Smooth Ironfeather Arrows
+			item = 42200,
+			tools = { 42004 },
+			reagents = {
+				{ 42152 },
+				{ 15420 },
+				{ 12359 },
+			},
+		},
+		[30033] = { --Heavy Duty Machete
+			item = 42120,
+			tools = { 5956 },
+			reagents = {
+				{ 12359, 6 },
+				{ 8170, 4 },
+				{ 12644, 2 },
+			},
+		},
+		[30035] = { --Thorium Edged Machete
+			item = 42121,
+			tools = { 5956 },
+			reagents = {
+				{ 12359, 10 },
+				{ 8170, 4 },
+				{ 12644, 2 },
+				{ 55154, 2 },
+				{ 7910 },
+			},
+		},
+		[30037] = { --Thorium Spear
+			item = 42122,
+			tools = { 42004, 5956 },
+			reagents = {
+				{ 12359, 4 },
+				{ 8170, 4 },
+				{ 42009, 6 },
+				{ 55154, 2 },
+			},
+		},
+		[30039] = { --Razor-sharp Skinning Knife
+			item = 42124,
+			tools = { 5956 },
+			reagents = {
+				{ 7005 },
+				{ 12404, 4 },
+				{ 12655, 8 },
+				{ 7910, 6 },
+				{ 7068, 8 },
+				{ 7078, 4 },
+			},
+		},
+		[30042] = { --Bundle of Star Wood Sticks
+			item = 42153,
+			tools = { 42004 },
+			reagents = {
+				{ 11291, 5 },
+			},
+		},
+		[30045] = { --Mastercraft Fishing Rod
+			item = 42123,
+			tools = { 42004 },
+			reagents = {
+				{ 12359, 8 },
+				{ 8170, 4 },
+				{ 42009, 10 },
+				{ 42006, 2 },
+				{ 16000, 4 },
+				{ 7080, 4 },
+			},
+		},
+		[30047] = { --Crystal Throat Lozenge
+			item = 23683,
+			reagents = {
+				{ 23567 },
+				{ 8150 },
+			},
+		},
+		[30050] = { --Miner's Rucksack
+			item = 33375,
+			reagents = {
+				{ 8170, 24 },
+				{ 8172, 3 },
+				{ 42153, 10 },
+				{ 2901 },
+				{ 7071, 4 },
+				{ 14341, 6 },
+			},
+		},
+		[30052] = { --Herbalist's Knapsack
+			item = 33376,
+			reagents = {
+				{ 8170, 22 },
+				{ 8172, 4 },
+				{ 42153, 10 },
+				{ 42095 },
+				{ 7071, 4 },
+				{ 14341, 4 },
+			},
+		},
+		[30054] = { --Skinner's Carryall
+			item = 33378,
+			reagents = {
+				{ 8170, 28 },
+				{ 12810, 6 },
+				{ 15407, 2 },
+				{ 33372 },
+				{ 7071, 4 },
+				{ 14341, 6 },
+			},
+		},
+		[30057] = { --Cooling Rations Bag
+			item = 33379,
+			reagents = {
+				{ 8170, 18 },
+				{ 12810, 8 },
+				{ 15407, 2 },
+				{ 7080, 4 },
+				{ 7071, 4 },
+				{ 14341, 6 },
+			},
+		},
+		[30061] = { --Starfeather Arrows
+			item = 42201,
+			tools = { 42004 },
+			reagents = {
+				{ 42153 },
+				{ 15420, 4 },
+			},
+		},
+		[30063] = { --Major Healing Salve
+			item = 42129,
+			reagents = {
+				{ 42005, 10 },
+				{ 10286 },
+				{ 42146, 4 },
+			},
+		},
+		[30065] = { --Fisherman's Backpack
+			item = 33377,
+			reagents = {
+				{ 8170, 20 },
+				{ 8172, 6 },
+				{ 42153, 10 },
+				{ 42123 },
+				{ 7071, 4 },
+				{ 14341, 6 },
+			},
+		},
+		[30067] = { --Starfeather Arrows
+			item = 42201,
+			tools = { 42004 },
+			reagents = {
+				{ 42153 },
+				{ 15420, 4 },
+				{ 12655 },
+			},
+		},
+		[30069] = { --Oil-Powered Cooker
+			item = 36701,
+			reagents = {
+				{ 10561, 8 },
+				{ 15994, 6 },
+				{ 10558, 6 },
+				{ 814, 10 },
+				{ 7078, 2 },
+				{ 12655, 4 },
+			},
+		},
+		[30071] = { --Blackmouth Fishing Trap
+			item = 42329,
+			reagents = {
+				{ 42150, 2 },
+				{ 114 },
+				{ 42154 },
+			},
+		},
+		[30073] = { --Rugged Mining Sack
+			item = 42294,
+			reagents = {
+				{ 4234, 8 },
+				{ 4233, 3 },
+				{ 4341, 2 },
+				{ 4291, 4 },
+				{ 4306, 14 },
+			},
+		},
+		[30078] = { --Snap Trap
+			item = 42328,
+			reagents = {
+				{ 4387, 4 },
+				{ 4359, 8 },
+			},
+		},
+		[30084] = { --Firefin Fishing Trap
+			item = 42330,
+			tools = { 42004 },
+			reagents = {
+				{ 42151, 2 },
+				{ 125 },
+				{ 42154 },
+			},
+		},
+		[30086] = { --Stonescale Fishing Trap
+			item = 42331,
+			tools = { 42004 },
+			reagents = {
+				{ 42153, 2 },
+				{ 145 },
+				{ 42154, 2 },
+			},
+		},
+		[30221] = { --Mood Ring
+			item = 7338,
+			reagents = {
+				{ 774 },
+				{ 4382 },
+			},
+		},
+		[32310] = { --Enchanted Thorium Shells
+			item = 42202,
+			tools = { 5956 },
+			reagents = {
+				{ 12655, 2 },
+				{ 15992 },
+			},
+		},
+		[32313] = { --Squid Eel Skewer
+			requires = L["Cooking Fire"],
+			item = 42163,
+			reagents = {
+				{ 13755 },
+				{ 13757 },
+				{ 2692, 2 },
+			},
+		},
+		[32314] = { --Deep Sea Stew
+			requires = L["Cooking Fire"],
+			item = 42164,
+			reagents = {
+				{ 13760 },
+				{ 13890 },
+				{ 3713, 2 },
+			},
+		},
+		[34758] = { --Kodoheart Necklace
+			item = 42205,
+			tools = { 55155 },
+			reagents = {
+				{ 2841, 6 },
+				{ 3827 },
+				{ 7069, 4 },
+				{ 1705, 2 },
+				{ 2842, 2 },
+			},
+		},
+		[34760] = { --Grimtotem Bracers
+			item = 42204,
+			reagents = {
+				{ 2319, 10 },
+				{ 4233, 2 },
+				{ 5116, 8 },
+				{ 5373, 4 },
+				{ 4340, 2 },
+			},
+		},
+		[34762] = { --Ceremonial Belt Buckle
+			item = 42203,
+			tools = { 5956 },
+			reagents = {
+				{ 3575, 4 },
+				{ 2319, 4 },
+				{ 5116, 2 },
+				{ 5373 },
+			},
+		},
+		[36579] = { --Timberheart Dreamcatcher
+			item = 42196,
+			tools = { 16207 },
+			reagents = {
+				{ 16203, 8 },
+				{ 11291, 8 },
+				{ 12364, 4 },
+				{ 12803, 4 },
+				{ 7082, 2 },
+				{ 7076, 2 },
+			},
+		},
+		[36581] = { --Ceremonial Furbolg Pendant
+			item = 42195,
+			tools = { 41328, 41327 },
+			reagents = {
+				{ 12360, 4 },
+				{ 3577, 32 },
+				{ 8168, 12 },
+				{ 7080, 4 },
+				{ 55154, 8 },
+				{ 55248, 2 },
+			},
+		},
+		[36583] = { --Deeproot Sash
+			item = 42194,
+			reagents = {
+				{ 14048, 16 },
+				{ 14256, 6 },
+				{ 7971, 4 },
+				{ 20520, 12 },
+				{ 12808, 12 },
+				{ 14341, 2 },
+			},
+		},
+		[36585] = { --Timberclaw Bracers
+			item = 42193,
+			reagents = {
+				{ 8170, 28 },
+				{ 8146, 40 },
+				{ 15407 },
+				{ 7076, 4 },
+				{ 7080, 4 },
+				{ 14341, 2 },
+			},
+		},
+		[36587] = { --Witherhide Gloves
+			item = 42192,
+			reagents = {
+				{ 15419, 20 },
+				{ 15407, 4 },
+				{ 12808, 6 },
+				{ 12753, 6 },
+				{ 14341, 2 },
+			},
+		},
+		[36589] = { --Mixologist Stone
+			item = 42184,
+			reagents = {
+				{ 12808, 8 },
+				{ 18335, 4 },
+				{ 20520, 2 },
+				{ 61673, 2 },
+				{ 13468 },
+			},
+		},
+		[36591] = { --Crystalized Topaz
+			item = 42191,
+			tools = { 41326, 41328 },
+			reagents = {
+				{ 55252, 2 },
+				{ 12800 },
+				{ 55248 },
+			},
+		},
+		[36593] = { --Denwatcher
+			item = 42183,
+			tools = { 5956 },
+			reagents = {
+				{ 12655, 30 },
+				{ 12803, 8 },
+				{ 7080, 8 },
+				{ 13463, 4 },
+				{ 12644, 4 },
+			},
+		},
+		[36747] = { --Jungle Remedy
+			item = 2633,
+			reagents = {
+				{ 42005, 4 },
+				{ 42143, 2 },
+				{ 4595 },
+			},
+		},
+		[36749] = { --Spirited Precision Sickle
+			item = 42231,
+			reagents = {
+				{ 42112 },
+				{ 19726, 8 },
+				{ 18262, 2 },
+				{ 12803, 8 },
+				{ 10286, 8 },
+			},
+		},
+		[36751] = { --Prospector's Magnifying Lens
+			item = 42232,
+			reagents = {
+				{ 55252, 2 },
+				{ 16000, 4 },
+				{ 55154, 5 },
+				{ 12655, 8 },
+				{ 12361, 3 },
+				{ 12364, 3 },
+			},
+		},
+		[36753] = { --Hydracoil Trousers
+			item = 33366,
+			reagents = {
+				{ 42215, 20 },
+				{ 12810, 8 },
+				{ 15407, 2 },
+				{ 7078, 6 },
+				{ 7077, 4 },
+				{ 42001, 2 },
+				{ 14341, 6 },
+			},
+		},
+		[36755] = { --Hydracoil Gauntlets
+			item = 33367,
+			reagents = {
+				{ 42215, 16 },
+				{ 12810, 6 },
+				{ 8170, 24 },
+				{ 7076, 4 },
+				{ 7075, 4 },
+				{ 42001 },
+				{ 14341, 4 },
+			},
+		},
+		[36757] = { --Hydracoil Spaulders
+			item = 33368,
+			reagents = {
+				{ 42215, 18 },
+				{ 12810, 4 },
+				{ 8170, 20 },
+				{ 15407 },
+				{ 7080, 3 },
+				{ 7079, 4 },
+				{ 42001, 3 },
+			},
+		},
+		[36765] = { --Bundle of Simple Sticks
+			tools = { 42004 },
+			item = 42149,
+			reagents = {
+				{ 4470, 2 },
+			},
+		},
+		[36766] = { --Crude Walking Stick
+			item = 42089,
+			tools = { 42004 },
+			reagents = {
+				{ 4470, 4 },
+			},
+		},
+		[36767] = { --Crude Machete
+			item = 42090,
+			requires = L["Anvil"],
+			tools = { 42004, 5956 },
+			reagents = {
+				{ 4470 },
+				{ 2840, 3 },
+			},
+		},
+		[36768] = { --Crude Hatchet
+			item = 42091,
+			reagents = {
+				{ 4470 },
+				{ 2840, 3 },
+			},
+		},
+		[36769] = { --Crude Hunting Bow
+			item = 42092,
+			tools = { 42004 },
+			reagents = {
+				{ 4470, 3 },
+				{ 42006, 2 },
+			},
+		},
+		[36770] = { --Copper Lantern
+			item = 42093,
+			tools = { 5956 },
+			reagents = {
+				{ 6182 },
+				{ 2840, 3 },
+			},
+		},
+		[36771] = { --Simple Slingshot
+			item = 42229,
+			tools = { 42004 },
+			reagents = {
+				{ 51708, 4 },
+				{ 42149, 2 },
+				{ 42006 },
+			},
+		},
+		[36772] = { --Simple Herbalist's Backpack
+			item = 33369,
+			reagents = {
+				{ 2318, 6 },
+				{ 2320, 4 },
+				{ 4231, 2 },
+				{ 2447, 12 },
+			},
+		},
+		[36773] = { --Makeshift Rations Bag
+			item = 33370,
+			reagents = {
+				{ 2318, 4 },
+				{ 2320, 6 },
+				{ 4231 },
+				{ 4289, 4 },
+			},
+		},
+		[36774] = { --Weak Healing Salve
+			item = 42233,
+			reagents = {
+				{ 159 },
+				{ 42005, 2 },
+				{ 42142 },
+			},
+		},
+		[36785] = { --Makeshift Knife
+			item = 42094,
+			tools = { 42004, 5956 },
+			reagents = {
+				{ 4470 },
+				{ 2840, 3 },
+				{ 2318, 2 },
+			},
+		},
+		[36786] = { --Gardening Gloves
+			item = 42095,
+			reagents = {
+				{ 2318, 4 },
+				{ 2320, 2 },
+				{ 2447, 6 },
+			},
+		},
+		[36787] = { --Crude Fishing Rod
+			item = 42096,
+			tools = { 42004 },
+			reagents = {
+				{ 4470, 8 },
+				{ 2321 },
+			},
+		},
+		[36788] = { --Hunting Spear
+			item = 42097,
+			tools = { 42004, 5956 },
+			reagents = {
+				{ 2841, 8 },
+				{ 2318, 4 },
+				{ 2321, 2 },
+				{ 4470, 12 },
+			},
+		},
+		[36789] = { --Gardening Broom
+			item = 42098,
+			tools = { 42004 },
+			reagents = {
+				{ 4470, 6 },
+				{ 42149, 8 },
+				{ 2321 },
+				{ 2319 },
+			},
+		},
+		[36795] = { --Nutritious Rations
+			item = 42155,
+			reagents = {
+				{ 51712, 2 },
+				{ 51711, 2 },
+				{ 51710, 2 },
+			},
+		},
+		[36796] = { --Shade Wood Arrows
+			item = 42199,
+			tools = { 42004 },
+			reagents = {
+				{ 42151 },
+				{ 5636 },
+				{ 3860 },
+			},
+		},
+		[36797] = { --Vine Cutter
+			item = 42115,
+			tools = { 5956 },
+			reagents = {
+				{ 3860, 10 },
+				{ 7966, 2 },
+				{ 4304, 4 },
+				{ 42151 },
+			},
+		},
+		[36798] = { --Hiking Staff
+			item = 42116,
+			tools = { 42004 },
+			reagents = {
+				{ 42008, 10 },
+				{ 50231, 4 },
+				{ 7966, 2 },
+			},
+		},
+		[36799] = { --Tree Hatchet
+			item = 42117,
+			tools = { 5956 },
+			reagents = {
+				{ 3860, 10 },
+				{ 7966, 4 },
+				{ 55153, 2 },
+				{ 42151 },
+			},
+		},
+		[36800] = { --Bundle of Tropical Sticks
+			item = 42152,
+			tools = { 42004 },
+			reagents = {
+				{ 42009, 5 },
+			},
+		},
+		[36801] = { --Sunshade Hat
+			item = 42118,
+			reagents = {
+				{ 4304, 12 },
+				{ 6049, 2 },
+				{ 7068, 4 },
+				{ 8150, 6 },
+				{ 4402, 5 },
+			},
+		},
+		[36802] = { --Thick Rations Bag
+			item = 33374,
+			reagents = {
+				{ 4304, 12 },
+				{ 8172, 2 },
+				{ 8343, 4 },
+				{ 4338, 10 },
+				{ 8150, 5 },
+			},
+		},
+		[36803] = { --Warped Recurve Bow
+			item = 42119,
+			tools = { 42004 },
+			reagents = {
+				{ 42009, 10 },
+				{ 4304, 4 },
+				{ 42006, 2 },
+				{ 5117, 6 },
+				{ 7081, 4 },
+			},
+		},
+		[36804] = { --Spiced Berries
+			item = 42130,
+			reagents = {
+				{ 51711 },
+				{ 42005 },
+				{ 2692, 2 },
+			},
+		},
+		[36805] = { --Aromatic Berries
+			item = 42131,
+			reagents = {
+				{ 51714 },
+				{ 42005 },
+				{ 3713, 2 },
+			},
+		},
+		[36806] = { --Advanced Camouflage
+			item = 42230,
+			reagents = {
+				{ 11018, 2 },
+				{ 42152, 2 },
+				{ 42145, 10 },
+			},
+		},
+		[36807] = { --Emergency Parachute
+			item = 42156,
+			reagents = {
+				{ 50231, 4 },
+				{ 14047, 5 },
+				{ 42154 },
+			},
+		},
+		[36808] = { --Stabilizing Healing Salve
+			item = 42128,
+			reagents = {
+				{ 42005, 8 },
+				{ 8831 },
+				{ 42145, 4 },
+			},
+		},
+		[36809] = { --Premium Fishing Lure
+			item = 145,
+			reagents = {
+				{ 7974, 2 },
+				{ 18288 },
+			},
+		},
+		[36842] = { --Oakwood Bow
+			item = 42099,
+			tools = { 42004 },
+			reagents = {
+				{ 4470, 12 },
+				{ 2324, 2 },
+				{ 42006, 2 },
+				{ 2319 },
+			},
+		},
+		[36843] = { --Simple Fishing Lure
+			item = 114,
+			reagents = {
+				{ 5503 },
+				{ 42005 },
+			},
+		},
+		[36844] = { --Healing Salve
+			item = 42125,
+			reagents = {
+				{ 42142, 4 },
+				{ 42005, 2 },
+				{ 3174 },
+			},
+		},
+		[36845] = { --Fishing Bag
+			item = 33371,
+			reagents = {
+				{ 2319, 8 },
+				{ 2321, 4 },
+				{ 4231, 4 },
+				{ 4289, 6 },
+			},
+		},
+		[36846] = { --Skinner’s Pack
+			item = 33372,
+			reagents = {
+				{ 2319, 6 },
+				{ 2321, 2 },
+				{ 4231, 4 },
+				{ 7005 },
+			},
+		},
+		[36847] = { --Gardening Pitchfork
+			item = 42100,
+			tools = { 42004, 5956 },
+			reagents = {
+				{ 2841, 10 },
+				{ 4470, 10 },
+				{ 2319, 4 },
+			},
+		},
+		[36848] = { --Murloc Scale Coat
+			item = 42101,
+			reagents = {
+				{ 2319, 6 },
+				{ 2321, 2 },
+				{ 5784, 10 },
+				{ 6372, 2 },
+			},
+		},
+		[36849] = { --Bundle of Bright Wood Sticks
+			item = 42150,
+			tools = { 42004 },
+			reagents = {
+				{ 42007, 3 },
+			},
+		},
+		[36850] = { --Sturdy Net
+			item = 42154,
+			reagents = {
+				{ 50231, 4 },
+			},
+		},
+		[36851] = { --Sturdy Cane
+			item = 42102,
+			tools = { 42004 },
+			reagents = {
+				{ 42007, 12 },
+				{ 2319, 2 },
+				{ 2321 },
+			},
+		},
+		[36852] = { --Sturdy Knife
+			item = 42103,
+			tools = { 42004, 5956 },
+			reagents = {
+				{ 42007, 2 },
+				{ 2319, 2 },
+				{ 2841, 6 },
+				{ 1206 },
+				{ 55151, 2 },
+			},
+		},
+		[36853] = { --Sturdy Blade
+			item = 42104,
+			tools = { 42004, 5956 },
+			reagents = {
+				{ 42007, 2 },
+				{ 2319 },
+				{ 2841, 8 },
+				{ 1206 },
+				{ 3478, 2 },
+			},
+		},
+		[36854] = { --Reliable Fishing Rod
+			item = 42105,
+			tools = { 42004 },
+			reagents = {
+				{ 42007, 6 },
+				{ 2321 },
+				{ 2841, 2 },
+			},
+		},
+		[36855] = { --Throwable Net
+			item = 42132,
+			reagents = {
+				{ 42154 },
+				{ 2836, 4 },
+			},
+		},
+		[36856] = { --Hat of the Junior Chef
+			item = 42106,
+			reagents = {
+				{ 4305, 6 },
+				{ 2324, 8 },
+				{ 4291, 4 },
+				{ 2692, 5 },
+				{ 3713, 5 },
+				{ 3182, 5 },
+			},
+		},
+		[36857] = { --Treasure Compass
+			item = 42107,
+			reagents = {
+				{ 4404, 4 },
+				{ 4382, 6 },
+				{ 4359, 20 },
+				{ 1529, 2 },
+				{ 4375, 6 },
+			},
+		},
+		[36858] = { --Bright Wood Arrows
+			item = 42198,
+			tools = { 42004 },
+			reagents = {
+				{ 42150 },
+				{ 5116 },
+				{ 3575 },
+			},
+		},
+		[36859] = { --Studded Rations Bag
+			item = 33373,
+			reagents = {
+				{ 4234, 8 },
+				{ 4233, 3 },
+				{ 4341, 2 },
+				{ 4291, 4 },
+				{ 6370, 6 },
+				{ 4289, 8 },
+			},
+		},
+		[36860] = { --Potent Healing Salve
+			item = 42126,
+			reagents = {
+				{ 42005, 4 },
+				{ 34001, 3 },
+				{ 159 },
+			},
+		},
+		[36861] = { --Spicy Fishing Lure
+			item = 125,
+			reagents = {
+				{ 5504 },
+				{ 2692 },
+			},
+		},
+		[36901] = { --Elixir of Greater Frost Power
 			item = 55046,
 			reagents = {
 				{ 13467, 3 },
 				{ 8925 },
 			},
 		},
-		[36903] = { --1.18
+		[36903] = { --Elixir of Greater Arcane Power
 			item = 55048,
 			reagents = {
 				{ 8831, 3 },
 				{ 8925 },
 			},
 		},
-		[36905] = { --1.18
-			item = 55060,
+		[36905] = { --Grandstaff of the Shen'dralar Elder
 			requires = L["Anvil"],
 			tools = { 41328, 41326 },
+			item = 55060,
 			reagents = {
 				{ 55252, 4 },
 				{ 12360, 2 },
@@ -10790,9 +12745,9 @@ AtlasTW.SpellDB = {
 			},
 		},
 		[36907] = { --1.18 Rune-Inscribed Plate Leggings
-			item = 55058,
 			requires = L["Anvil"],
 			tools = { 5956 },
+			item = 55058,
 			reagents = {
 				{ 12360, 3 },
 				{ 12655, 12 },
@@ -10811,7 +12766,7 @@ AtlasTW.SpellDB = {
 				{ 14341, 6 },
 			},
 		},
-		[36911] = { --1.18
+		[36911] = { --Prismatic Scale Barbute
 			item = 55054,
 			reagents = {
 				{ 8165,  20 },
@@ -10822,7 +12777,7 @@ AtlasTW.SpellDB = {
 				{ 8170,  30 },
 			},
 		},
-		[36913] = { --1.18
+		[36913] = { --Astronomer Raiments
 			item = 55052,
 			reagents = {
 				{ 14048, 12 },
@@ -10831,7 +12786,7 @@ AtlasTW.SpellDB = {
 				{ 9210,  5 },
 			},
 		},
-		[36915] = { --1.18
+		[36915] = { --Spellwoven Nobility Drape
 			item = 55056,
 			reagents = {
 				{ 14342, 3 },
@@ -10842,31 +12797,51 @@ AtlasTW.SpellDB = {
 				{ 9210,  10 },
 			},
 		},
-		[36929] = { --1.18
-			item = 47410, --Concoction of the Emerald Mongoose
+		[36929] = { --Concoction of the Emerald Mongoose
+			item = 47410,
 			reagents = {
 				{ 13452 },
 				{ 61224 },
-				-- {8153, 6}, --Wildvine 03.09.25 deleted
-				{ 18256 }, --Imbued Vial 03.09.25
+				{ 18256 },
 			},
 		},
-		[36932] = { --1.18
-			item = 47412, --Concoction of the Arcane Giant
+		[36932] = { --Concoction of the Arcane Giant
+			item = 47412,
 			reagents = {
 				{ 9206 },
 				{ 13454 },
-				--{8831, 6}, --Purple Lotus 03.09.25 deleted
-				{ 18256 }, --Imbued Vial 03.09.25
+				{ 18256 },
 			},
 		},
-		[36935] = { --1.18
-			item = 47414, --Concoction of the Dreamwater
+		[36935] = { --Concoction of the Dreamwater
+			item = 47414,
 			reagents = {
-				{ 12820 }, --Winterfall Firewater
-				{ 61423 }, --Dreamtonic
-				--{8838, 6}, --Sungrass 03.09.25 deleted
-				{ 18256 }, --Imbued Vial 03.09.25
+				{ 12820 },
+				{ 61423 },
+				{ 18256 },
+			},
+		},
+		[36946] = { --Facetted Crystal Scope
+			item = 33146,
+			tools = { 5956, 6219 },
+			reagents = {
+				{ 12655, 10 },
+				{ 16006, 4 },
+				{ 61673, 2 },
+				{ 16000 },
+				{ 42001, 2 },
+			},
+		},
+		[36948] = { --Bulwark of Unshaken Earth
+			item = 33135,
+			tools = { 5956 },
+			reagents = {
+				{ 12360, 2 },
+				{ 12655, 12 },
+				{ 7076, 6 },
+				{ 7075, 4 },
+				{ 7067, 8 },
+				{ 18567 },
 			},
 		},
 		[41001] = {
@@ -11164,9 +13139,9 @@ AtlasTW.SpellDB = {
 			tools = { 55155 },
 			item = 41318,
 			reagents = {
-				{ 2842, 3 }, -- Silver Bar
-				{ 10998 }, -- Lesser Astral Essence
-				{ 1210 }, -- Shadowgem
+				{ 2842, 3 },
+				{ 10998 },
+				{ 1210 },
 			},
 		},
 		[41065] = {
@@ -11208,6 +13183,7 @@ AtlasTW.SpellDB = {
 		},
 		[41073] = {
 			requires = L["Anvil"],
+			tools = { 6219, 5956 },
 			item = 41326,
 			reagents = {
 				{ 2841, 2 },
@@ -11217,8 +13193,21 @@ AtlasTW.SpellDB = {
 				{ 1705 },
 			},
 		},
+		[41075] = {
+			requires = L["Anvil"],
+			tools = { 6219, 5956 },
+			item = 41327,
+			reagents = {
+				{ 10559, 2 },
+				{ 4389 },
+				{ 10561, 4 },
+				{ 3864 },
+				{ 7191 },
+			},
+		},
 		[41077] = {
 			requires = L["Anvil"],
+			tools = { 6219, 5956 },
 			item = 41328,
 			reagents = {
 				{ 4389 },
@@ -11226,17 +13215,6 @@ AtlasTW.SpellDB = {
 				{ 4382, 3 },
 				{ 4375, 3 },
 				{ 55155 },
-			},
-		},
-		[41075] = {
-			requires = L["Anvil"],
-			item = 41327,
-			reagents = {
-				{ 4389 },
-				{ 3864 },
-				{ 10559, 2 },
-				{ 10561, 4 },
-				{ 7191 },
 			},
 		},
 		[41081] = {
@@ -11942,15 +13920,6 @@ AtlasTW.SpellDB = {
 				{ 55152, 2 },
 			},
 		},
-		[41334] = {
-			tools = { 55155 },
-			item = 56044,
-			reagents = {
-				{ 2840, 6 },
-				{ 818 },
-				{ 55246 },
-			},
-		},
 		[41335] = { --1.18 Jewelcrafting: Shining Copper Cuffs
 			tools = { 55155 },
 			item = 56044,
@@ -12012,6 +13981,7 @@ AtlasTW.SpellDB = {
 			},
 		},
 		[41354] = { --1.18 Jewelcrafting: Skyfire Jewel
+			tools = { 41328, 41326 },
 			item = 55255,
 			reagents = {
 				{ 41321 },
@@ -13064,8 +15034,8 @@ AtlasTW.SpellDB = {
 			},
 		},
 		[45057] = {
-			item = 51268,
 			quantity = { 1, 3 },
+			item = 51268,
 			reagents = {
 				{ 4359, 4 },
 				{ 2589, 2 },
@@ -13074,6 +15044,7 @@ AtlasTW.SpellDB = {
 		},
 		[45063] = {
 			requires = L["Anvil"], --TODO check
+			tools = { 5956 },
 			item = 51264,
 			reagents = {
 				{ 2840, 12 },
@@ -13092,6 +15063,10 @@ AtlasTW.SpellDB = {
 		[45069] = {
 			item = 51284,
 			reagents = {
+				{ 2318, 8 },
+				{ 2321, 2 },
+				{ 4231 },
+				{ 818 },
 			},
 		},
 		[45451] = {
@@ -13248,7 +15223,7 @@ AtlasTW.SpellDB = {
 		},
 		[45481] = {
 			requires = L["Anvil"],
-			tools = { 5956, 6219 },
+			tools = { 10498, 6219 },
 			item = 61187,
 			reagents = {
 				{ 16006, 8 },
@@ -13353,16 +15328,16 @@ AtlasTW.SpellDB = {
 		[46066] = {
 			item = 65028,
 			reagents = {
-				{ 5785, 16 },
-				{ 4234, 8 },
-				{ 8343, 2 },
-				{ 6370, 3 },
+				{ 2319,  4 },
+				{ 2321,  2 },
+				{ 5784,  8 },
 				{ 6372 },
+				{ 17058, 2 },
 			},
 		},
 		[46068] = {
-			item = 60001,
 			quantity = 2,
+			item = 60001,
 			reagents = {
 				{ 4306, 2 },
 				{ 9260 },
@@ -13377,6 +15352,7 @@ AtlasTW.SpellDB = {
 			},
 		},
 		[46073] = {
+			tools = { 42004 },
 			item = 51282,
 			reagents = {
 				{ 4470,  20 },
@@ -13392,11 +15368,12 @@ AtlasTW.SpellDB = {
 			},
 		},
 		[46075] = {
+			tools = { 5956 },
 			item = 2714,
 			reagents = {
-				{ 3575, 2 },
+				{ 3575, 4 },
+				{ 2592, 8 },
 				{ 814,  4 },
-				{ 2592, 5 },
 			},
 		},
 		[46077] = {
@@ -13424,6 +15401,7 @@ AtlasTW.SpellDB = {
 		},
 		[46600] = { --1.18 Blacksmithing: Lordaeron Breastplate
 			requires = L["Anvil"],
+			tools = { 5956 },
 			item = 46600,
 			reagents = {
 				{ 2840, 16 },
@@ -13432,6 +15410,7 @@ AtlasTW.SpellDB = {
 			},
 		},
 		[46608] = { --1.18 Engineering: Hypertech Battery Pack
+			tools = { 6219, 10498 },
 			item = 60098,
 			reagents = {
 				{ 10558 },
@@ -13440,15 +15419,15 @@ AtlasTW.SpellDB = {
 			},
 		},
 		[46610] = {
-			tools = { 5956, 10498 },
+			tools = { 10498, 5956 },
 			item = 60099,
 			reagents = {
 				{ 9449 },
-				{ 60098, 5 },
-				{ 814,   2 },
-				{ 7191,  4 },
+				{ 60098 },
+				{ 814,  2 },
+				{ 7191 },
 				{ 3829 },
-				{ 4375,  6 },
+				{ 4375, 6 },
 				{ 18631 },
 			},
 		},
@@ -13479,7 +15458,7 @@ AtlasTW.SpellDB = {
 			reagents = {
 				{ 4304, 10 },
 				{ 4234, 2 },
-				{ 4291, 4 },
+				{ 4291, 3 },
 				{ 2605 },
 			},
 		},
@@ -13737,6 +15716,7 @@ AtlasTW.SpellDB = {
 			},
 		},
 		[46651] = { --1.18 Blacksmithing: Bloodstone Warblade
+			tools = { 5956 },
 			item = 60294,
 			reagents = {
 				{ 3860, 14 },
@@ -13812,7 +15792,6 @@ AtlasTW.SpellDB = {
 				{ 8846,  10 },
 				{ 11382, 2 },
 				{ 12644, 4 },
-				{ 4278,  10 },
 			},
 		},
 		[46659] = {
@@ -13828,6 +15807,7 @@ AtlasTW.SpellDB = {
 		},
 		[46660] = { --Blacksmithing: Imperial Plate Gauntlets 1.18
 			requires = L["Anvil"],
+			tools = { 5956 },
 			item = 65007,
 			reagents = {
 				{ 12359, 24 },
@@ -13860,6 +15840,7 @@ AtlasTW.SpellDB = {
 			},
 		},
 		[46663] = {
+			tools = { 5956 },
 			item = 65010,
 			reagents = {
 				{ 2840, 8 },
@@ -13867,6 +15848,7 @@ AtlasTW.SpellDB = {
 			},
 		},
 		[46664] = {
+			tools = { 5956 },
 			item = 65011,
 			reagents = {
 				{ 2840, 8 },
@@ -13875,6 +15857,7 @@ AtlasTW.SpellDB = {
 			},
 		},
 		[46665] = {
+			tools = { 5956 },
 			item = 65012,
 			reagents = {
 				{ 2841, 6 },
@@ -13886,6 +15869,7 @@ AtlasTW.SpellDB = {
 		},
 		[46666] = {       --1.18 Blacksmithing: Frostbound Slasher
 			requires = L["Anvil"], --TODO check
+			tools = { 5956 },
 			item = 65013,
 			reagents = {
 				{ 3859, 10 },
@@ -13897,6 +15881,7 @@ AtlasTW.SpellDB = {
 		},
 		[46667] = {       --1.18 Blacksmithing: Pauldron of Deflection
 			requires = L["Anvil"], --TODO check
+			tools = { 5956 },
 			item = 65014,
 			reagents = {
 				{ 11371, 10 },
@@ -14087,11 +16072,11 @@ AtlasTW.SpellDB = {
 			tools = { 5956 },
 			item = 60575,
 			reagents = {
-				{ 12359, 16 },
+				{ 12359, 20 },
 				{ 11371 },
-				{ 11754, 6 },
+				{ 11754, 8 },
 				{ 7078,  2 },
-				{ 8170,  2 },
+				{ 8170,  4 },
 			},
 		},
 		[47032] = {
@@ -14143,12 +16128,13 @@ AtlasTW.SpellDB = {
 		[47101] = { --1.18 Survival: Survivalist's Skinning Knife
 			item = 7009,
 			reagents = {
-				[1] = { 2835, 2 },
-				[2] = { 2320 },
-				[3] = { 2318 },
+				{ 2835, 2 },
+				{ 2320 },
+				{ 2318 },
 			},
 		},
 		[47103] = { --1.18 Survival: Driftwood Fishing Pole
+			tools = { 42004 },
 			item = 7010,
 			reagents = {
 				{ 2320, 2 },
@@ -14160,10 +16146,9 @@ AtlasTW.SpellDB = {
 			requires = L["Cooking Fire"],
 			item = 83309,
 			reagents = {
-				{ 8838 },
+				{ 36668 },
 				{ 22529 },
-				{ 51714, 2 }, -- 3->2 1.18
-				--{6370}, 1.18
+				{ 42000, 2 },
 			},
 		},
 		[51924] = {
@@ -14182,7 +16167,8 @@ AtlasTW.SpellDB = {
 				{ 8925 },
 			},
 		},
-		[52747] = { --1.18
+		[52747] = { --Voltage-Neutralizing Nature Reflector
+			tools = { 5956, 6219 },
 			item = 58304,
 			reagents = {
 				{ 11371, 8 },
@@ -14192,7 +16178,8 @@ AtlasTW.SpellDB = {
 				{ 12800, 2 },
 			},
 		},
-		[52749] = { --1.18
+		[52749] = { --Giga-Charged Arcane Reflector
+			tools = { 5956, 6219 },
 			item = 58305,
 			reagents = {
 				{ 11371, 8 },
@@ -14458,9 +16445,9 @@ AtlasTW.SpellDB = {
 		[57131] = {
 			item = 61224,
 			reagents = {
-				{ 61198 },
-				{ 11176 },
 				{ 8925 },
+				{ 11176 },
+				{ 61198 },
 			},
 		},
 		[57163] = {
@@ -14599,18 +16586,18 @@ AtlasTW.SpellDB = {
 		},
 		[57555] = {
 			name = LS["Transmute: Elemental Earth"],
+			quantity = 3,
 			tools = { 9149 },
 			item = 7067,
-			quantity = 3,
 			reagents = {
 				{ 7075 },
 			},
 		},
 		[57557] = {
 			name = LS["Transmute: Elemental Water"],
+			quantity = 3,
 			tools = { 9149 },
 			item = 7070,
-			quantity = 3,
 			reagents = {
 				{ 7079 },
 			},
@@ -14618,8 +16605,8 @@ AtlasTW.SpellDB = {
 		[57601] = {
 			item = 55518,
 			reagents = {
-				{ 61673, 5 },
 				{ 14342, 2 },
+				{ 61673, 5 },
 				{ 14048, 6 },
 				{ 14227, 3 },
 			},
@@ -14627,8 +16614,8 @@ AtlasTW.SpellDB = {
 		[57603] = {
 			item = 55519,
 			reagents = {
-				{ 61673, 4 },
 				{ 14342, 2 },
+				{ 61673, 4 },
 				{ 14048, 3 },
 				{ 14227, 4 },
 			},
@@ -14636,8 +16623,8 @@ AtlasTW.SpellDB = {
 		[57605] = {
 			item = 55520,
 			reagents = {
-				{ 61673, 7 },
 				{ 14342, 3 },
+				{ 61673, 7 },
 				{ 14048, 8 },
 				{ 14227, 2 },
 			},
@@ -14645,8 +16632,8 @@ AtlasTW.SpellDB = {
 		[57607] = {
 			item = 55521,
 			reagents = {
-				{ 61673, 7 },
 				{ 14342, 3 },
+				{ 61673, 7 },
 				{ 14048, 6 },
 				{ 14227, 2 },
 			},
@@ -14654,36 +16641,36 @@ AtlasTW.SpellDB = {
 		[57609] = {
 			item = 55522,
 			reagents = {
-				{ 61673, 5 },
 				{ 15407, 2 },
 				{ 12810, 8 },
+				{ 61673, 5 },
 				{ 14227 },
 			},
 		},
 		[57611] = {
 			item = 55523,
 			reagents = {
-				{ 61673, 4 },
 				{ 15407, 2 },
 				{ 12810, 7 },
+				{ 61673, 4 },
 				{ 14227, 2 },
 			},
 		},
 		[57613] = {
 			item = 55524,
 			reagents = {
-				{ 61673, 8 },
 				{ 15407, 4 },
 				{ 12810, 12 },
+				{ 61673, 8 },
 				{ 14227 },
 			},
 		},
 		[57615] = {
 			item = 55525,
 			reagents = {
-				{ 61673, 6 },
 				{ 15407, 3 },
 				{ 12810, 13 },
+				{ 61673, 6 },
 				{ 14227, 2 },
 			},
 		},
@@ -14692,9 +16679,9 @@ AtlasTW.SpellDB = {
 			tools = { 5956 },
 			item = 55526,
 			reagents = {
-				{ 12359, 6 },
-				{ 12655 },
+				{ 15407 },
 				{ 12360 },
+				{ 61673, 6 },
 				{ 12607 },
 			},
 		},
@@ -14703,9 +16690,9 @@ AtlasTW.SpellDB = {
 			tools = { 5956 },
 			item = 55527,
 			reagents = {
-				{ 12359, 5 },
-				{ 12655 },
+				{ 15407 },
 				{ 12360 },
+				{ 61673, 5 },
 				{ 12607, 3 },
 			},
 		},
@@ -14714,9 +16701,9 @@ AtlasTW.SpellDB = {
 			tools = { 5956 },
 			item = 55528,
 			reagents = {
-				{ 12359, 6 },
-				{ 12655 },
-				{ 12360, 2 },
+				{ 15407, 2 },
+				{ 12360 },
+				{ 61673, 6 },
 				{ 12607, 2 },
 			},
 		},
@@ -14725,9 +16712,9 @@ AtlasTW.SpellDB = {
 			tools = { 5956 },
 			item = 55529,
 			reagents = {
-				{ 12359, 7 },
-				{ 12655 },
-				{ 12360, 2 },
+				{ 15407, 2 },
+				{ 12360 },
+				{ 61673, 7 },
 				{ 12607, 2 },
 			},
 		},
@@ -14736,9 +16723,9 @@ AtlasTW.SpellDB = {
 			tools = { 5956 },
 			item = 55530,
 			reagents = {
-				{ 12359, 6 },
 				{ 12360, 2 },
 				{ 12655, 7 },
+				{ 61673, 6 },
 			},
 		},
 		[57627] = {
@@ -14746,9 +16733,9 @@ AtlasTW.SpellDB = {
 			tools = { 5956 },
 			item = 55531,
 			reagents = {
-				{ 12359, 7 },
 				{ 12360, 2 },
 				{ 12655, 9 },
+				{ 61673, 7 },
 			},
 		},
 		[57629] = {
@@ -14756,9 +16743,9 @@ AtlasTW.SpellDB = {
 			tools = { 5956 },
 			item = 55532,
 			reagents = {
-				{ 12359, 5 },
 				{ 12360, 2 },
 				{ 12655, 10 },
+				{ 61673, 5 },
 			},
 		},
 		[57631] = {
@@ -14766,33 +16753,33 @@ AtlasTW.SpellDB = {
 			tools = { 5956 },
 			item = 55533,
 			reagents = {
-				{ 12359, 7 },
 				{ 12360, 2 },
 				{ 12655, 12 },
+				{ 61673, 7 },
 			},
 		},
 		[57633] = {
 			item = 55534,
 			reagents = {
-				{ 61673, 4 },
 				{ 14342, 2 },
-				{ 14048, 6 },
+				{ 61673, 4 },
 				{ 14227, 4 },
+				{ 14048, 6 },
 				{ 13926 },
 			},
 		},
 		[58044] = { --Cooking: Ambersap Glazed Boar Ribs 1.18
-			item = 41674,
 			requires = L["Cooking Fire"],
+			item = 41674,
 			reagents = {
 				{ 41675 },
 				{ 2677 },
 				{ 2692 },
 			},
 		},
-		[58046] = { --1.18
-			item = 41673,
+		[58046] = { --Crawford Apple Tarte
 			requires = L["Cooking Fire"],
+			item = 41673,
 			reagents = {
 				{ 4539 },
 				{ 41677 },
@@ -14940,5 +16927,5 @@ AtlasTW.SpellDB = {
 			tools = { 2901 },
 			item = 55252,
 		},
-	},
+},
 }

@@ -37,8 +37,6 @@ AtlasTW.InstanceData.BlackwingLair = {
     DamageType = L["Fire"],
     Entrances = {
         { letter = "A) ".. L["Entrance"] },
-        { letter = "B) ".. L["Connection"] },
-        { letter = "C) ".. L["Connection"] }
     },
     Bosses = {
         {
@@ -173,7 +171,29 @@ AtlasTW.InstanceData.BlackwingLair = {
                 { id = 19395 }, -- Rejuvenating Gem
             }
         },
-        { prefix = "5)", name = LMD["Master Elemental Shaper Krixix"], color = Colors.GREY, },
+        {
+            id = "EzzelDarkbrewer",
+            prefix = "5)",
+            name = LB["Ezzel Darkbrewer"],
+            postfix = L["Optional"],
+            defaults = { dropRate = 0 },
+            loot = {
+                { id = 33073 }, -- 
+                { id = 33074, dropRate = 10 }, -- Taut Dragonhide Boots
+                { id = 33075, dropRate = 10 }, -- Staff of Cleansing Vapors
+                { id = 33076 }, -- 
+                { id = 33077 }, -- 
+                { id = 33078 }, -- 
+                { id = 33079 }, -- 
+                { id = 33080 }, -- 
+                { id = 33081 }, -- 
+                { id = 33083, container = { 33093,33094 } }, -- Elementium Sharpening Stone
+                { id = 33084, container = { 33096 } }, -- Pristine Chromatic Scale
+                { id = 33085, container = { 33095 }, dropRate = 10 }, -- Over-Tinkered Lens
+                { id = 33086 }, --
+                { id = 33087 }, --
+            }
+        },
         {
             id = "Ebonroc",
             prefix = "6)",
@@ -332,18 +352,9 @@ AtlasTW.InstanceData.BlackwingLair = {
                 { id = 17969, disc = L["Container"], dropRate = 20, container = { 13926, 7971, 55250, 7909, 3864, 55251, 7910, 1529, 12799 } }, -- Red Sack of Gems
             }
         },
-        {
-            id = "EzzelDarkbrewer",
-            prefix = "10)",
-            name = LB["Ezzel Darkbrewer"],
-            postfix = L["Optional"],
-            defaults = { dropRate = 20 },
-            loot = {
-                --TODO Ezzel Darkbrewer loot
-            }
-        },
         { prefix = "1)", name = LMD["Alchemy Lab"], color = Colors.GREEN },
         { prefix = "2)", name = LMD["Draconic for Dummies"], color = Colors.GREEN },
+        { prefix = "3'", name = LMD["Master Elemental Shaper Krixix"], color = Colors.GREEN, },
         {
             id = "BWLTrash",
             name = L["Trash Mobs"].."-"..LZ["Blackwing Lair"],

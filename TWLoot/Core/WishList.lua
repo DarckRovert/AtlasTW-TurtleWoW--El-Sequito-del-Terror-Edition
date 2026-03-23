@@ -18,30 +18,8 @@
 local L = AtlasTW.Localization.UI
 local LS = AtlasTW.Localization.Spells
 
--- Cache for categorizing WishList/SearchResult results
-if not AtlasTW then AtlasTW = {} end
-if not AtlasTW._CatCache then AtlasTW._CatCache = {} end
-if not AtlasTW._CatRev then AtlasTW._CatRev = {} end
-
----
---- Invalidates the categorized list cache for a specific key
---- @param key string - The cache key to invalidate
---- @return nil
---- @usage AtlasTWLoot_InvalidateCategorizedList("wishlist")
----
-function AtlasTWLoot_InvalidateCategorizedList(key)
-	if not key then return end
-	if not AtlasTW then return end
-	if not AtlasTW._CatRev then AtlasTW._CatRev = {} end
-	AtlasTW._CatRev[key] = (AtlasTW._CatRev[key] or 0) + 1
-	if AtlasTW._CatCache and AtlasTW._CatCache[key] then
-		AtlasTW._CatCache[key].data = nil
-		AtlasTW._CatCache[key].rev = AtlasTW._CatRev[key]
-	end
-end
-
 -- Forward declaration to use function before its definition
-local _GetInstanceKeyByName
+-- (Removed local _GetInstanceKeyByName as we use AtlasTW.LootUtils.GetInstanceKeyByName)
 
 ---
 --- Displays the WishList interface and normalizes wish list data
@@ -61,7 +39,7 @@ function AtlasTWLoot_ShowWishList()
 			-- Normalize instance field: if name is recorded, replace with key
 			if v.instance and v.instance ~= "" then
 				if not (AtlasTW and AtlasTW.InstanceData and AtlasTW.InstanceData[v.instance]) then
-					local k = _GetInstanceKeyByName(v.instance)
+					local k = AtlasTW.LootUtils.GetInstanceKeyByName(v.instance)
 					if k then v.instance = k end
 				end
 			end
@@ -70,15 +48,15 @@ function AtlasTWLoot_ShowWishList()
 				local bossName, instPart = AtlasTW.LootUtils.Strsplit("|", v.sourcePage)
 				if instPart and instPart ~= "" then
 					if not (AtlasTW and AtlasTW.InstanceData and AtlasTW.InstanceData[instPart]) then
-						local k = _GetInstanceKeyByName(instPart)
+						local k = AtlasTW.LootUtils.GetInstanceKeyByName(instPart)
 						if k then
-							v.sourcePage = (bossName or (v.element or "")).."|"..k
+							v.sourcePage = (bossName or (v.element or "")) .. "|" .. k
 							if not v.instance or v.instance == "" then v.instance = k end
 						end
 					end
 				end
 			elseif v.element and v.instance and v.element ~= "" and v.instance ~= "" then
-				v.sourcePage = v.element.."|"..v.instance
+				v.sourcePage = v.element .. "|" .. v.instance
 			end
 		end
 	end
@@ -97,312 +75,11 @@ function AtlasTWLoot_ShowWishList()
 
 	-- Update display
 	AtlasTW.LootBrowserUI.ScrollBarLootUpdate()
-end
 
----
---- Helper function: find first location of ID (numeric) in instance database
---- @param targetId number - The target ID to search for
---- @return string|nil, string|nil - The element name and instance key if found
---- @usage local elem, inst = FindLocationById(12345)
----
----
---- Helper function: find first location of ID (numeric) in instance database
---- @param targetId number - The target ID to search for
---- @return string|nil, string|nil - The element name and instance key if found
---- @usage local elem, inst = FindLocationById(12345)
----
-local function FindLocationById(targetId)
-	if not targetId or not AtlasTW or not AtlasTW.InstanceData or not AtlasTW.LootUtils or not AtlasTW.LootUtils.IterateAllLootItems then return nil, nil end
-	
-    -- Local cache to resolve context from keys (similar to Search.lua)
-    local pageKeyToContext = {}
-    local function resolveContext(pageKey)
-        if pageKeyToContext[pageKey] then return unpack(pageKeyToContext[pageKey]) end
-        -- Note: IterateAllLootItems iterates EVERYTHING. 
-        -- To emulate FindLocationById's behavior (finding INSTANCE location),
-        -- we really only care about items that are linked to an Instance.
-        -- So we iterate InstanceData to build a map if needed, 
-        -- OR we can just scan InstanceData like before but supporting string keys?
-        -- Actually, IterateAllLootItems passes 'key' which is bossID or table key.
-        -- If we search for 12345, IterateAllLootItems finds it and gives us 'key'.
-        -- We then need to map 'key' -> 'Instance/Boss'.
-        -- If 'key' IS a bossID, we are good.
-        -- If 'key' is a loot page key (e.g. "MCBoss1"), we need to know it belongs to MC.
-        -- So we need the reverse lookup.
-        for instKey, inst in pairs(AtlasTW.InstanceData) do
-             if inst.Bosses then
-                for _, boss in ipairs(inst.Bosses) do
-                     local items = boss.items or boss.loot
-                     if boss.id == pageKey or items == pageKey then
-                         local res = {(boss.name or boss.Name or "?"), instKey}
-                         pageKeyToContext[pageKey] = res
-                         return unpack(res)
-                     end
-                end
-             end
-             if inst.Reputation then
-                 for _, src in pairs(inst.Reputation) do
-                     local items = src.items or src.loot
-                     if items == pageKey then
-                         local res = {(src.name or "Reputation"), instKey}
-                         pageKeyToContext[pageKey] = res
-                         return unpack(res)
-                     end
-                 end
-             end
-             if inst.Keys then
-                 for _, src in pairs(inst.Keys) do
-                     local items = src.items or src.loot
-                     if items == pageKey then
-                         local res = {(src.name or "Keys"), instKey}
-                         pageKeyToContext[pageKey] = res
-                         return unpack(res)
-                     end
-                 end
-             end
-        end
-        return nil, nil
-    end
-
-    return AtlasTW.LootUtils.IterateAllLootItems(function(id, key, itemData)
-        if id == targetId or (type(itemData)=="table" and itemData.id == targetId) then
-            -- We found the item in loot page 'key'.
-            -- Now check if 'key' belongs to an instance.
-            local elem, inst = resolveContext(key)
-            if elem and inst then
-                return elem, inst
-            end
-        end
-    end)
-end
-
----
---- Helper function to get instance key by name or return key as is
---- @param instName string - The instance name to look up
---- @return string|nil - The instance key or nil if not found
---- @usage local key = _GetInstanceKeyByName("Molten Core")
----
-_GetInstanceKeyByName = function(instName)
-	if not instName or instName == "" then return nil end
-	if AtlasTW and AtlasTW.InstanceData then
-		if AtlasTW.InstanceData[instName] then return instName end
-		for key, inst in pairs(AtlasTW.InstanceData) do
-			if inst and inst.Name == instName then
-				return key
-			end
-		end
+	-- Show sort dropdown if it exists
+	if AtlasTWLootWishListSortDropDown then
+		AtlasTWLootWishListSortDropDown:Show()
 	end
-	return nil
-end
-
----
---- Finds instance by element name and returns instance key and normalized element name
---- @param elemName string - The element name to search for
---- @return string|nil, string - The instance key and normalized element name
---- @usage local instKey, elemName = FindInstanceByElemName("Thunderfury")
----
-local function FindInstanceByElemName(elemName)
-	if not elemName or not AtlasTW or not AtlasTW.InstanceData then
-		return nil, elemName
-	end
-	for instKey, instanceData in pairs(AtlasTW.InstanceData) do
-		-- Search in reputations
-		if instanceData.Reputation then
-			for _, v in ipairs(instanceData.Reputation) do
-				if v.name == elemName or v.loot == elemName then
-					return instKey, (v.name or elemName)
-				end
-			end
-		end
-		-- Search in keys
-		if instanceData.Keys then
-			for _, v in ipairs(instanceData.Keys) do
-				if v.name == elemName or v.loot == elemName then
-					return instKey, (v.name or elemName)
-				end
-			end
-		end
-		-- Search in bosses
-		if instanceData.Bosses then
-			for _, bossData in ipairs(instanceData.Bosses) do
-				if bossData.name == elemName or bossData.id == elemName then
-					return instKey, (bossData.name or elemName)
-				end
-			end
-		end
-	end
-	return nil, elemName
-end
-
----
---- Returns localized/readable name for loot page by its key
---- @param pageKey string - The loot page key to get display name for
---- @return string|nil - The display name if found, nil otherwise
---- @usage local name = AtlasTWLoot_GetLootPageDisplayName("BWL_Nefarian")
----
-local function AtlasTWLoot_GetLootPageDisplayName(pageKey)
-	if not pageKey or pageKey == "" then return nil end
-	-- Try to resolve display name from MenuData first (works for WorldBlues*/WorldEnchants etc.)
-	if AtlasTW and AtlasTW.MenuData then
-		local menuTablesToCheck = {
-			AtlasTW.MenuData.WorldEvents,
-			AtlasTW.MenuData.Factions,
-			AtlasTW.MenuData.PVP,
-			AtlasTW.MenuData.PVPSets,
-			AtlasTW.MenuData.Sets,
-			AtlasTW.MenuData.WorldBlues,
-			AtlasTW.MenuData.Alchemy,
-			AtlasTW.MenuData.Smithing,
-			AtlasTW.MenuData.Enchanting,
-			AtlasTW.MenuData.Engineering,
-			AtlasTW.MenuData.Herbalism,
-			AtlasTW.MenuData.Leatherworking,
-			AtlasTW.MenuData.Mining,
-			AtlasTW.MenuData.Tailoring,
-			AtlasTW.MenuData.Jewelcrafting,
-			AtlasTW.MenuData.Cooking,
-			AtlasTW.MenuData.FirstAid,
-			AtlasTW.MenuData.Survival,
-			AtlasTW.MenuData.Skinning,
-			AtlasTW.MenuData.Fishing,
-			AtlasTW.MenuData.Poisons,
-		}
-		for _, menuTable in pairs(menuTablesToCheck) do
-			if type(menuTable) == "table" then
-				for _, entry in pairs(menuTable) do
-					if type(entry) == "table" and entry.lootpage == pageKey and entry.name then
-						return entry.name
-					end
-				end
-			end
-		end
-	end
-	if AtlasTW.DataResolver.IsLootTableAvailable(pageKey) and AtlasTWLoot_Data and AtlasTWLoot_Data[pageKey] then
-		local page = AtlasTWLoot_Data[pageKey]
-		if type(page) == "table" then
-			local m = table.getn(page)
-			for i = 1, m do
-				local e = page[i]
-				if type(e) == "table" and e.name and e.name ~= "" then
-					return e.name
-				end
-			end
-		end
-	end
-	return pageKey
-end
-
----
---- New helper: find first craft loot page by spell ID
---- @param spellID number - The spell ID to search for
---- @return string|nil - The loot page key if found, nil otherwise
---- @usage local pageKey = FindFirstCraftLootPageForSpell(12345)
----
-local function FindFirstCraftLootPageForSpell(spellID)
-	if not AtlasTWLoot_Data or not spellID then return nil end
-    if AtlasTW.LootUtils and AtlasTW.LootUtils.IterateAllLootItems then
-        return AtlasTW.LootUtils.IterateAllLootItems(function(id, key, itemData)
-            if id == spellID then return key end
-            if type(itemData) == "table" and itemData.id == spellID then return key end
-        end)
-    end
-	return nil
-end
-
----
---- Returns localized profession name by loot page key (craft page)
---- @param pageKey string - The loot page key to get profession for
---- @return string|nil - The localized profession name if found
---- @usage local profession = GetProfessionByLootPageKey("Alchemy1")
----
-local function GetProfessionByLootPageKey(pageKey)
-	if not pageKey or type(pageKey) ~= "string" then return nil end
-	if not AtlasTW or not AtlasTW.MenuData then return nil end
-
-	local MenuData = AtlasTW.MenuData
-
-	-- Mapping menu table keys to localized profession names
-	local ProfByTableKey = {
-		Alchemy = LS["Alchemy"] or "Alchemy",
-		Smithing = LS["Blacksmithing"] or "Blacksmithing",
-		Enchanting = LS["Enchanting"] or "Enchanting",
-		Engineering = LS["Engineering"] or "Engineering",
-		Leatherworking = LS["Leatherworking"] or "Leatherworking",
-		Mining = LS["Mining"] or "Mining",
-		Tailoring = LS["Tailoring"] or "Tailoring",
-		Jewelcrafting = LS["Jewelcrafting"] or "Jewelcrafting",
-		Cooking = LS["Cooking"] or "Cooking",
-		FirstAid = LS["First Aid"] or "First Aid",
-		Poisons = LS["Poisons"] or "Poisons",
-		Herbalism = LS["Herbalism"] or "Herbalism",
-		Survival = LS["Survival"] or "Survival",
-	}
-
-	-- Local helper: safe traversal of sparse arrays
-	local function GetMaxNumericIndex(tbl)
-		local maxIndex = 0
-		for k, v in pairs(tbl) do
-			if type(k) == "number" and k > maxIndex and v then
-				maxIndex = k
-			end
-		end
-		return maxIndex
-	end
-
-	-- Local helper: attempt to find profession by menu table
-	local function TryResolveByTable(tableKey)
-		local t = MenuData[tableKey]
-		if not t or type(t) ~= "table" then return nil end
-		local maxIndex = GetMaxNumericIndex(t)
-		for i = 1, maxIndex do
-			local e = t[i]
-			if e and e.lootpage == pageKey then
-				-- If there's a prefix before colon in the name - use it (e.g. "Alchemy: Apprentice")
-				if e.name and type(e.name) == "string" then
-					local pos = string.find(e.name, ":")
-					if pos and pos > 1 then
-						return string.sub(e.name, 1, pos - 1)
-					end
-				end
-				-- Otherwise return localized name by menu table key
-				return ProfByTableKey[tableKey]
-			end
-		end
-		return nil
-	end
-
-	-- 1) Direct match in main profession tables
-	for tableKey, _ in pairs(ProfByTableKey) do
-		local r = TryResolveByTable(tableKey)
-		if r and r ~= "" then return r end
-	end
-
-	-- 2) Match in top-level Crafting (in case profession menu key like "AtlasTWLoot_AlchemyMenu" was passed)
-	if MenuData.Crafting and type(MenuData.Crafting) == "table" then
-		local maxIndex = GetMaxNumericIndex(MenuData.Crafting)
-		for i = 1, maxIndex do
-			local e = MenuData.Crafting[i]
-			if e and e.lootpage == pageKey then
-				if e.name and e.name ~= "" then
-					return e.name
-				end
-				break
-			end
-		end
-	end
-
-	-- 3) Fallback to prefixes (as before) if not found in MenuData
-	if string.sub(pageKey, 1, 11) == "Engineering" then return LS and LS["Engineering"] or "Engineering" end
-	if string.sub(pageKey, 1, 10) == "Enchanting" then return LS and LS["Enchanting"] or "Enchanting" end
-	if string.sub(pageKey, 1, 9) == "Tailoring" then return LS and LS["Tailoring"] or "Tailoring" end
-	if string.sub(pageKey, 1, 8) == "Smithing" then return LS and LS["Blacksmithing"] or "Blacksmithing" end
-	if string.sub(pageKey, 1, 8) == "Alchemy" then return LS and LS["Alchemy"] or "Alchemy" end
-	if string.sub(pageKey, 1, 7) == "Leather" then return LS and LS["Leatherworking"] or "Leatherworking" end
-	if string.sub(pageKey, 1, 7) == "Cooking" then return LS and LS["Cooking"] or "Cooking" end
-	if string.sub(pageKey, 1, 7) == "Mining" then return LS and LS["Mining"] or "Mining" end
-	if string.sub(pageKey, 1, 13) == "Jewelcrafting" then return LS and LS["Jewelcrafting"] or "Jewelcrafting" end
-
-	return nil
 end
 
 ---
@@ -416,10 +93,10 @@ end
 --- @usage AtlasTWLoot_AddToWishlist(12345, "Thunderfury", "MC", "item", "Bindings")
 ---
 function AtlasTWLoot_AddToWishlist(itemID, elemFromSearch, instKeyFromSearch, typeFromSearch, srcFromSearch)
- 	-- Initialize wish list if it doesn't exist
- 	if not AtlasTWCharDB.WishList then
- 		AtlasTWCharDB.WishList = {}
- 	end
+	-- Initialize wish list if it doesn't exist
+	if not AtlasTWCharDB.WishList then
+		AtlasTWCharDB.WishList = {}
+	end
 	-- Determine element type and get corresponding information
 	local elementType = typeFromSearch or "item"
 	local name = nil
@@ -474,38 +151,70 @@ function AtlasTWLoot_AddToWishlist(itemID, elemFromSearch, instKeyFromSearch, ty
 		end
 	end
 
-	-- If nothing came from search, try to determine location and source only for items
-	if (not currentElement and not currentInstanceKey) and elementType == "item" then
-		local foundElem, foundInst = FindLocationById(actualItemID)
-		currentElement = foundElem
-		currentInstanceKey = foundInst
-		-- If not found by ID, try by name
-		if not currentElement then
-			local instKeyByName, normalizedElem = FindInstanceByElemName(name)
-			currentElement = normalizedElem
-			currentInstanceKey = instKeyByName
+	-- Search fallback: if context not passed but we have sourcePage (e.g. from search), try to extract it
+	if (not currentElement or currentElement == "") and (not currentInstanceKey or currentInstanceKey == "") then
+		if type(srcFromSearch) == "string" and srcFromSearch ~= "" then
+			if string.find(srcFromSearch, "|") then
+				local parts = AtlasTW.LootUtils.Strsplit("|", srcFromSearch)
+				if parts and parts[1] then
+					currentElement = parts[1]
+					currentInstanceKey = parts[2]
+				end
+			else
+				-- It's just a loot page key (like craft)
+				currentInstanceKey = srcFromSearch
+				currentElement = AtlasTWLoot_GetLootPageDisplayName(srcFromSearch) or srcFromSearch
+			end
 		end
 	end
 
-  	-- Form record for WishList
-  	local record = {
-  		id = actualItemID,
-  		element = currentElement,
-  		instance = currentInstanceKey,
-  		type = elementType,
-  	}
+	-- If still no context, try to find it for spells/enchants
+	if (not currentElement or currentElement == "") and (not currentInstanceKey or currentInstanceKey == "") then
+		if (elementType == "spell" or elementType == "enchant") and actualItemID and actualItemID ~= 0 then
+			local lootPage = AtlasTW.LootUtils.FindCraftLootPageForSpell(actualItemID)
+			if lootPage then
+				currentInstanceKey = lootPage
+				currentElement = AtlasTWLoot_GetLootPageDisplayName(lootPage)
+			end
+		end
+	end
+
+	-- If nothing came from search, try to determine location and source only for items
+	if (not currentElement or currentElement == "") and (not currentInstanceKey or currentInstanceKey == "") and elementType == "item" then
+		if AtlasTW.DataIndex and AtlasTW.DataIndex.LocationCache then
+			-- Use centralized index
+			if not AtlasTW.DataIndex.isIndexed and not AtlasTW.DataIndex.isIndexing then
+				AtlasTW.DataIndex.CheckAndBuildIndex()
+			end
+			local locs = AtlasTW.DataIndex.LocationCache[actualItemID]
+			if locs and locs[1] then
+				-- Pick first location
+				local loc = locs[1]
+				currentElement = loc.boss or loc.displayName
+				currentInstanceKey = loc.inst or loc.page
+			end
+		end
+	end
+
+	-- Form record for WishList
+	local record = {
+		id = actualItemID,
+		element = currentElement,
+		instance = currentInstanceKey,
+		type = elementType,
+	}
 
 	-- Form sourcePage: prioritize value from search (e.g., craft page)
 	if type(srcFromSearch) == "string" and srcFromSearch ~= "" then
 		record.sourcePage = srcFromSearch
 	elseif currentElement and currentInstanceKey then
-		record.sourcePage = currentElement.."|"..currentInstanceKey
-	-- Don't set sourcePage if only instance key is known: such key cannot be opened directly
+		record.sourcePage = currentElement .. "|" .. currentInstanceKey
+		-- Don't set sourcePage if only instance key is known: such key cannot be opened directly
 	end
 
 	-- If sourcePage is not set yet and there are valid elem/inst
 	if not record.sourcePage and currentElement and currentInstanceKey then
-		record.sourcePage = currentElement.."|"..currentInstanceKey
+		record.sourcePage = currentElement .. "|" .. currentInstanceKey
 	end
 
 	-- Check for duplicate addition (by type+id pair)
@@ -523,21 +232,21 @@ function AtlasTWLoot_AddToWishlist(itemID, elemFromSearch, instKeyFromSearch, ty
 	end
 	if isDuplicate then
 		if name and name ~= "" then
-			PrintA(name..L[" already in the WishList!"])
+			PrintA(name .. L[" already in the WishList!"])
 		else
-			PrintA(tostring(actualItemID)..L[" already in the WishList!"])
+			PrintA(tostring(actualItemID) .. L[" already in the WishList!"])
 		end
 		return
 	end
 
-  	-- Save to wish list
+	-- Save to wish list
 	table.insert(AtlasTWCharDB.WishList, record)
 
 	-- Chat message about addition
 	if name and name ~= "" then
-		PrintA(name..L[" added to the WishList."])
+		PrintA(name .. L[" added to the WishList."])
 	else
-		PrintA(tostring(actualItemID)..L[" added to the WishList."])
+		PrintA(tostring(actualItemID) .. L[" added to the WishList."])
 	end
 
 	-- Invalidate category cache for wish list
@@ -564,27 +273,100 @@ function AtlasTWLoot_CategorizeWishList(wishList)
 	if not wishList then return result end
 	-- Use cache for WishList/SearchResult
 	local cacheKey = nil
+	local sortMode = "Default"
 	if AtlasTWCharDB then
 		if wishList == AtlasTWCharDB.WishList then
 			cacheKey = "WishList"
+			sortMode = AtlasTWCharDB.WishListSortMode or "Default"
+			if sortMode == "Instance" then sortMode = "Source" end -- Migration
 		elseif wishList == AtlasTWCharDB.SearchResult then
 			cacheKey = "SearchResult"
+			sortMode = "Source" -- Always sort search results by group
 		end
 	end
 	if cacheKey and AtlasTW and AtlasTW._CatCache and AtlasTW._CatRev then
 		local currRev = AtlasTW._CatRev[cacheKey] or 0
 		local c = AtlasTW._CatCache[cacheKey]
-		if c and c.rev == currRev and c.data then
+		-- Cache key for wishlist now includes sort mode
+		local effectiveCacheKey = cacheKey .. (cacheKey == "WishList" and ("_" .. sortMode) or "")
+		if c and c.rev == currRev and c.data and (c.mode == sortMode or (c.mode == "Instance" and sortMode == "Source")) then
 			return c.data
 		end
 	end
 
-	-- Go through list without sorting and add headers when category changes
-	local lastCategoryKey = nil
+	-- Create a copy to work with if we need to sort
+	local listToProcess = {}
 	local m = table.getn(wishList)
 	for i = 1, m do
-		local v = wishList[i]
+		table.insert(listToProcess, wishList[i])
+	end
+
+	-- Apply sorting if needed
+	if (cacheKey == "WishList" or cacheKey == "SearchResult") and sortMode == "Source" then
+		local function GetItemNameLocal(id, elementType)
+			if elementType == "spell" then
+				return (AtlasTW.SpellDB and AtlasTW.SpellDB.craftspells and AtlasTW.SpellDB.craftspells[id] and AtlasTW.SpellDB.craftspells[id].name) or
+					"Unknown Spell"
+			elseif elementType == "enchant" then
+				return (AtlasTW.SpellDB and AtlasTW.SpellDB.enchants and AtlasTW.SpellDB.enchants[id] and AtlasTW.SpellDB.enchants[id].name) or
+					"Unknown Enchant"
+			else
+				local name = GetItemInfo(id)
+				return name or "Unknown Item"
+			end
+		end
+
+		local function GetSourceNameLocal(v)
+			local instKey = v.instance or v[3]
+			local src = v.sourcePage or v[5]
+
+			if (not instKey or instKey == "") and src and src ~= "" then
+				if string.find(src, "|") then
+					local b, ik = AtlasTW.LootUtils.Strsplit("|", src)
+					if type(ik) == "table" then ik = ik[1] end
+					if type(ik) == "string" and ik ~= "" then
+						instKey = ik
+					end
+				else
+					instKey = src
+				end
+			end
+
+			if not instKey or instKey == "" then return L["Unknown"] or "Unknown" end
+
+			-- 1. Try InstanceData (for instances)
+			if AtlasTW and AtlasTW.InstanceData and AtlasTW.InstanceData[instKey] then
+				return AtlasTW.InstanceData[instKey].Name or instKey
+			end
+
+			-- 2. Try LootPageDisplayName (for professions, events, etc.)
+			local displayName = AtlasTWLoot_GetLootPageDisplayName(instKey)
+			if displayName and displayName ~= instKey then
+				return displayName
+			end
+
+			return instKey
+		end
+
+		table.sort(listToProcess, function(a, b)
+			local instA = GetSourceNameLocal(a)
+			local instB = GetSourceNameLocal(b)
+			if instA ~= instB then
+				return instA < instB
+			end
+			local nameA = GetItemNameLocal(a.id or a[1], a.type or a[4] or "item")
+			local nameB = GetItemNameLocal(b.id or b[1], b.type or b[4] or "item")
+			return nameA < nameB
+		end)
+	end
+
+	-- Go through list and add headers when category changes
+	local lastCategoryKey = nil
+	local m = table.getn(listToProcess)
+	for i = 1, m do
+		local v = listToProcess[i]
 		local currentCategory
+		local extratext = ""
 
 		-- Support both formats: dictionary (WishList) and array (SearchResult)
 		local elem = (v.element ~= nil) and v.element or v[2]
@@ -600,113 +382,274 @@ function AtlasTWLoot_CategorizeWishList(wishList)
 		if not (type(inst) == "string" or type(inst) == "number") then inst = nil end
 		if type(src) ~= "string" then src = nil end
 
-		local elemOK = (elem ~= nil and elem ~= "")
-		local instOK = (inst ~= nil and inst ~= "")
+		if sortMode == "Source" and cacheKey == "WishList" then
+			-- Grouping by source
+			local effectiveInst = inst
 
-		local predefinedHeaderName = nil
-		local predefinedExtraText = nil
-
-		if elemOK and instOK then
-			currentCategory = AtlasTWLoot_GetWishListSubheadingBoss(elem, inst)
-		elseif src and src ~= "" then
-			-- Try to extract boss|instance from sourcePage
-			local b, ik = AtlasTW.LootUtils.Strsplit("|", src)
-			-- Normalization: AtlasTW.LootUtils.Strsplit returns table of parts
-			if type(b) == "table" then
-				if not ik then ik = b[2] end
-				b = b[1]
-			end
-			if type(ik) == "table" then ik = ik[1] end
-			if (type(ik) == "string" or type(ik) == "number") and ik ~= "" then
-				currentCategory = AtlasTWLoot_GetWishListSubheadingBoss(b, ik)
-				if not elemOK then elem = b end
-				if not instOK then inst = ik end
-				elemOK = (elem ~= nil and elem ~= "")
-				instOK = (inst ~= nil and inst ~= "")
-			else
-				-- src can be loot page key (e.g., craft) - localize name by page data
-				local displayName = AtlasTWLoot_GetLootPageDisplayName(src)
-				-- For craft pages, make header the short category name without profession prefix
-				local headerName = displayName
-				local profName = GetProfessionByLootPageKey(src)
-				if displayName and profName then
-					local prefix = profName..": "
-					if string.sub(displayName, 1, string.len(prefix)) == prefix then
-						headerName = string.sub(displayName, string.len(prefix) + 1)
+			-- If inst is completely missing, try to extract it from src
+			if (not inst or inst == "") and src and src ~= "" then
+				if string.find(src, "|") then
+					local b, ik = AtlasTW.LootUtils.Strsplit("|", src)
+					if type(ik) == "table" then ik = ik[1] end
+					if type(ik) == "string" and ik ~= "" then
+						effectiveInst = ik
 					end
+				else
+					effectiveInst = src
 				end
-				currentCategory = (headerName and headerName ~= "") and headerName or (displayName and displayName ~= "" and displayName or src)
-				if not elemOK then elem = currentCategory end
-				-- Pre-fill subtitle with profession
-				predefinedExtraText = GetProfessionByLootPageKey(src) or nil
 			end
-		else
-			-- Try to calculate header/subtitle for spells/enchants by craft page
-			if (elementType == "spell" or elementType == "enchant") and elemId and elemId ~= 0 then
-				local lootPage = FindFirstCraftLootPageForSpell(elemId)
-				if lootPage then
-					local displayName = AtlasTWLoot_GetLootPageDisplayName(lootPage)
+
+			if effectiveInst and effectiveInst ~= "" then
+				-- Try InstanceData first
+				if AtlasTW and AtlasTW.InstanceData and AtlasTW.InstanceData[effectiveInst] and AtlasTW.InstanceData[effectiveInst].Name then
+					currentCategory = AtlasTW.InstanceData[effectiveInst].Name
+				else
+					-- Fallback to loot page display name (professions, events etc)
+					local displayName = AtlasTWLoot_GetLootPageDisplayName(effectiveInst)
+					currentCategory = displayName or effectiveInst
+				end
+			else
+				currentCategory = L["Unknown"] or "Unknown"
+			end
+			-- Subtitle for source mode: try to get meta-category (Crafting, Factions, etc.)
+			if effectiveInst and effectiveInst ~= "" then
+				extratext = AtlasTW.LootUtils.GetMetaCategoryForMenu(effectiveInst) or ""
+			else
+				extratext = ""
+			end
+		elseif sortMode == "Default" or cacheKey == "SearchResult" then
+			-- Default grouping (by boss/page)
+			local elemOK = (elem ~= nil and elem ~= "")
+			local instOK = (inst ~= nil and inst ~= "")
+
+			local predefinedHeaderName = nil
+			local predefinedExtraText = nil
+
+			if elemOK and instOK then
+				currentCategory = AtlasTWLoot_GetWishListSubheadingBoss(elem, inst)
+			elseif src and src ~= "" then
+				-- Try to extract boss|instance from sourcePage
+				local b, ik = AtlasTW.LootUtils.Strsplit("|", src)
+				-- Normalization: AtlasTW.LootUtils.Strsplit returns table of parts
+				if type(b) == "table" then
+					if not ik then ik = b[2] end
+					b = b[1]
+				end
+				if type(ik) == "table" then ik = ik[1] end
+				if (type(ik) == "string" or type(ik) == "number") and ik ~= "" then
+					currentCategory = AtlasTWLoot_GetWishListSubheadingBoss(b, ik)
+					if not elemOK then elem = b end
+					if not instOK then inst = ik end
+					elemOK = (elem ~= nil and elem ~= "")
+					instOK = (inst ~= nil and inst ~= "")
+				else
+					-- src can be loot page key (e.g., craft) - localize name by page data
+					local displayName = AtlasTWLoot_GetLootPageDisplayName(src)
+					-- For craft pages, make header the short category name without profession prefix
 					local headerName = displayName
-					local profName = GetProfessionByLootPageKey(lootPage)
+					local profName = GetProfessionByLootPageKey(src)
 					if displayName and profName then
-						local prefix = profName..": "
+						local prefix = profName .. ": "
 						if string.sub(displayName, 1, string.len(prefix)) == prefix then
 							headerName = string.sub(displayName, string.len(prefix) + 1)
 						end
 					end
-					predefinedHeaderName = (headerName and headerName ~= "") and headerName or (displayName and displayName ~= "" and displayName or lootPage)
-					predefinedExtraText = profName or nil
+					currentCategory = (headerName and headerName ~= "") and headerName or
+						(displayName and displayName ~= "" and displayName or src)
+					if not elemOK then elem = currentCategory end
+					-- Pre-fill subtitle with profession
+					predefinedExtraText = GetProfessionByLootPageKey(src) or nil
+				end
+			else
+				-- Try to calculate header/subtitle for spells/enchants by craft page
+				if (elementType == "spell" or elementType == "enchant") and elemId and elemId ~= 0 then
+					local lootPage = AtlasTW.LootUtils.FindCraftLootPageForSpell(elemId)
+					if lootPage then
+						local displayName = AtlasTWLoot_GetLootPageDisplayName(lootPage)
+						local headerName = displayName
+						local profName = GetProfessionByLootPageKey(lootPage)
+						if displayName and profName then
+							local prefix = profName .. ": "
+							if string.sub(displayName, 1, string.len(prefix)) == prefix then
+								headerName = string.sub(displayName, string.len(prefix) + 1)
+							end
+						end
+						predefinedHeaderName = (headerName and headerName ~= "") and headerName or
+							(displayName and displayName ~= "" and displayName or lootPage)
+						predefinedExtraText = profName or nil
+					end
+				end
+				-- If couldn't calculate - use neutral header
+				currentCategory = predefinedHeaderName or L["Search Result"]
+			end
+
+			-- Now that currentCategory is determined, securely prepend the profession name if needed
+			local workingInst = inst
+			if not workingInst or workingInst == "" then
+				-- If no inst, try extracting it similarly from src
+				if src and src ~= "" then
+					if string.find(src, "|") then
+						local b, ik = AtlasTW.LootUtils.Strsplit("|", src)
+						if type(ik) == "table" then ik = ik[1] end
+						if type(ik) == "string" and ik ~= "" then
+							workingInst = ik
+						end
+					else
+						workingInst = src
+					end
 				end
 			end
-			-- If couldn't calculate - use neutral header
-			currentCategory = predefinedHeaderName or L["Search Result"]
+			if workingInst and workingInst ~= "" then
+				local profName = GetProfessionByLootPageKey(workingInst)
+				if profName and profName ~= "" then
+					local prefix = profName .. ": "
+					if currentCategory and string.sub(currentCategory, 1, string.len(prefix)) ~= prefix then
+						currentCategory = prefix .. currentCategory
+					end
+					predefinedExtraText = profName
+				end
+			end
+
+			-- Pre-calculate extratext for forming category key
+			if instOK then
+				extratext = GetLootTableParent(elem, inst) or ""
+			elseif src and src ~= "" then
+				local b, ik = AtlasTW.LootUtils.Strsplit("|", src)
+				-- Normalization: AtlasTW.LootUtils.Strsplit returns table of parts
+				if type(b) == "table" then
+					if not ik then ik = b[2] end
+					b = b[1]
+				end
+				if type(ik) == "table" then ik = ik[1] end
+				if (type(ik) == "string" or type(ik) == "number") and ik ~= "" then
+					extratext = GetLootTableParent(b, ik) or ""
+				else
+					-- If this is craft page or special page, use Meta-Category name
+					extratext = GetLootTableParent(nil, src) or ""
+				end
+			end
+			-- Fallback: if subtitle is empty and this is spell/enchant, try to determine Meta-Category
+			if (not extratext or extratext == "") and (elementType == "spell" or elementType == "enchant") then
+				if predefinedExtraText and predefinedExtraText ~= "" then
+					extratext = predefinedExtraText
+				elseif elementType == "enchant" then
+					extratext = LS and LS["Enchanting"] or "Enchanting"
+				else
+					local lootPage = AtlasTW.LootUtils.FindCraftLootPageForSpell(elemId)
+					if lootPage then
+						extratext = GetLootTableParent(nil, lootPage) or ""
+					end
+				end
+			end
 		end
 
-		-- Pre-calculate extratext for forming category key
-		local extratext = ""
-		if instOK then
-			extratext = GetLootTableParent(elem, inst) or ""
-		elseif src and src ~= "" then
-			local b, ik = AtlasTW.LootUtils.Strsplit("|", src)
-			-- Normalization: AtlasTW.LootUtils.Strsplit returns table of parts
-			if type(b) == "table" then
-				if not ik then ik = b[2] end
-				b = b[1]
-			end
-			if type(ik) == "table" then ik = ik[1] end
-			if (type(ik) == "string" or type(ik) == "number") and ik ~= "" then
-				extratext = GetLootTableParent(b, ik) or ""
-			else
-				-- If this is craft page, subtitle is profession name
-				extratext = GetProfessionByLootPageKey(src) or ""
-			end
-		end
-		-- Fallback: if subtitle is empty and this is spell/enchant, try to determine profession
-		if (not extratext or extratext == "") and (elementType == "spell" or elementType == "enchant") then
-			if predefinedExtraText and predefinedExtraText ~= "" then
-				extratext = predefinedExtraText
-			elseif elementType == "enchant" then
-				extratext = LS and LS["Enchanting"] or "Enchanting"
-			else
-				local lootPage = FindFirstCraftLootPageForSpell(elemId)
-				if lootPage then
-					extratext = GetProfessionByLootPageKey(lootPage) or ""
-				end
+		-- Ensure header and subheader don't duplicate each other (e.g. "Alchemy" and "Alchemy" -> "Alchemy" and "Crafting")
+		if currentCategory and extratext and currentCategory == extratext then
+			local pKey = src or (v and (v.sourcePage or v[5] or v[3]))
+			local metaCategory = GetLootTableParent(nil, pKey)
+			if metaCategory and metaCategory ~= currentCategory then
+				extratext = metaCategory
+			elseif GetProfessionByLootPageKey(pKey) then
+				extratext = L["Crafting"]
 			end
 		end
 
 		local currentCategoryKey = tostring(currentCategory or "") .. "||" .. tostring(extratext or "")
 
-		-- If category changed, add header
-		if currentCategoryKey ~= lastCategoryKey then
-			-- Add empty line between categories (except first)
-			if table.getn(result) > 0 then
-				table.insert(result, {})
+		-- Logic for header insertion (New Category or Continuation at column boundary)
+		local currentCount = table.getn(result)
+		local isNewCategory = (currentCategoryKey ~= lastCategoryKey)
+		local isBoundary = (currentCount > 0 and math.mod(currentCount, 15) == 0)
+
+		if isNewCategory then
+			if currentCount > 0 then
+				-- Check if we are at the top of a column (16, 31, ...)
+				local targetIndentPos = currentCount + 1
+				local isIndentAtTop = (math.mod(targetIndentPos - 1, 15) == 0)
+
+				if isIndentAtTop then
+					-- At column start, skip indent to satisfy "no indent at top"
+					-- UNLESS it's Page 2+ and the cell directly above has an item
+					local needsTopSpacer = false
+					if targetIndentPos > 16 then
+						local abovePos = targetIndentPos - 16
+						local aboveCell = result[abovePos]
+						if aboveCell and aboveCell[1] and aboveCell[1] ~= 0 then
+							needsTopSpacer = true
+						end
+					end
+
+					if needsTopSpacer then
+						table.insert(result, {})
+						table.insert(result, { 0, currentCategory, extratext })
+					else
+						-- Header itself at the top acts as a separator
+						table.insert(result, { 0, currentCategory, extratext })
+					end
+				else
+					-- Normal case: ensure header doesn't end up at bottom of column
+					local targetHeaderPos = currentCount + 2
+					local needsPush = (math.mod(targetHeaderPos, 15) == 0)
+					local isStandardTransfer = (math.mod(targetIndentPos, 15) == 0)
+
+					if needsPush or isStandardTransfer then
+						-- Determine which boundary we are crossing
+						local boundaryPos = needsPush and targetHeaderPos or targetIndentPos
+						local isCol2ToCol1 = (math.mod(boundaryPos, 30) == 0)
+
+						local numSpacers = 2
+						if isCol2ToCol1 then
+							-- Check if the bottom of the first column on this page has an element
+							local cell15Pos = boundaryPos - 15
+							local cell15 = result[cell15Pos]
+							local isElementAt15 = cell15 and cell15[1] and cell15[1] ~= 0
+							if isElementAt15 then
+								numSpacers = 3
+							end
+						end
+
+						for s = 1, numSpacers do
+							table.insert(result, {})
+						end
+						table.insert(result, { 0, currentCategory, extratext })
+					else
+						-- Normal case: 1 spacer + header
+						table.insert(result, {})
+						table.insert(result, { 0, currentCategory, extratext })
+					end
+				end
+			else
+				-- First category header
+				table.insert(result, { 0, currentCategory, extratext })
+			end
+			lastCategoryKey = currentCategoryKey
+		elseif isBoundary then
+			-- Continuation of the same category at a column boundary
+			-- If Page 2+ and cell above has an item, add spacer
+			local targetPos = currentCount + 1
+			local needsTopSpacer = false
+			if targetPos > 16 then
+				local abovePos = targetPos - 16
+				local aboveCell = result[abovePos]
+				if aboveCell and aboveCell[1] and aboveCell[1] ~= 0 then
+					needsTopSpacer = true
+				end
 			end
 
-			-- Add category header: boss/page name as header, instance/profession as extratext
+			if needsTopSpacer then
+				table.insert(result, {})
+			end
 			table.insert(result, { 0, currentCategory, extratext })
-			lastCategoryKey = currentCategoryKey
+		end
+
+		-- Before adding item, check if we need a continuation header at column start
+		-- This handles categories that span multiple columns (e.g., 15+ items)
+		local countBeforeItem = table.getn(result)
+		if countBeforeItem > 0 and math.mod(countBeforeItem, 15) == 0 and not isNewCategory and not isBoundary then
+			-- We're at a column boundary (15, 30, 45...) and about to add an item
+			-- This item would be the first in the new column
+			-- Insert header to maintain context
+			table.insert(result, { 0, currentCategory, extratext })
 		end
 
 		-- Add item considering element type
@@ -722,14 +665,14 @@ function AtlasTWLoot_CategorizeWishList(wishList)
 		if not src2 and (elementType == "spell" or elementType == "enchant") then
 			local eid = (v.id ~= nil) and v.id or v[1]
 			if eid and eid ~= 0 then
-				local lp = FindFirstCraftLootPageForSpell(eid)
+				local lp = AtlasTW.LootUtils.FindCraftLootPageForSpell(eid)
 				if lp then
 					src2 = lp
 				end
 			end
 		end
 		if src2 then
-			table.insert(displayItem, src2)
+			displayItem[5] = src2
 		end
 		table.insert(result, displayItem)
 	end
@@ -739,7 +682,7 @@ function AtlasTWLoot_CategorizeWishList(wishList)
 	if cacheKey then
 		if not AtlasTW._CatCache then AtlasTW._CatCache = {} end
 		if not AtlasTW._CatRev then AtlasTW._CatRev = {} end
-		AtlasTW._CatCache[cacheKey] = { data = result, rev = AtlasTW._CatRev[cacheKey] or 0 }
+		AtlasTW._CatCache[cacheKey] = { data = result, rev = AtlasTW._CatRev[cacheKey] or 0, mode = sortMode }
 	end
 	return result
 end
@@ -762,6 +705,12 @@ function AtlasTWLoot_GetWishListSubheadingBoss(bossName, instanceName)
 		if AtlasTW and AtlasTW.InstanceData and AtlasTW.InstanceData[instanceName] and AtlasTW.InstanceData[instanceName].Name then
 			return AtlasTW.InstanceData[instanceName].Name
 		end
+
+		local displayName = AtlasTWLoot_GetLootPageDisplayName(instanceName)
+		if displayName and displayName ~= instanceName then
+			return displayName
+		end
+
 		return instanceName
 	end
 
@@ -813,47 +762,15 @@ function AtlasTWLoot_DeleteFromWishList(elemID)
 
 	if removed then
 		if removedName and removedName ~= "" then
-			PrintA(removedName..L[" deleted from the WishList."])
+			PrintA(removedName .. L[" deleted from the WishList."])
 		else
-			PrintA(tostring(elemID)..L[" deleted from the WishList."])
+			PrintA(tostring(elemID) .. L[" deleted from the WishList."])
 		end
 	else
-		PrintA(tostring(elemID)..L[" not found in the WishList."])
+		PrintA(tostring(elemID) .. L[" not found in the WishList."])
 	end
 
 	-- Update display
 	AtlasTWLoot_InvalidateCategorizedList("WishList")
 	AtlasTWLoot_ShowWishList()
-end
-
----
---- Gets the parent instance name for a loot table
---- @param bossName string - The boss name
---- @param instanceName string - The instance name
---- @return string - The parent instance display name
---- @usage local parent = GetLootTableParent("Nefarian", "BWL")
----
-function GetLootTableParent(bossName, instanceName)
-	-- Return instance name as extratext (subtitle)
-	if instanceName and instanceName ~= "" then
-		if AtlasTW and AtlasTW.InstanceData and AtlasTW.InstanceData[instanceName] and AtlasTW.InstanceData[instanceName].Name then
-			return AtlasTW.InstanceData[instanceName].Name
-		end
-		return instanceName
-	end
-
-	-- If no instance name, try to find it by boss name
-	if bossName and AtlasTW.InstanceData then
-		for instanceKey, instanceData in pairs(AtlasTW.InstanceData) do
-			if instanceData.Bosses then
-				for _, bossData in ipairs(instanceData.Bosses) do
-					if bossData.name == bossName then
-						return instanceData.Name or instanceKey
-					end
-				end
-			end
-		end
-	end
-
-	return L["Unknown"] or "Unknown"
 end

@@ -40,18 +40,8 @@ AtlasTW.InstanceData.OnyxiasLair = {
     },
     Bosses = {
         {
-            prefix = "1)",
-            name = LMD["Onyxian Warders"],
-            color = Colors.GREY,
-        },
-        {
-            prefix = "2)",
-            name = LMD["Whelp Eggs"],
-            color = Colors.GREY,
-        },
-        {
             id = "Onyxia",
-            prefix = "3)",
+            prefix = "1)",
             name = LB["Onyxia"],
             defaults = { dropRate = 13 },
             loot = {
@@ -94,12 +84,20 @@ AtlasTW.InstanceData.OnyxiasLair = {
         },
         {
             id = "BroodcommanderAxelus",
-            prefix = "4)",
+            prefix = "2)",
             name = LB["Broodcommander Axelus"],
             postfix = L["Optional"],
-            defaults = { dropRate = 20 },
+            defaults = { dropRate = 0 },
             loot = {
-                --TODO Broodcommander Axelus loot
+                { id = 33149, dropRate = 10 }, -- Battle Standard of the Broodcommander
+                { id = 33150 }, -- Yoxtez, Black Breath of the Dragonflight
+                { id = 33151 }, -- Onyxian Brood Egg
+                { id = 33152 }, -- Prestor's Rod of Command
+                { id = 33153 }, -- Ignited Obsidian Scale
+                { id = 33154 }, -- Ring of Burning Talons
+                { id = 33155 }, -- Scaleshield of Obsidian Flight
+                { id = 33156 }, -- Dragonhunter Javelin
+                { id = 33157 }, -- Broodwarden's Bulwarkblade
             }
         }
     }
