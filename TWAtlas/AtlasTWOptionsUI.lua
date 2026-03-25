@@ -43,7 +43,7 @@ do
         insets = { left = 11, right = 12, top = 12, bottom = 11 }
     })
     optionsFrame:SetBackdropColor(0, 0, 0, 1)
-    optionsFrame:SetBackdropBorderColor(0.80, 0.60, 0.25, 1)
+    optionsFrame:SetBackdropBorderColor(0.40, 0.15, 0.50, 1)
 
     -- Frame scripts
     optionsFrame:SetScript("OnDragStart", function()
@@ -296,7 +296,7 @@ do
     -- Background texture
     local dropDownCatsBg = dropDownCats:CreateTexture(nil, "BACKGROUND")
     dropDownCatsBg:SetTexture("Interface\\Tooltips\\UI-Tooltip-Background")
-    dropDownCatsBg:SetVertexColor(0.1, 0.1, 0.1, 0.8)
+    dropDownCatsBg:SetVertexColor(0.40, 0.15, 0.50, 0.8)
     dropDownCatsBg:SetAllPoints(dropDownCats)
 
     -- Text display

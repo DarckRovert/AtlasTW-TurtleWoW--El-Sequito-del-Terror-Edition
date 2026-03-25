@@ -248,9 +248,9 @@ function AtlasTW.OptionsInit()
     end
     -- Consult the saved variable table to see whether to show the bottom panel
     if AtlasTWOptions.LootShowPanel then
-        AtlasTWLootPanel:Show()
+        if AtlasTWLootPanel then AtlasTWLootPanel:Show() end
     else
-        AtlasTWLootPanel:Hide()
+        if AtlasTWLootPanel then AtlasTWLootPanel:Hide() end
     end
     -- Set values on load
     AtlasTWOptionToggleButton:SetChecked(AtlasTWOptions.AtlasButtonShown)

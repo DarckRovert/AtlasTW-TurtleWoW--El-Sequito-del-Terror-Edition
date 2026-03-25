@@ -171,7 +171,7 @@ end
 frame:RegisterEvent("PLAYER_ENTERING_WORLD")
 frame:RegisterEvent("CHAT_MSG_SYSTEM")
 frame:RegisterEvent("CHAT_MSG_ADDON")
-frame:SetBackdropBorderColor(0.80, 0.60, 0.25, 1)
+frame:SetBackdropBorderColor(0.40, 0.15, 0.50, 1)
 frame:SetScript("OnEvent", function()
     -- Debug print to verify script handler execution
     -- if DEFAULT_CHAT_FRAME then DEFAULT_CHAT_FRAME:AddMessage("Atlas-TW: Frame OnEvent Triggered: " .. (event or "nil")) end

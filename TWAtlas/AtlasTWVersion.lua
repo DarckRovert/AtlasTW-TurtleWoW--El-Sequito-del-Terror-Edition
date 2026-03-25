@@ -30,7 +30,7 @@ VC.joinAt = nil
 --- @usage local v = AtlasTW.VersionCheck.getLocalVersionString()
 function VC.getLocalVersionString()
   -- Prefer pre-initialized AtlasTW.Version if present; otherwise query metadata.
-  return AtlasTW.Version or GetAddOnMetadata(AtlasTW.Name, 'Version')
+  return AtlasTW.Version or GetAddOnMetadata("Atlas-TW", 'Version')
 end
 
 ---

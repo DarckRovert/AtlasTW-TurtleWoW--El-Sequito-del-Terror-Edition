@@ -13,7 +13,7 @@
 ## Major Changes in 1.50-TW
 
 ### 1. Synchronization with Upstream 1.50
-- Merged all core improvements from the official `byCFM2/Atlas-TW` repository.
+- Merged all core improvements from the official `DarckRovert/AtlasTW-TurtleWoW-El-Sequito-del-Terror-Edition` repository.
 - Full codebase synchronization keeping the modular localization framework.
 
 ### 2. Turtle WoW 1.18.1 Patch Support

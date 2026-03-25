@@ -113,7 +113,7 @@ Overview: Atlas‑TW is a dungeon map browser with an integrated loot panel and 
 12) Technical Details
 - No external Babble libraries required (replaced by modular system)
 - All localization data is loaded via `Locales/locales.xml`
-- Fully synchronized with `byCFM2/Atlas-TW` v1.50 (Turtle WoW 1.18.1)
+- Fully synchronized with `DarckRovert/AtlasTW-TurtleWoW-El-Sequito-del-Terror-Edition` v1.50 (Turtle WoW 1.18.1)
 
 ## Turtle WoW Compatibility & Patch 1.18.1 (March 2026)
 
@@ -126,7 +126,7 @@ This version includes specific fixes and data updates for Turtle WoW:
 - **Faction Rewards**: Complete loot tables for the *Draenei Exiles* faction.
 - **Instance Data**: Updated loot and boss information for *Naxxramas*, *Onyxia's Lair*, and *Blackwing Lair*.
 - **Crafting System**: Split menus by skill tier (Apprentice to Artisan) with new recipes for *Survival* and *Jewelcrafting*.
-- **Synchronization**: Fully synced with the official `byCFM2/Atlas-TW` (v1.50) core.
+- **Synchronization**: Fully synced with the official `DarckRovert/AtlasTW-TurtleWoW-El-Sequito-del-Terror-Edition` (v1.50) core.
 
 For more details, see:
 - **CHANGELOG_TURTLEWOW.md** - Full technical changelog (English)

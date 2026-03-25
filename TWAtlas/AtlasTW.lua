@@ -29,7 +29,7 @@ local frame
 local loadingStartTime -- Load time
 local Colors = AtlasTW.Colors
 
-AtlasTW.Version = GetAddOnMetadata(AtlasTW.Name, "Version")
+AtlasTW.Version = GetAddOnMetadata("Atlas-TW", "Version")
 
 ---
 --- Outputs debug information to chat if debug mode is enabled
@@ -267,7 +267,7 @@ end
 --- @usage Automatically called by WoW event system
 ---
 function AtlasTW.OnEvent()
-	if arg1 == AtlasTW.Name then
+	if arg1 == "Atlas-TW" then
 		Atlas_Init()
 
 		-- Compatibility hooks for AtlasFu2 and other Atlas-dependent addons

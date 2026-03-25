@@ -13,7 +13,7 @@
 ## Cambios Principales en 1.50-TW
 
 ### 1. Sincronización con Upstream 1.50
-- Mezcladas todas las mejoras del núcleo del repositorio oficial `byCFM2/Atlas-TW`.
+- Mezcladas todas las mejoras del núcleo del repositorio oficial `DarckRovert/AtlasTW-TurtleWoW-El-Sequito-del-Terror-Edition`.
 - Sincronización completa del código manteniendo el framework de localización modular.
 
 ### 2. Soporte para el Parche 1.18.1 de Turtle WoW

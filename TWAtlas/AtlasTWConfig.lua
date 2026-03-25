@@ -91,7 +91,7 @@ AtlasTW = {
 
     --variables
     --atlas
-    Name = "Atlas-TW",
+    Name = "Atlas-TW - El Sequito del Terror Edition",
     Version = nil,
     DropDowns = {},
     CurrentLine = 0,
@@ -114,7 +114,7 @@ AtlasTW = {
 --- @param text string - the message to display in chat
 --- @usage printA("message")
 function PrintA(msg)
-  local prefix = (AtlasTW.Colors and AtlasTW.Colors.DEFAULT or '|cffFFd200') .. 'Atlas-TW:|r '
+  local prefix = (AtlasTW.Colors and AtlasTW.Colors.PURPLE or '|cff9330DB') .. 'Atlas-TW:|r '
   DEFAULT_CHAT_FRAME:AddMessage(prefix .. msg)
 end
 

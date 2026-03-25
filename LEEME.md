@@ -185,7 +185,7 @@ Esta versión incluye correcciones específicas y actualizaciones de datos para 
 - **Recompensas de Facción**: Tablas de botín completas para los *Exiliados Draenei* (Draenei Exiles).
 - **Datos de Instancias**: Botín y jefes actualizados para *Naxxramas*, *Guarida de Onyxia* y *Guarida de Alanegra*.
 - **Sistema de Profesiones**: Menús divididos por nivel de habilidad (Aprendiz a Artesano) con nuevas recetas de *Supervivencia (Survival)* y *Joyería (Jewelcrafting)*.
-- **Sincronización**: Totalmente sincronizado con el núcleo oficial de `byCFM2/Atlas-TW` (v1.50).
+- **Sincronización**: Totalmente sincronizado con el núcleo oficial de `DarckRovert/AtlasTW-TurtleWoW-El-Sequito-del-Terror-Edition` (v1.50).
 
 Para más detalles, consulta:
 - **CHANGELOG_TURTLEWOW.md** - Registro técnico completo (Inglés)
