@@ -1,4 +1,4 @@
-# Atlas‑TW — Documentation (WoW 1.12)
+# Atlas‑TW — v9.3.0-TW [God-Tier] Séquito del Terror Edition
 
 Overview: Atlas‑TW is a dungeon map browser with an integrated loot panel and quests module. It is compatible with World of Warcraft 1.12 and includes localization support.
 
