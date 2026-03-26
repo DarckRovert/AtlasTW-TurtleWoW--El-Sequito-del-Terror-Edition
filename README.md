@@ -115,6 +115,9 @@ Overview: Atlas‑TW is a dungeon map browser with an integrated loot panel and 
 - All localization data is loaded via `Locales/locales.xml`
 - Fully synchronized with `DarckRovert/AtlasTW-TurtleWoW-El-Sequito-del-Terror-Edition` v1.50 (Turtle WoW 1.18.1)
 
+### 🌐 Séquito Ecosystem Compatible
+`Atlas-TW` ahora sirve como el **Mapa Táctico** del clan. Sincroniza automáticamente los waypoints de los jefes y las estrategias de raid con `TerrorSquadAI` para una navegación perfecta por las mazmorras del Séquito.
+
 ## Turtle WoW Compatibility & Patch 1.18.1 (March 2026)
 
 This version includes specific fixes and data updates for Turtle WoW:
