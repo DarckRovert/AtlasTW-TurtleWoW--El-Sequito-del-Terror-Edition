@@ -115,8 +115,23 @@ Overview: Atlas‑TW is a dungeon map browser with an integrated loot panel and 
 - All localization data is loaded via `Locales/locales.xml`
 - Fully synchronized with `DarckRovert/AtlasTW-TurtleWoW-El-Sequito-del-Terror-Edition` v1.50 (Turtle WoW 1.18.1)
 
-### 🌐 Séquito Ecosystem Compatible
-`Atlas-TW` ahora sirve como el **Mapa Táctico** del clan. Sincroniza automáticamente los waypoints de los jefes y las estrategias de raid con `TerrorSquadAI` para una navegación perfecta por las mazmorras del Séquito.
+### 🌐 Séquito Ecosystem Compatible (SquadMind)
+`Atlas-TW` ahora sirve como el **Mapa Táctico** de la Red Neural de 10 addons del clan. 
+
+```mermaid
+graph TD
+    classDef intel fill:#003366,stroke:#00BFFF,stroke-width:2px,color:#fff;
+    classDef core fill:#2C0000,stroke:#FF0000,stroke-width:2px,color:#fff;
+    ATLAS["🗺️ Atlas-TW<br/>(Estrategia Dungeon)"]:::intel
+    TSAI["🧠 TerrorSquadAI<br/>(Comandante Táctico)"]:::core
+    PFQ["📜 pfQuest<br/>(Inteligencia)"]:::intel
+    
+    PFQ -.->|Base de Datos y Rutas| ATLAS
+    ATLAS -.->|Sincronización de Tácticas| TSAI
+```
+
+- **Simbiosis con pfQuest**: Permite hacer clic derecho en ítems de Loot de Atlas-TW para ver directamente en el mapa (vía pfQuest) dónde cae, qué misiones lo requieren o qué lo dropea.
+- **Simbiosis con TerrorSquadAI**: Atlas-TW no es solo consultivo; sincroniza los waypoints de jefes y estrategias de raid con **TerrorBoard** (Pizarra holográfica de TSAI) para una navegación táctica perfecta por las mazmorras del Séquito.
 
 ## Turtle WoW Compatibility & Patch 1.18.1 (March 2026)
 
