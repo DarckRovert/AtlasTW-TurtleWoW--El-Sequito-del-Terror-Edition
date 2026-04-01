@@ -27,7 +27,7 @@ local LIS = AtlasTW.Localization.ItemSets
 AtlasTWLoot_Data = AtlasTWLoot_Data or {}
 
 local pvpRewards = {
-	PVPWeapons = {
+	PVPWeapons118 = {
 		{ name = LF["Alliance"], icon="INV_BannerPVP_02", extra=L["Rank"].." 14"},
 		{ id = 18827 }, -- Grand Marshal's Handaxe
 		{ id = 18830 }, -- Grand Marshal's Sunderer
@@ -80,6 +80,51 @@ local pvpRewards = {
 		{ id = 18826 }, -- High Warlord's Shield Wall
 		{ id = 23468 }, -- High Warlord's Tome of Destruction
 		{ id = 23469 }, -- High Warlord's Tome of Mending
+		{ id = 98731 }, -- Gladiator's Tunic
+	},
+	PVPWeapons = {
+		{ id = 33883 }, -- Strategist's Stave
+		{ id = 33881 }, -- Strategist's Demolisher
+		{ id = 33894 }, -- Strategist's Mageblade
+		{ id = 33895 }, -- Strategist's Tome of Power
+		{ id = 33902 }, -- Strategist's Destroyer
+		{ id = 33904 }, -- Strategist's War Staff
+		{ id = 33915 }, -- Strategist's Spellblade
+		{ id = 33916 }, -- Strategist's Tome of Destruction
+		{},
+		{ id = 33879 }, -- Partisan's Claymore
+		{ id = 33880 }, -- Partisan's Battle Hammer
+		{ id = 33882 }, -- Partisan's Sunderer
+		{ id = 33884 }, -- Partisan's Glaive
+		{ id = 33885 }, -- Partisan's Aegis
+		{ id = 33886 }, -- Partisan's Longsword
+		{ id = 33887 }, -- Partisan's Punisher
+		{ id = 33888 }, -- Partisan's Handaxe
+		{ id = 33892 }, -- Partisan's Swiftblade
+		{ id = 33893 }, -- Partisan's Dirk
+		{ id = 33897 }, -- Partisan's Hand Cannon
+		{ id = 33898 }, -- Partisan's Repeater
+		{ id = 33899 }, -- Partisan's Bullseye
+		{ id = 33900 }, -- Partisan's Greatsword
+		{ id = 33901 }, -- Partisan's Pulverizer
+		{ id = 33903 }, -- Partisan's Battle Axe
+		{ id = 33905 }, -- Partisan's Pig Sticker
+		{ id = 33906 }, -- Partisan's Shield Wall
+		{ id = 33907 }, -- Partisan's Blade
+		{ id = 33908 }, -- Partisan's Bludgeon
+		{ id = 33909 }, -- Partisan's Cleaver
+		{ id = 33910 }, -- Partisan's Left Claw
+		{ id = 33911 }, -- Partisan's Right Claw
+		{ id = 33913 }, -- Partisan's Quickblade
+		{ id = 33914 }, -- Partisan's Razor
+		{ id = 33918 }, -- Partisan's Street Sweeper
+		{ id = 33919 }, -- Partisan's Crossbow
+		{ id = 33920 }, -- Partisan's Recurve
+		{},
+		{ id = 33896 }, -- Physician's Tome of Restoration
+		{ id = 33891 }, -- Physician's Warhammer
+		{ id = 33912 }, -- Physician's Battle Mace
+		{ id = 33917 }, -- Physician's Tome of Mending
 	},
 	PvP60Accessories = {
 		{ name = LF["Alliance"], icon="INV_BannerPVP_02", extra=L["Rank"].." 1"}, --*1
@@ -174,7 +219,7 @@ local pvpRewards = {
 		{ name = LF["Horde"], icon="INV_BannerPVP_01", extra=L["Rank"].." 9"},
 		{ id = 18607, disc=L["Misc"] }, -- Horde Battle Standard 9
 	},
-	PVPHunter = {
+	PVPHunter118 = {
 		{ name=LIS["Field Marshal's Pursuit"], icon="INV_BannerPVP_02", extra=L["Epic Set"] },
 		{ id = 16465, disc=L["Rank"].." 13" }, -- Field Marshal's Chain Helm
 		{ id = 16468, disc=L["Rank"].." 13" }, -- Field Marshal's Chain Spaulders
@@ -206,7 +251,37 @@ local pvpRewards = {
 		{ id = 22875, disc=L["Rank"].." 8" }, -- Legionnaire's Chain Legguards
 		{ id = 22843, disc=L["Rank"].." 7" }, -- Blood Guard's Chain Greaves
 	},
-	PVPMage = {
+	PVPHunter = {
+		{ id = 33440 }, -- Combatant's Chain Helm
+		{ id = 33441 }, -- Combatant's Chain Spaulders
+		{ id = 33442 }, -- Combatant's Chain Breastplate
+		{ id = 33443 }, -- Combatant's Chain Grips
+		{ id = 33444 }, -- Combatant's Chain Legguards
+		{ id = 33445 }, -- Combatant's Chain Boots
+		{},
+		{ id = 33716 }, -- Combatant's Chain Helm
+		{ id = 33717 }, -- Combatant's Chain Spaulders
+		{ id = 33718 }, -- Combatant's Chain Breastplate
+		{ id = 33719 }, -- Combatant's Chain Grips
+		{ id = 33720 }, -- Combatant's Chain Legguards
+		{ id = 33721 }, -- Combatant's Chain Boots
+		{},
+		{},
+		{ id = 33446 }, -- Partisan's Chain Helm
+		{ id = 33447 }, -- Partisan's Chain Spaulders
+		{ id = 33448 }, -- Partisan's Chain Breastplate
+		{ id = 33449 }, -- Partisan's Chain Grips
+		{ id = 33450 }, -- Partisan's Chain Legguards
+		{ id = 33451 }, -- Partisan's Chain Boots
+		{},
+		{ id = 33722 }, -- Partisan's Chain Helm
+		{ id = 33723 }, -- Partisan's Chain Spaulders
+		{ id = 33724 }, -- Partisan's Chain Breastplate
+		{ id = 33725 }, -- Partisan's Chain Grips
+		{ id = 33726 }, -- Partisan's Chain Legguards
+		{ id = 33727 }, -- Partisan's Chain Boots
+	},
+	PVPMage118 = {
 		{ name=LIS["Field Marshal's Regalia"], icon="INV_BannerPVP_02", extra=L["Epic Set"] },
 		{ id = 16441, disc=L["Rank"].." 13" }, -- Field Marshal's Coronet
 		{ id = 16444, disc=L["Rank"].." 13" }, -- Field Marshal's Silk Spaulders
@@ -238,7 +313,37 @@ local pvpRewards = {
 		{ id = 22883, disc=L["Rank"].." 8" }, -- Legionnaire's Silk Legguards
 		{ id = 22860, disc=L["Rank"].." 7" }, -- Blood Guard's Silk Walkers
 	},
-	PVPPriest = {
+	PVPMage = {
+		{ id = 33422 }, -- Tactician's Coronet
+		{ id = 33423 }, -- Tactician's Silk Spaulders
+		{ id = 33424 }, -- Tactician's Silk Vestments
+		{ id = 33425 }, -- Tactician's Silk Gloves
+		{ id = 33426 }, -- Tactician's Silk Leggings
+		{ id = 33427 }, -- Tactician's Silk Footwraps
+		{},
+		{ id = 33698 }, -- Tactician's Coronet
+		{ id = 33699 }, -- Tactician's Silk Spaulders
+		{ id = 33700 }, -- Tactician's Silk Vestments
+		{ id = 33701 }, -- Tactician's Silk Gloves
+		{ id = 33702 }, -- Tactician's Silk Leggings
+		{ id = 33703 }, -- Tactician's Silk Footwraps
+		{},
+		{},
+		{ id = 33428 }, -- Strategist's Coronet
+		{ id = 33429 }, -- Strategist's Silk Spaulders
+		{ id = 33430 }, -- Strategist's Silk Vestments
+		{ id = 33431 }, -- Strategist's Silk Gloves
+		{ id = 33432 }, -- Strategist's Silk Leggings
+		{ id = 33433 }, -- Strategist's Silk Footwraps
+		{},
+		{ id = 33704 }, -- Strategist's Coronet
+		{ id = 33705 }, -- Strategist's Silk Spaulders
+		{ id = 33706 }, -- Strategist's Silk Vestments
+		{ id = 33707 }, -- Strategist's Silk Gloves
+		{ id = 33708 }, -- Strategist's Silk Leggings
+		{ id = 33709 }, -- Strategist's Silk Footwraps
+	},
+	PVPPriest118 = {
 		{ name=LIS["Field Marshal's Raiment"], icon="INV_BannerPVP_02", extra=L["Epic Set"] },
 		{ id = 17602, disc=L["Rank"].." 13" }, -- Field Marshal's Headdress
 		{ id = 17604, disc=L["Rank"].." 13" }, -- Field Marshal's Satin Mantle
@@ -270,7 +375,60 @@ local pvpRewards = {
 		{ id = 22882, disc=L["Rank"].." 8" }, -- Legionnaire's Satin Legguards
 		{ id = 22859, disc=L["Rank"].." 7" }, -- Blood Guard's Satin Walkers
 	},
-	PVPWarlock = {
+	PVPPriest = {
+		{ id = 33620 }, -- Tactician's Headdress
+		{ id = 33621 }, -- Tactician's Satin Mantle
+		{ id = 33622 }, -- Tactician's Satin Vestments
+		{ id = 33623 }, -- Tactician's Satin Gloves
+		{ id = 33624 }, -- Tactician's Satin Pants
+		{ id = 33625 }, -- Tactician's Satin Sandals
+		{},
+		{ id = 33806 }, -- Tactician's Headdress
+		{ id = 33807 }, -- Tactician's Satin Mantle
+		{ id = 33808 }, -- Tactician's Satin Vestments
+		{ id = 33809 }, -- Tactician's Satin Gloves
+		{ id = 33810 }, -- Tactician's Satin Pants
+		{ id = 33811 }, -- Tactician's Satin Sandals
+		{},
+		{},
+		{ id = 33626 }, -- Strategist's Headdress
+		{ id = 33627 }, -- Strategist's Satin Mantle
+		{ id = 33628 }, -- Strategist's Satin Vestments
+		{ id = 33629 }, -- Strategist's Satin Gloves
+		{ id = 33630 }, -- Strategist's Satin Pants
+		{ id = 33631 }, -- Strategist's Satin Sandals
+		{},
+		{ id = 33812 }, -- Strategist's Headdress
+		{ id = 33813 }, -- Strategist's Satin Mantle
+		{ id = 33814 }, -- Strategist's Satin Vestments
+		{ id = 33815 }, -- Strategist's Satin Gloves
+		{ id = 33816 }, -- Strategist's Satin Pants
+		{ id = 33817 }, -- Strategist's Satin Sandals
+		{},
+		{},
+		{ id = 33638 }, -- Corpsman's Headdress
+		{ id = 33639 }, -- Corpsman's Satin Mantle
+		{ id = 33640 }, -- Corpsman's Satin Vestments
+		{ id = 33641 }, -- Corpsman's Satin Gloves
+		{ id = 33642 }, -- Corpsman's Satin Pants
+		{ id = 33643 }, -- Corpsman's Satin Sandals
+		{},
+		{ id = 33824 }, -- Corpsman's Headdress
+		{ id = 33825 }, -- Corpsman's Satin Mantle
+		{ id = 33826 }, -- Corpsman's Satin Vestments
+		{ id = 33827 }, -- Corpsman's Satin Gloves
+		{ id = 33828 }, -- Corpsman's Satin Pants
+		{ id = 33829 }, -- Corpsman's Satin Sandals
+		{},
+		{},
+		{ id = 33645 }, -- Physician's Headdress
+		{ id = 33831 }, -- Physician's Satin Mantle
+		{ id = 33646 }, -- Physician's Satin Vestments
+		{ id = 33833 }, -- Physician's Satin Gloves
+		{ id = 33832 }, -- Physician's Satin Pants
+		{ id = 33834 }, -- Physician's Satin Sandals
+	},
+	PVPWarlock118 = {
 		{ name=LIS["Field Marshal's Threads"], icon="INV_BannerPVP_02", extra=L["Epic Set"] },
 		{ id = 17578, disc=L["Rank"].." 13" }, -- Field Marshal's Coronal
 		{ id = 17580, disc=L["Rank"].." 13" }, -- Field Marshal's Dreadweave Shoulders
@@ -302,7 +460,37 @@ local pvpRewards = {
 		{ id = 22881, disc=L["Rank"].." 8" }, -- Legionnaire's Dreadweave Legguards
 		{ id = 22855, disc=L["Rank"].." 7" }, -- Blood Guard's Dreadweave Walkers
 	},
-	PVPRogue = {
+	PVPWarlock = {
+		{ id = 33458 }, -- Tactician's Coronal
+		{ id = 33459 }, -- Tactician's Dreadweave Shoulders
+		{ id = 33460 }, -- Tactician's Dreadweave Robe
+		{ id = 33461 }, -- Tactician's Dreadweave Gloves
+		{ id = 33462 }, -- Tactician's Dreadweave Leggings
+		{ id = 33463 }, -- Tactician's Dreadweave Boots
+		{},
+		{ id = 33734 }, -- Tactician's Coronal
+		{ id = 33735 }, -- Tactician's Dreadweave Shoulders
+		{ id = 33736 }, -- Tactician's Dreadweave Robe
+		{ id = 33737 }, -- Tactician's Dreadweave Gloves
+		{ id = 33738 }, -- Tactician's Dreadweave Leggings
+		{ id = 33739 }, -- Tactician's Dreadweave Boots
+		{},
+		{},
+		{ id = 33464 }, -- Strategist's Coronal
+		{ id = 33465 }, -- Strategist's Dreadweave Shoulders
+		{ id = 33466 }, -- Strategist's Dreadweave Robe
+		{ id = 33467 }, -- Strategist's Dreadweave Gloves
+		{ id = 33468 }, -- Strategist's Dreadweave Leggings
+		{ id = 33469 }, -- Strategist's Dreadweave Boots
+		{},
+		{ id = 33740 }, -- Strategist's Coronal
+		{ id = 33741 }, -- Strategist's Dreadweave Shoulders
+		{ id = 33742 }, -- Strategist's Dreadweave Robe
+		{ id = 33743 }, -- Strategist's Dreadweave Gloves
+		{ id = 33744 }, -- Strategist's Dreadweave Leggings
+		{ id = 33745 }, -- Strategist's Dreadweave Boots
+	},
+	PVPRogue118 = {
 		{ name=LIS["Field Marshal's Vestments"], icon="INV_BannerPVP_02", extra=L["Epic Set"] },
 		{ id = 16455, disc=L["Rank"].." 13" }, -- Field Marshal's Leather Mask
 		{ id = 16457, disc=L["Rank"].." 13" }, -- Field Marshal's Leather Epaulets
@@ -334,7 +522,37 @@ local pvpRewards = {
 		{ id = 22880, disc=L["Rank"].." 8" }, -- Legionnaire's Leather Legguards
 		{ id = 22856, disc=L["Rank"].." 7" }, -- Blood Guard's Leather Walkers
 	},
-	PVPDruid = {
+	PVPRogue = {
+		{ id = 33656 }, -- Combatant's Leather Mask
+		{ id = 33657 }, -- Combatant's Leather Epaulets
+		{ id = 33658 }, -- Combatant's Leather Chestpiece
+		{ id = 33659 }, -- Combatant's Leather Handgrips
+		{ id = 33660 }, -- Combatant's Leather Leggings
+		{ id = 33661 }, -- Combatant's Leather Footguards
+		{},
+		{ id = 33842 }, -- Combatant's Leather Mask
+		{ id = 33843 }, -- Combatant's Leather Epaulets
+		{ id = 33844 }, -- Combatant's Leather Chestpiece
+		{ id = 33845 }, -- Combatant's Leather Handgrips
+		{ id = 33846 }, -- Combatant's Leather Leggings
+		{ id = 33847 }, -- Combatant's Leather Footguards
+		{},
+		{},
+		{ id = 33662 }, -- Partisan's Leather Mask
+		{ id = 33663 }, -- Partisan's Leather Epaulets
+		{ id = 33664 }, -- Partisan's Leather Chestpiece
+		{ id = 33665 }, -- Partisan's Leather Handgrips
+		{ id = 33666 }, -- Partisan's Leather Leggings
+		{ id = 33667 }, -- Partisan's Leather Footguards
+		{},
+		{ id = 33848 }, -- Partisan's Leather Mask
+		{ id = 33849 }, -- Partisan's Leather Epaulets
+		{ id = 33850 }, -- Partisan's Leather Chestpiece
+		{ id = 33851 }, -- Partisan's Leather Handgrips
+		{ id = 33852 }, -- Partisan's Leather Leggings
+		{ id = 33853 }, -- Partisan's Leather Footguards
+	},
+	PVPDruid118 = {
 		{ name=LIS["Field Marshal's Sanctuary"], icon="INV_BannerPVP_02", extra=L["Epic Set"] },
 		{ id = 16451, disc=L["Rank"].." 13" }, -- Field Marshal's Dragonhide Helmet
 		{ id = 16449, disc=L["Rank"].." 13" }, -- Field Marshal's Dragonhide Spaulders
@@ -366,7 +584,60 @@ local pvpRewards = {
 		{ id = 22878, disc=L["Rank"].." 8" }, -- Legionnaire's Dragonhide Leggings
 		{ id = 22852, disc=L["Rank"].." 7" }, -- Blood Guard's Dragonhide Treads
 	},
-	PVPShaman = {
+	PVPDruid = {
+		{ id = 33530 }, -- Combatant's Dragonhide Helmet
+		{ id = 33531 }, -- Combatant's Dragonhide Epaulets
+		{ id = 33532 }, -- Combatant's Dragonhide Hauberk
+		{ id = 33533 }, -- Combatant's Dragonhide Gloves
+		{ id = 33534 }, -- Combatant's Dragonhide Leggings
+		{ id = 33535 }, -- Combatant's Dragonhide Boots
+		{},
+		{ id = 33752 }, -- Combatant's Dragonhide Helmet
+		{ id = 33753 }, -- Combatant's Dragonhide Shoulders
+		{ id = 33754 }, -- Combatant's Dragonhide Hauberk
+		{ id = 33755 }, -- Combatant's Dragonhide Gauntlets
+		{ id = 33756 }, -- Combatant's Dragonhide Leggings
+		{ id = 33757 }, -- Combatant's Dragonhide Boots
+		{},
+		{},
+		{ id = 33758 }, -- Partisan's Dragonhide Helmet
+		{ id = 33759 }, -- Partisan's Dragonhide Epaulets
+		{ id = 33760 }, -- Partisan's Dragonhide Hauberk
+		{ id = 33761 }, -- Partisan's Dragonhide Gloves
+		{ id = 33762 }, -- Partisan's Dragonhide Leggings
+		{ id = 33763 }, -- Partisan's Dragonhide Boots
+		{},
+		{ id = 33536 }, -- Partisan's Dragonhide Helmet
+		{ id = 33537 }, -- Partisan's Dragonhide Epaulets
+		{ id = 33538 }, -- Partisan's Dragonhide Hauberk
+		{ id = 33539 }, -- Partisan's Dragonhide Gloves
+		{ id = 33540 }, -- Partisan's Dragonhide Leggings
+		{ id = 33541 }, -- Partisan's Dragonhide Boots
+		{},
+		{},
+		{ id = 33554 }, -- Strategist's Dragonhide Helmet
+		{ id = 33777 }, -- Strategist's Dragonhide Epaulets
+		{ id = 33778 }, -- Strategist's Dragonhide Hauberk
+		{ id = 33779 }, -- Strategist's Dragonhide Gloves
+		{ id = 33780 }, -- Strategist's Dragonhide Leggings
+		{ id = 33781 }, -- Strategist's Dragonhide Boots
+		{},
+		{ id = 33548 }, -- Physician's Dragonhide Helmet
+		{ id = 33549 }, -- Physician's Dragonhide Epaulets
+		{ id = 33550 }, -- Physician's Dragonhide Hauberk
+		{ id = 33551 }, -- Physician's Dragonhide Gloves
+		{ id = 33552 }, -- Physician's Dragonhide Leggings
+		{ id = 33553 }, -- Physician's Dragonhide Boots
+		{},
+		{},
+		{ id = 33788 }, -- Corpsman's Dragonhide Helmet
+		{ id = 33789 }, -- Corpsman's Dragonhide Epaulets
+		{ id = 33790 }, -- Corpsman's Dragonhide Hauberk
+		{ id = 33791 }, -- Corpsman's Dragonhide Gloves
+		{ id = 33792 }, -- Corpsman's Dragonhide Leggings
+		{ id = 33793 }, -- Corpsman's Dragonhide Boots
+	},
+	PVPShaman118 = {
 		{ name=LIS["Warlord's Earthshaker"], icon="INV_BannerPVP_01", extra=L["Epic Set"] },
 		{ id = 16578, disc=L["Rank"].." 13" }, -- Warlord's Mail Helm
 		{ id = 16580, disc=L["Rank"].." 13" }, -- Warlord's Mail Spaulders
@@ -383,7 +654,52 @@ local pvpRewards = {
 		{ id = 22887, disc=L["Rank"].." 8" }, -- Legionnaire's Mail Legguards
 		{ id = 22857, disc=L["Rank"].." 7" }, -- Blood Guard's Mail Greaves
 	},
-	PVPWarrior = {
+	PVPShaman = {
+		{ id = 33476 }, -- Combatant's Mail Helm
+		{ id = 33477 }, -- Combatant's Mail Shoulders
+		{ id = 33478 }, -- Combatant's Mail Armor
+		{ id = 33479 }, -- Combatant's Mail Gauntlets
+		{ id = 33480 }, -- Combatant's Mail Leggings
+		{ id = 33481 }, -- Combatant's Mail Boots
+		{},
+		{ id = 33482 }, -- Partisan's Mail Helm
+		{ id = 33483 }, -- Partisan's Mail Shoulders
+		{ id = 33484 }, -- Partisan's Mail Armor
+		{ id = 33485 }, -- Partisan's Mail Gauntlets
+		{ id = 33486 }, -- Partisan's Mail Leggings
+		{ id = 33487 }, -- Partisan's Mail Boots
+		{},
+		{},
+		{ id = 33500 }, -- Strategist's Mail Helm
+		{ id = 33501 }, -- Strategist's Mail Shoulders
+		{ id = 33502 }, -- Strategist's Mail Armor
+		{ id = 33503 }, -- Strategist's Mail Gauntlets
+		{ id = 33504 }, -- Strategist's Mail Leggings
+		{ id = 33505 }, -- Strategist's Mail Boots
+		{},
+		{ id = 33518 }, -- Physician's Mail Helm
+		{ id = 33519 }, -- Physician's Mail Spaulders
+		{ id = 33520 }, -- Physician's Mail Armor
+		{ id = 33521 }, -- Physician's Mail Gauntlets
+		{ id = 33522 }, -- Physician's Mail Leggings
+		{ id = 33523 }, -- Physician's Mail Boots
+		{},
+		{},
+		{ id = 33512 }, -- Corpsman's Mail Helm
+		{ id = 33513 }, -- Corpsman's Mail Spaulders
+		{ id = 33514 }, -- Corpsman's Mail Armor
+		{ id = 33515 }, -- Corpsman's Mail Gauntlets
+		{ id = 33516 }, -- Corpsman's Mail Leggings
+		{ id = 33517 }, -- Corpsman's Mail Boots
+		{},
+		{ id = 33494 }, -- Tactician's Mail Helm
+		{ id = 33495 }, -- Tactician's Mail Spaulders
+		{ id = 33496 }, -- Tactician's Mail Armor
+		{ id = 33497 }, -- Tactician's Mail Gauntlets
+		{ id = 33498 }, -- Tactician's Mail Leggings
+		{ id = 33499 }, -- Tactician's Mail Boots
+	},
+	PVPWarrior118 = {
 		{ name=LIS["Field Marshal's Battlegear"], icon="INV_BannerPVP_02", extra=L["Epic Set"] },
 		{ id = 16478, disc=L["Rank"].." 13" }, -- Field Marshal's Plate Helm
 		{ id = 16480, disc=L["Rank"].." 13" }, -- Field Marshal's Plate Shoulderguards
@@ -415,7 +731,37 @@ local pvpRewards = {
 		{ id = 22873, disc=L["Rank"].." 8" }, -- Legionnaire's Plate Leggings
 		{ id = 22858, disc=L["Rank"].." 7" }, -- Blood Guard's Plate Greaves
 	},
-	PVPPaladin = {
+	PVPWarrior = {
+		{ id = 33404 }, -- Combatant's Plate Helm
+		{ id = 33405 }, -- Combatant's Plate Shoulderguards
+		{ id = 33406 }, -- Combatant's Plate Armor
+		{ id = 33407 }, -- Combatant's Plate Gauntlets
+		{ id = 33408 }, -- Combatant's Plate Leggings
+		{ id = 33409 }, -- Combatant's Plate Boots
+		{},
+		{ id = 33680 }, -- Combatant's Plate Helm
+		{ id = 33681 }, -- Combatant's Plate Shoulderguards
+		{ id = 33682 }, -- Combatant's Plate Armor
+		{ id = 33683 }, -- Combatant's Plate Gauntlets
+		{ id = 33684 }, -- Combatant's Plate Leggings
+		{ id = 33685 }, -- Combatant's Plate Boots
+		{},
+		{},
+		{ id = 33410 }, -- Partisan's Plate Helm
+		{ id = 33411 }, -- Partisan's Plate Shoulderguards
+		{ id = 33412 }, -- Partisan's Plate Armor
+		{ id = 33413 }, -- Partisan's Plate Gauntlets
+		{ id = 33414 }, -- Partisan's Plate Leggings
+		{ id = 33415 }, -- Partisan's Plate Boots
+		{},
+		{ id = 33686 }, -- Partisan's Plate Helm
+		{ id = 33687 }, -- Partisan's Plate Shoulderguards
+		{ id = 33688 }, -- Partisan's Plate Armor
+		{ id = 33689 }, -- Partisan's Plate Gauntlets
+		{ id = 33690 }, -- Partisan's Plate Leggings
+		{ id = 33691 }, -- Partisan's Plate Boots
+	},
+	PVPPaladin118 = {
 		{ name=LIS["Field Marshal's Aegis"], icon="INV_BannerPVP_02", extra=L["Epic Set"] },
 		{ id = 16474, disc=L["Rank"].." 13" }, -- Field Marshal's Lamellar Faceguard
 		{ id = 16476, disc=L["Rank"].." 13" }, -- Field Marshal's Lamellar Pauldrons
@@ -431,6 +777,36 @@ local pvpRewards = {
 		{ id = 23274, disc=L["Rank"].." 7" }, -- Knight-Lieutenant's Lamellar Gauntlets
 		{ id = 23273, disc=L["Rank"].." 8" }, -- Knight-Captain's Lamellar Leggings
 		{ id = 23275, disc=L["Rank"].." 7" }, -- Knight-Lieutenant's Lamellar Sabatons
+	},
+	PVPPaladin = {
+		{ id = 33584 }, -- Combatant's Lamellar Faceguard
+		{ id = 33585 }, -- Combatant's Lamellar Shoulders
+		{ id = 33586 }, -- Combatant's Lamellar Chestplate
+		{ id = 33587 }, -- Combatant's Lamellar Gauntlets
+		{ id = 33588 }, -- Combatant's Lamellar Legplates
+		{ id = 33589 }, -- Combatant's Lamellar Sabatons
+		{},
+		{ id = 33590 }, -- Partisan's Lamellar Faceguard
+		{ id = 33591 }, -- Partisan's Lamellar Shoulders
+		{ id = 33592 }, -- Partisan's Lamellar Chestplate
+		{ id = 33593 }, -- Partisan's Lamellar Gauntlets
+		{ id = 33594 }, -- Partisan's Lamellar Legplates
+		{ id = 33595 }, -- Partisan's Lamellar Sabatons
+		{},
+		{},
+		{ id = 33602 }, -- Corpsman's Lamellar Faceguard
+		{ id = 33603 }, -- Corpsman's Lamellar Pauldrons
+		{ id = 33604 }, -- Corpsman's Lamellar Chestplate
+		{ id = 33605 }, -- Corpsman's Lamellar Gloves
+		{ id = 33606 }, -- Corpsman's Lamellar Legplates
+		{ id = 33607 }, -- Corpsman's Lamellar Sabatons
+		{},
+		{ id = 33608 }, -- Physician's Lamellar Faceguard
+		{ id = 33609 }, -- Physician's Lamellar Pauldrons
+		{ id = 33610 }, -- Physician's Lamellar Chestplate
+		{ id = 33611 }, -- Physician's Lamellar Gloves
+		{ id = 33612 }, -- Physician's Lamellar Legplates
+		{ id = 33613 }, -- Physician's Lamellar Boots
 	},
 	PvPMountsPvP = {
 		{ name = LF["Alliance"], icon="INV_BannerPVP_02", extra=L["Rank"].." 11"},

@@ -43,6 +43,53 @@ AtlasTW.SpellDB = {
 				{ 11137 },
 			},
 		},
+		[5169] = {
+			icon = "Ability_Rogue_Disguise",
+			name = LS["Defias Disguise"],
+			reagents = {
+				{ 2589 },
+			},
+		},
+		[5264] = {
+			icon = "Ability_Rogue_Disguise",
+			name = LS["South Seas Pirate Disguise"],
+			tools = { 5107 },
+			reagents = {
+				{ 2589 },
+			},
+		},
+		[5265] = {
+			icon = "Ability_Rogue_Disguise",
+			name = LS["Stonesplinter Trogg Disguise"],
+			tools = { 5109 },
+			reagents = {
+				{ 2589 },
+			},
+		},
+		[5266] = {
+			icon = "Ability_Rogue_Disguise",
+			name = LS["Syndicate Disguise"],
+			tools = { 5113 },
+			reagents = {
+				{ 2592 },
+			},
+		},
+		[5267] = {
+			icon = "Ability_Rogue_Disguise",
+			name = LS["Dalaran Wizard Disguise"],
+			tools = { 5110 },
+			reagents = {
+				{ 2592 },
+			},
+		},
+		[5268] = {
+			icon = "Ability_Rogue_Disguise",
+			name = LS["Dark Iron Dwarf Disguise"],
+			tools = { 5108 },
+			reagents = {
+				{ 2592 },
+			},
+		},
 		[5668] = {
 			icon = "Ability_Rogue_Disguise",
 			name = LS["Peasant Disguise"],
@@ -4050,48 +4097,12 @@ AtlasTW.SpellDB = {
 				{ 3372 },
 			},
 		},
-		[5169] = {
-			tools = { 7997 },
-			reagents = {
-				{ 2589 },
-			},
-		},
 		[5244] = {
 			item = 5081,
 			reagents = {
 				{ 5082, 3 },
 				{ 2318, 4 },
 				{ 2320 },
-			},
-		},
-		[5264] = {
-			tools = { 5107 },
-			reagents = {
-				{ 2589 },
-			},
-		},
-		[5265] = {
-			tools = { 5109 },
-			reagents = {
-				{ 2589 },
-			},
-		},
-		[5266] = {
-			tools = { 5113 },
-			reagents = {
-				{ 2592 },
-			},
-		},
-		[5267] = {
-			tools = { 5110 },
-			reagents = {
-				{ 2589 },
-			},
-		},
-		[5268] = {
-			tools = { 5108 },
-			reagents = {
-				{ 2592 },
 			},
 		},
 		[5668] = {
@@ -15316,6 +15327,13 @@ AtlasTW.SpellDB = {
 				{ 13464 },
 				{ 8838 },
 				{ 8925 },
+			},
+		},
+		[45999] = { --Honeycomb Delight
+			item = 42186,
+			reagents = {
+				{ 42293 },
+				{ 42016 },
 			},
 		},
 		[46064] = {

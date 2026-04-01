@@ -128,6 +128,7 @@ AtlasTW.Localization:RegisterNamespace("UI", "esES", {
     --************************************************
     -- Common UI Strings
     --************************************************
+    ["Currently Equipped"] = "Equipado actualmente",
     ["Rank Pattern"] = " %a+ %d+$",
     ["Options"] = "Opciones",
     ["Search"] = "Buscar",
@@ -681,4 +682,5 @@ AtlasTW.Localization:RegisterNamespace("UI", "esES", {
     ["Other"] = "Otro",
     ["... %d more"] = "... %d más",
     ["Recipe #%d"] = "Receta #%d",
+    ["Link"] = "https://github.com/DarckRovert/AtlasTW-TurtleWoW-El-Sequito-del-Terror-Edition/|r",
 })

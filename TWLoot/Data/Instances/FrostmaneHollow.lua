@@ -43,10 +43,13 @@ AtlasTW.InstanceData.FrostmaneHollow = {
             id = "FHTanshaTheSleek",
             prefix = "1)",
             name = LB["Tan'sha The Sleek"],
-            defaults = { dropRate = 25 },
+            defaults = { dropRate = 33 },
             loot = {
+                { id = 162 }, -- Frigid Cloak
                 { id = 184 }, -- Oboka's Axe
                 { id = 197 }, -- Vest of the Beastkeeper
+                {},
+                { id = 42300, dropRate = 100 }, -- Flawless Leopard Pelt
             }
         },
         { name = LB["Handler Oboka"], color = Colors.GREY },
@@ -54,7 +57,7 @@ AtlasTW.InstanceData.FrostmaneHollow = {
             id = "FHBattlemasterUbukaz",
             prefix = "2)",
             name = LB["Battlemaster Ubukaz"],
-            defaults = { dropRate = 25 },
+            defaults = { dropRate = 33 },
             loot = {
                 { id = 134 }, -- Frostmane Battle Boots
                 { id = 150 }, -- Tribal War Gauntlets
@@ -65,9 +68,10 @@ AtlasTW.InstanceData.FrostmaneHollow = {
             id = "FHKanzaTheSeer",
             prefix = "3)",
             name = LB["Kan'za The Seer"],
-            defaults = { dropRate = 25 },
+            defaults = { dropRate = 33 },
             loot = {
                 { id = 205 }, -- Frost Seer Dirk
+                { id = 213 }, -- Ice-Stitched Cuffs TODO
                 { id = 241 }, -- Windcrest Pants
             }
         },
@@ -75,7 +79,7 @@ AtlasTW.InstanceData.FrostmaneHollow = {
             id = "FHHailarTheFrigid",
             prefix = "4)",
             name = LB["Hailar The Frigid"],
-            defaults = { dropRate = 25 },
+            defaults = { dropRate = 33 },
             loot = {
                 { id = 110 }, -- Rak'uhz the Coldbinder
                 { id = 116 }, -- Belt of Binding

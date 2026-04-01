@@ -1,5 +1,64 @@
 # Atlas-TW - Turtle WoW Compatibility Fixes Changelog
 
+## Version 9.3.1 [God-Tier] - El Séquito del Terror Edition (April 1, 2026)
+
+### Author Information
+- **Lead Developer**: DarckRovert / Elnazzareno
+- **Technical Assistant**: Antigravity (Advanced AI)
+- **Guild**: El Séquito del Terror (@TurtleWoW)
+
+### 1. Visual & Branding Overhaul
+- **Clan Identity**: Integrated the official "El Séquito del Terror" skull logo in the main Atlas header.
+- **Header Refinement**: Repositioned all functional buttons (Options, Quests, Loot Panel, Filter) to eliminate overlaps with the version string and localization text.
+- **Display Name**: Addon now identifies as "Atlas-TW - El Séquito del Terror Edition" in the UI.
+
+### 2. Loot Panel Reconstruction
+- **Dimensions**: Widened the bottom Loot Panel to **800px** and increased height to **125px** for a superior browsing experience.
+- **Button Normalization**: Standardized all category button widths and Y-offsets to ensure a clean, professional aesthetic in the Spanish localization.
+
+### 3. Technical & Conflict Resolution
+- **AtlasLoot Deactivation**: Formally resolved the "Double Atlas" conflict by deactivating legacy AtlasLoot functionality in favor of the modernized Atlas-TW core.
+- **Legacy Migration**: Implemented a robust data migration system that automatically absorbs **Wishlists** and **QuickLooks** from `AtlasLootCharDB` into `AtlasTWCharDB` on first load.
+- **Version Logic**: Fixed a critical Lua error in the version check module to support the custom "[God-Tier]" string format.
+
+### 4. Localization & Repository
+- **Spanish Support**: Updated `esES` locales with the new clan repository link and specific UI fixes.
+- **Official Repo**: `https://github.com/DarckRovert/AtlasTW-TurtleWoW-El-Sequito-del-Terror-Edition`
+
+---
+
+## Version 1.51 - Turtle WoW Edition (April 2026)
+
+### Author Information
+- **Real Name**: DarckRovert
+- **In-Game Character**: Elnazzareno
+- **Guild**: El Sequito del Terror
+- **Integration Assistant**: Antigravity
+- **Date**: April 1, 2026
+
+---
+
+## Major Changes in 1.51-TW
+
+### 1. Synchronization with Upstream 1.51
+- Full codebase synchronization with the official 1.51 release.
+- Updated all instance and loot data to the latest Turtle WoW standards.
+- Integrated the official **Timbermaw Hold** instance map and loot tables.
+- Synchronized **PvP Rewards** restructure for patch 1.18.2 compatibility.
+
+### 2. Feature Enhancements
+- **ShaguTweaks Integration**: Enhanced equipment comparison support for players using ShaguTweaks.
+- **New Tables**: Added dedicated data for *Cloth* and *Disenchanting* categories.
+- **Improved Map Data**: Accurate entrance and sub-zone labeling for 1.18.x content.
+
+### 3. Localization & Polish
+- Synchronized all localization modules with new 1.51 strings.
+- Maintained the custom "El Séquito del Terror" branding and Spanish (esES) quality of life fixes.
+- Updated versioning to `9.3.1 [God-Tier]`.
+
+---
+
+
 ## Version 1.50 - Turtle WoW Edition (March 2026)
 
 ### Author Information

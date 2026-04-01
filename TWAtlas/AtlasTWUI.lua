@@ -166,7 +166,7 @@ do
     local dropDown = CreateFrame("Button", "AtlasTWFrameDropDown", atlasFrame)
     dropDown:SetWidth(210)
     dropDown:SetHeight(24)
-    dropDown:SetPoint("LEFT", dropDownType, "RIGHT", 10, 0)
+    dropDown:SetPoint("LEFT", dropDownType, "RIGHT", 20, 0)
 
     -- Background texture
     local dropDownBg = dropDown:CreateTexture(nil, "BACKGROUND")
@@ -261,31 +261,37 @@ do
     -- Options button
     local optionsButton = CreateFrame("Button", nil, atlasFrame, "OptionsButtonTemplate")
     optionsButton:SetWidth(80)
-    optionsButton:SetPoint("TOPRIGHT", -10, -60)
+    optionsButton:SetPoint("TOPRIGHT", -150, -17)
     optionsButton:SetText(L["Options"])
     optionsButton:SetScript("OnClick", function()
         AtlasTW.OptionsOnClick()
     end)
+    optionsButton:SetFrameLevel(atlasFrame:GetFrameLevel() + 2)
+
     -- Hide Quests button
     local questsToggleButton = CreateFrame("Button", nil, atlasFrame, "OptionsButtonTemplate")
-    questsToggleButton:SetPoint("LEFT", optionsButton, -90, 0)
+    questsToggleButton:SetWidth(80)
+    questsToggleButton:SetPoint("TOPRIGHT", -240, -17)
     questsToggleButton:SetText(L["Quests"])
     questsToggleButton:SetScript("OnClick", function()
         AtlasTW.Quest.ToggleQuestFrame()
     end)
+    questsToggleButton:SetFrameLevel(atlasFrame:GetFrameLevel() + 2)
 
     -- Hide Loot Panel button
     local ShowPanelButton = CreateFrame("Button", nil, atlasFrame, "OptionsButtonTemplate")
+    ShowPanelButton:SetWidth(110)
     ShowPanelButton:SetText(L["Loot Panel"])
-    ShowPanelButton:SetPoint("LEFT", questsToggleButton, -90, 0)
+    ShowPanelButton:SetPoint("TOPRIGHT", -335, -17)
     ShowPanelButton:SetScript("OnClick", function()
         AtlasTW.OptionShowPanelOnClick()
     end)
+    ShowPanelButton:SetFrameLevel(atlasFrame:GetFrameLevel() + 2)
 
     -- Loot Filter button
     local filterButton = CreateFrame("Button", "AtlasTWLootFilterButton", atlasFrame, "OptionsButtonTemplate")
-    filterButton:SetWidth(130)
-    filterButton:SetPoint("LEFT", ShowPanelButton, -130, 0)
+    filterButton:SetWidth(135)
+    filterButton:SetPoint("TOPRIGHT", -460, -17)
     filterButton:SetScript("OnClick", function()
         AtlasTW.OptionFilterModeOnClick()
     end)
@@ -408,47 +414,55 @@ do
     -- Textures
     local topTexture = atlasFrame:CreateTexture("AtlasTWFrameTop", "ARTWORK")
     topTexture:SetTexture(AtlasTW.PATH .. "Images\\AtlasTWFrame-Top")
-    topTexture:SetVertexColor(0.40, 0.15, 0.50)
+    topTexture:SetVertexColor(0.80, 0.60, 0.25)
     topTexture:SetWidth(512)
     topTexture:SetHeight(128)
     topTexture:SetPoint("TOPLEFT", 0, 0)
 
     local leftTexture = atlasFrame:CreateTexture("AtlasTWFrameLeft", "ARTWORK")
     leftTexture:SetTexture(AtlasTW.PATH .. "Images\\AtlasTWFrame-Left")
-    leftTexture:SetVertexColor(0.40, 0.15, 0.50)
+    leftTexture:SetVertexColor(0.80, 0.60, 0.25)
     leftTexture:SetWidth(32)
     leftTexture:SetHeight(256)
     leftTexture:SetPoint("TOPLEFT", 0, -128)
 
     local bottomTexture = atlasFrame:CreateTexture("AtlasTWFrameBottom", "ARTWORK")
     bottomTexture:SetTexture(AtlasTW.PATH .. "Images\\AtlasTWFrame-Bottom")
-    bottomTexture:SetVertexColor(0.40, 0.15, 0.50)
+    bottomTexture:SetVertexColor(0.80, 0.60, 0.25)
     bottomTexture:SetWidth(512)
     bottomTexture:SetHeight(256)
     bottomTexture:SetPoint("TOPLEFT", 0, -384)
 
     local bottom2Texture = atlasFrame:CreateTexture("AtlasTWFrameBottom2", "ARTWORK")
     bottom2Texture:SetTexture(AtlasTW.PATH .. "Images\\AtlasTWFrame-Bottom2")
-    bottom2Texture:SetVertexColor(0.40, 0.15, 0.50)
+    bottom2Texture:SetVertexColor(0.80, 0.60, 0.25)
     bottom2Texture:SetWidth(512)
     bottom2Texture:SetHeight(128)
     bottom2Texture:SetPoint("TOPLEFT", 512, -512)
 
     local rightTexture = atlasFrame:CreateTexture("AtlasTWFrameRight", "ARTWORK")
     rightTexture:SetTexture(AtlasTW.PATH .. "Images\\AtlasTWFrame-Right")
-    rightTexture:SetVertexColor(0.40, 0.15, 0.50)
+    rightTexture:SetVertexColor(0.80, 0.60, 0.25)
     rightTexture:SetWidth(512)
     rightTexture:SetHeight(512)
     rightTexture:SetPoint("TOPLEFT", 512, 0)
 
+    -- El Séquito Guild Logo
+    local guildLogo = atlasFrame:CreateTexture("AtlasTWGuildLogo", "OVERLAY", nil, 7)
+    guildLogo:SetWidth(62)
+    guildLogo:SetHeight(62)
+    guildLogo:SetPoint("TOPLEFT", 3, -5)
+    guildLogo:SetTexture("Interface\\AddOns\\Atlas-TW\\Images\\ElSequitoLogo")
+    guildLogo:SetBlendMode("BLEND")
+
     local titleText = atlasFrame:CreateFontString(nil, "ARTWORK", "GameFontHighlight")
-    titleText:SetText(Colors.YELLOW .. AtlasTW.Name)
-    titleText:SetPoint("TOPLEFT", 200, -17)
+    titleText:SetText(Colors.YELLOW .. AtlasTW.DisplayName)
+    titleText:SetPoint("TOPLEFT", 80, -17)
 
     local versionText = atlasFrame:CreateFontString(nil, "ARTWORK", "GameFontNormalSmall")
     versionText:SetText(AtlasTW.Version)
-    versionText:SetTextColor(0.4, 0.4, 0.4)
-    versionText:SetPoint("TOPRIGHT", -52, -17)
+    versionText:SetTextColor(0.8, 0.8, 0.8)
+    versionText:SetPoint("TOPRIGHT", -55, -17)
 
     -- Update marker (shown when a newer version is available)
     local updateMarker = atlasFrame:CreateFontString("AtlasTWUpdateMarker", "ARTWORK", "GameFontNormalSmall")
@@ -460,6 +474,7 @@ do
     local noticeText = atlasFrame:CreateFontString(nil, "ARTWORK", "GameFontHighlight")
     noticeText:SetText(Colors.RED .. L["NoticeText"])
     noticeText:SetPoint("TOP", -20, -17)
+    noticeText:Hide()
 
     -- Notice link
     local noticeBox = CreateFrame("EditBox", "AtlasTWNoticeBox", atlasFrame, "InputBoxTemplate")
@@ -469,6 +484,7 @@ do
     noticeBox:SetMaxLetters(48)
     noticeBox:SetAutoFocus(false)
     noticeBox:SetText(Colors.RED .. L["NoticeLink"])
+    noticeBox:Hide()
     noticeBox:SetScript("OnTextChanged", function()
         if noticeBox:GetText() ~= Colors.RED .. L["NoticeLink"] then
             noticeBox:SetText(Colors.RED .. L["NoticeLink"])

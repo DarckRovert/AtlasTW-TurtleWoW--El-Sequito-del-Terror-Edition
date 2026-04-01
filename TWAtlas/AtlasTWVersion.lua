@@ -18,7 +18,7 @@ AtlasTW.VersionCheck = AtlasTW.VersionCheck or {}
 local VC = AtlasTW.VersionCheck
 
 -- Settings
-VC.abbrev = 'ATW'
+VC.abbrev = 'ATWE'
 VC.channelName = 'LFT'
 VC.nextPublishAt = nil
 VC.joinAt = nil
@@ -30,7 +30,7 @@ VC.joinAt = nil
 --- @usage local v = AtlasTW.VersionCheck.getLocalVersionString()
 function VC.getLocalVersionString()
   -- Prefer pre-initialized AtlasTW.Version if present; otherwise query metadata.
-  return AtlasTW.Version or GetAddOnMetadata("Atlas-TW", 'Version')
+  return AtlasTW.Version or GetAddOnMetadata(AtlasTW.Name, 'Version')
 end
 
 ---
@@ -41,10 +41,14 @@ end
 function VC.getVersionNumber()
   local v = VC.getLocalVersionString()
   if not v or v == '' then return 0 end
-  local _, _, major, minor = string.find(v, '^(%d*)%.?(%d*)$')
+  -- Clear non-numeric chars and parse as major.minor (e.g. 9.3.1 -> 931)
+  local clean = string.gsub(v, "[^%d%.]", "")
+  local _, _, major, minor, patch = string.find(clean, '^(%d+)%.?(%d*)%.?(%d*)')
   major = tonumber(major) or 0
   minor = tonumber(minor) or 0
-  return major * 1000 + minor
+  patch = tonumber(patch) or 0
+  -- Use a multiplier that handles 3 levels of versioning (major*10000 + minor*100 + patch)
+  return (major * 10000) + (minor * 100) + patch
 end
 
 ---

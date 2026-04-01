@@ -126,6 +126,7 @@ AtlasTW.Localization:RegisterNamespace("UI", "enUS", {
     --************************************************
     -- Common UI Strings
     --************************************************
+    ["Currently Equipped"] = true,
     ["Rank Pattern"] = " %a+ %d+$",
     ["Options"] = true,
     ["Search"] = true,
@@ -363,7 +364,7 @@ AtlasTW.Localization:RegisterNamespace("UI", "enUS", {
     ["NewVersionAvailableFmt"] = "|cffff0000New version available!|r |cff00ff00Download here:|r %s",
     [" |cffA52A2Aloaded."] = true,
     ["NoticeText"] = "If you find anything missing, please report it at:|r",
-    ["NoticeLink"] = "https://github.com/DarckRovert/AtlasTW-TurtleWoW-El-Sequito-del-Terror-Edition/issues/|r",
+    ["NoticeLink"] = "https://github.com/byCFM2/Atlas-TW/issues/|r",
     ["Link"] = "https://github.com/DarckRovert/AtlasTW-TurtleWoW-El-Sequito-del-Terror-Edition/|r",
 
     --************************************************

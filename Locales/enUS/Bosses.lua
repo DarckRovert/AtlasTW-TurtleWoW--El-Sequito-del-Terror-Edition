@@ -12,6 +12,18 @@ AtlasTW.Localization:RegisterNamespace("Bosses", "enUS", {
     --************************************************
     ["Broodcommander Axelus"] = true,
     ["Ezzel Darkbrewer"] = true,
+    --Timbermaw Hold
+    ["Ormanos the Cracked"] = true,
+    ["Loktanag the Vile"] = true,
+    ["Archdruid Kronn"] = true,
+    ["Xavian Form"] = true,
+    ["Trioch the Devourer"] = true,
+    ["Karrsh the Sentinel"] = true,
+    ["Selenaxx Foulheart"] = true,
+    ["Chieftain Partath"] = true,
+    ["Rotgrowl"] = true,
+    ["Kodiak"] = true,
+    ["Peroth'arn"] = true,
     --frostmane hollow
     ["Handler Oboka"] = true, --1*
     ["Tan'sha The Sleek"] = true, --1

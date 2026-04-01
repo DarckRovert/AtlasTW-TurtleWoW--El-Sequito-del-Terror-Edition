@@ -19,6 +19,7 @@ local _G = getfenv()
 AtlasTW = _G.AtlasTW or {}
 
 local L = AtlasTW.Localization.UI
+local LB = AtlasTW.Localization.Bosses
 local LZ = AtlasTW.Localization.Zones
 local LIS = AtlasTW.Localization.ItemSets
 local LMD = AtlasTW.Localization.MapData
@@ -35,64 +36,171 @@ AtlasTW.InstanceData.TimbermawHold = {
     MaxPlayers = 20,
     DamageType = L["Physical"],
     Entrances = {
-        { letter = "A)"..L["Entrance"].." "..LMD["Front"] },
+        { letter = "A)"..L["Entrance"].." "..LZ["Azshara"] },
+        { letter = "B)"..L["Entrance"].." "..LZ["Felwood"] },
     },
-    Keys = {
-       -- { name = LMD["Key to Stormwrought Castle"], loot = "VanillaKeys", info = "6+" },
-    },
-    Bosses = {--[[ 
+--[[     Keys = {
+        { name = LMD["Key to Stormwrought Castle"], loot = "VanillaKeys", info = "6+" },
+    }, ]]
+    Bosses = {
         {
-            id = "WHC",
+            id = "THKarrshtheSentinel",
             prefix = "1)",
-            name = BB[""],
+            name = LB["Karrsh the Sentinel"],
             defaults = { dropRate = 25 },
             loot = {
-                { id = 58135 }, -- Dagger of Whispered Madness
-                { id = 58136 }, -- Shadeweave Drape
-                { id = 58137 }, -- Netherbranch
-                { id = 58177 }, -- Stormreaver Robe
+                { id = 33237 }, -- Timbermaw Defenders
+                { id = 33238 }, -- Karrsh's Memento TODO CHECK
+                { id = 33239 }, -- Weaponmaster's Gauntlets
+                { id = 33334 }, -- Timbermaw Protectors
+                { id = 33341 }, -- Pendant of Relentless Assault
                 {},
-                { id = 41797, dropRate = 100, container = { 41798 } }, -- The Pendant of Uth'okk
+                { id = 33241 }, -- Bramblehide Breastplate
+                { id = 33345 }, -- Treads of the Pathfinder
+                {},
+                { id = 42170 }, -- Pendant of the Sentinel
             }
         },
         {
-            prefix = "a)",
-            name = L["Severs"],
-            color = Colors.GREEN,
+            id = "THRotgrowl",
+            prefix = "2)",
+            name = LB["Rotgrowl"],
+            defaults = { dropRate = 25 },
+            loot = {
+                { id = 33245 }, -- Tealeaf Waistwrap
+                { id = 33246 }, -- Twig of Untamed Magics
+                { id = 33333 }, -- Furbolg Medicine Wristwraps
+                { id = 33343 }, -- Earth Warder's Visage
+                { id = 33344 }, -- Moonblessed Bracers
+                {},
+                { id = 33247 }, -- Denrender, Hatchet of the Subterranean Hunter
+                { id = 33248 }, -- Fetish of the Endless Bond
+                --! recipe: honeycomb delight
+            }
         },
         {
-            id = "WHCTrash",
-            name = L["Trash Mobs"].."-"..LZ["Windhorn Canyon"],
+            id = "THKodiak",
+            name = LB["Kodiak"],
+        },
+        {
+            id = "THLoktanagtheVile",
+            prefix = "3)",
+            name = LB["Loktanag the Vile"],
+            defaults = { dropRate = 25 },
+            loot = {
+                { id = 33251 }, -- Drape of Contagion
+                {},
+                { id = 33256 }, -- Corrosion
+                {},
+                { id = 33340, dropRate = 100, container = { 33679, 33385, 33391, 33397, 33403 }, disc = L["Boots"] }, -- Ritualistic Boots path of the
+                {},
+                { id = 41987, container = { 41986 }, dropRate = 100 }, -- Crest of Heroism
+            }
+        },
+        {
+            id = "THTriochtheDevourer",
+            prefix = "4)",
+            name = LB["Trioch the Devourer"],
+            defaults = { dropRate = 25 },
+            loot = {
+                { id = 33289 }, -- Digested Slayer's Pauldrons
+                {},
+                { id = 33088 }, -- Libram of the Exorciser
+                { id = 33291 }, -- Pysan's New Greatsword
+                { id = 33293 }, -- Trifang Shredders
+                {},
+                { id = 33339, dropRate = 100, container = { 33678, 33384, 33390, 33396, 33402 }, disc = L["Legs"] }, -- Ritualistic Leggings vigor of the
+                {},
+                { id = 41987, container = { 41986 }, dropRate = 100 }, -- Crest of Heroism
+            }
+        },
+        {
+            id = "THOrmanostheCracked",
+            prefix = "5)",
+            name = LB["Ormanos the Cracked"],
+            defaults = { dropRate = 25 },
+            loot = {
+                { id = 33258 }, -- Visor of the Mending Cracks
+                {},
+                { id = 33261 }, -- Crown of Draenic Corruption
+                {},
+                { id = 33338, dropRate = 100, container = { 33677, 33383, 33389, 33395, 33401 }, disc = L["Gloves"] }, -- Ritualistic Gloves grasp of the
+                {},
+                { id = 41987, container = { 41986 }, dropRate = 100 }, -- Crest of Heroism
+            }
+        },
+        {
+            id = "THSelenaxxFoulheart",
+            prefix = "6)",
+            name = LB["Selenaxx Foulheart"],
+            defaults = { dropRate = 25 },
+            loot = {
+                { id = 33283 }, --Fang of the First Called
+                {},
+                { id = 33336, dropRate = 100, container = { 33675, 33381, 33387, 33393, 33399 }, disc = L["Shoulders"] }, -- Ritualistic Mantle burden of the
+                {},
+                { id = 42224 }, -- Geode shards
+                { id = 41987, container = { 41986 }, dropRate = 100 }, -- Crest of Heroism
+            }
+        },
+        {
+            id = "THChieftainPartath",
+            prefix = "7)",
+            name = LB["Chieftain Partath"],
+            defaults = { dropRate = 25 },
+            loot = {
+                { id = 33273 }, -- Sash of the Pathfinder
+                {},
+                { id = 33276 }, -- Unity of the Timbermaw
+                { id = 33277 }, -- Will of the Chieftain
+                {},
+                { id = 33335, dropRate = 100, container = { 33674, 33380, 33386, 33392, 33398 }, disc = L["Head"] }, -- Ritualistic Headdress guile of the
+                {},
+                { id = 41987, container = { 41986 }, dropRate = 100 }, -- Crest of Heroism
+            }
+        },
+        {
+            id = "THArchdruidKronn",
+            prefix = "8)",
+            name = LB["Archdruid Kronn"],
+            defaults = { dropRate = 25 },
+            loot = {
+                { id = 33267 }, -- Mantle of the Den Watcher
+                { id = 33333 }, -- Furbolg Medicine Wristwraps
+                {},
+                { id = 33345 }, -- Treads of the Pathfinder
+                {},
+                { id = 33084, container = { 33096 } }, -- Pristine Chromatic Scales
+                {},
+                { id = 41987, container = { 41986 }, dropRate = 100 }, -- Crest of Heroism
+            }
+        },
+        {
+            id = "THXavianForm",
+            name = LB["Xavian Form"],
+        },
+        {
+            id = "THPerotharn",
+            prefix = "9)",
+            name = LB["Peroth'arn"],
+            defaults = { dropRate = 25 },
+            loot = {
+                { id = 33306 }, -- Cloak of unwavering will
+                { id = 33312 }, -- The Herald of Nightmares
+            }
+        },
+        {
+            id = "THTrash",
+            name = L["Trash Mobs"].."-"..LZ["Timbermaw Hold"],
             defaults = { dropRate = .1 },
             loot = {
-                { id = 70113, container = { 56040 } }, -- Plans: Gleaming Silver Necklace
-                { id = 58178, dropRate = 1.35 }, -- Stormreaver Boots
-                { id = 58131, dropRate = 1.35 }, -- Stormreaver Belt
-                { id = 1992 }, -- Swampchill Fetish
-                { id = 2262 }, -- Mark of Kern
-                { id = 5756 }, -- Sliverblade
-                { id = 5819 }, -- Sunblaze Coif
-                { id = 7727 }, -- Watchman Pauldrons
-                { id = 7728, dropRate = .04 }, -- Beguiler Robes
-                { id = 7729 }, -- Chesterfall Musket
-                { id = 7730 }, -- Cobalt Crusher
-                { id = 7736 }, -- Fight Club
-                { id = 7752 }, -- Dreamslayer
-                { id = 7753 }, -- Bloodspiller
-                { id = 7754, dropRate = .01 }, -- Harbinger Boots
-                { id = 7755 }, -- Flintrock Shoulders
-                { id = 7757 }, -- Windweaver Staff
-                { id = 7759 }, -- Archon Chestpiece
-                { id = 7760 }, -- Warchief Kilt
-                { id = 7761 }, -- Steelclaw Reaver
-                { id = 7786 }, -- Headsplitter
-                { id = 7787 }, -- Resplendent Guardian
-                { id = 8225 }, -- Tainted Pierce
-                { id = 8226 }, -- The Butcher
-                { id = 41941, dropRate = 70, disc = L["Quest Item"] }, -- Balorian Treasure
+                { id = 42016 }, -- Timbermaw Sap
+                { id = 58400, container = { 58304 } }, -- Schematic: Voltage-Neutralizing Nature Reflector
             }
         },
-        { name = LIS["Stormreaver Attire"], items = "Stormreaver" },]]
+        -- { id = 33337, container = { 33676, 33382, 33388, 33394, 33400 }, disc = L["Chest"] = Ritualistic Tunic embrace of the
+        { name = LIS["Surrender to Madness"], items = "SurrendertoMadness" },
+        { name = LZ["Timbermaw Hold"].." "..L["Sets"], items = "TimbermawHoldSets" },
     },
 }
 

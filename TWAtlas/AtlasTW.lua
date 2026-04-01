@@ -29,7 +29,7 @@ local frame
 local loadingStartTime -- Load time
 local Colors = AtlasTW.Colors
 
-AtlasTW.Version = GetAddOnMetadata("Atlas-TW", "Version")
+AtlasTW.Version = GetAddOnMetadata(AtlasTW.Name, "Version") or "9.3.1 [God-Tier]"
 
 ---
 --- Outputs debug information to chat if debug mode is enabled
@@ -267,7 +267,21 @@ end
 --- @usage Automatically called by WoW event system
 ---
 function AtlasTW.OnEvent()
-	if arg1 == "Atlas-TW" then
+	if event == "ADDON_LOADED" and arg1 == AtlasTW.Name then
+		-- Data Migration: Absorb original AtlasLoot data (Wishlists and QuickLooks)
+		if AtlasLootCharDB and AtlasTWCharDB then
+			-- Migrate WishList if target is empty
+			if AtlasLootCharDB["WishList"] and (not AtlasTWCharDB["WishList"] or table.getn(AtlasTWCharDB["WishList"]) == 0) then
+				AtlasTWCharDB["WishList"] = AtlasLootCharDB["WishList"]
+				PrintA(Colors.GREEN .. "Datos de Lista de Deseos absorbidos con éxito.")
+			end
+			-- Migrate QuickLooks if target is empty
+			if AtlasLootCharDB["QuickLooks"] and (not AtlasTWCharDB["QuickLooks"] or table.getn(AtlasTWCharDB["QuickLooks"]) == 0) then
+				AtlasTWCharDB["QuickLooks"] = AtlasLootCharDB["QuickLooks"]
+				PrintA(Colors.GREEN .. "Vistas Rápidas absorbidas con éxito.")
+			end
+		end
+
 		Atlas_Init()
 
 		-- Compatibility hooks for AtlasFu2 and other Atlas-dependent addons
@@ -286,7 +300,7 @@ function AtlasTW.OnEvent()
 		if not Atlas_Refresh then
 			Atlas_Refresh = AtlasTW.Refresh
 		end
-	elseif not arg1 then
+	elseif not arg1 or event == "PLAYER_ENTERING_WORLD" then
 		AtlasTW.isHorde = UnitFactionGroup("player") == "Horde"
 		AtlasTW.Faction = AtlasTW.isHorde and "Horde" or "Alliance"
 		AtlasTW.PlayerClass = UnitClass("player")
