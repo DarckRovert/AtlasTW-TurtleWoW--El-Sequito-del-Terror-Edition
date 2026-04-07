@@ -1,18 +1,8 @@
 ## Interface: 11200
 ## Title: |cffffffffAtlas-TW |r|cff00ccff[Séquito del Terror]|r
-## Title-deDE: |cffffffffAtlas-TW |r|cff00ccff[Séquito del Terror]|r
-## Title-esES: |cffffffffAtlas-TW |r|cff00ccff[Séquito del Terror]|r
-## Title-ptBR: |cffffffffAtlas-TW |r|cff00ccff[Séquito del Terror]|r
-## Title-zhCN: |cffffffffAtlas-TW |r|cff00ccff[Séquito del Terror]|r
+## Version: 9.4.0 [Omni-Tier]
 ## Notes: Instance map browser for El Séquito del Terror clan members. Shows possible boss loot and instance quests. [TurtleWoW Fixes by DarckRovert]
-## Notes-deDE: Instanzkarten-Browser fÃ¼r El Séquito del Terror Clan-Mitglieder. [TurtleWoW Korrekturen von DarckRovert]
-## Notes-esES: Navegador de mapas de mazmorras para miembros del clan El Séquito del Terror. [Correcciones Turtle WoW por DarckRovert]
-## Notes-ptBR: Navegador de mapas de masmorras para membros do clan El Séquito del Terror. [Correcciones TurtleWoW por DarckRovert]
-## Notes-zhCN: El Séquito del Terror ä¸“ç”¨å‰¯æœ¬åŠ©æ‰‹ã€‚[TurtleWoW ä¿®å¤ by DarckRovert]
-## Version: 9.3.1 [God-Tier]
-## X-TurtleWow-Fixes: DarckRovert (El Séquito del Terror) - 2026
-## X-Original-Version: 1.51
-## Author: El Séquito del Terror
+## Author: El Séquito del Terror (DarckRovert)
 ## SavedVariables: AtlasTWOptions
 ## SavedVariablesPerCharacter: AtlasTWCharDB
 ## OptionalDeps: LootLink, ItemSync, EquipCompare, EQCompare, pfQuest, pfUI
